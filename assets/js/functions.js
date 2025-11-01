@@ -1,5 +1,5 @@
 /*------------------------------------
-	Theme Name: Max Law
+	Theme Name: Alliance Legal Group
 	Start Date : 15-Fab-2017
 	End Date : 
 	Last change: 

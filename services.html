@@ -117,7 +117,7 @@
               <img
                 src="assets/images/logo.png"
                 alt="logo"
-                style="width: 6rem;%"
+                style="width: 6rem"
               />
             </a>
           </div>
@@ -155,7 +155,7 @@
           <h3>services</h3>
           <ol class="breadcrumb">
             <li><a href="index.html">Home</a></li>
-            <li class="active">service list</li>
+            <li class="active">services</li>
           </ol>
         </div>
         <!-- Container /- -->
@@ -174,7 +174,10 @@
                 <div class="practice-box">
                   <a href="corporate.html">
                     <i
-                      ><img src="assets/images/corporate.jpg" alt="Practice"
+                      ><img
+                        src="assets/images/corporate.jpg"
+                        alt="Practice"
+                        style="height: 36rem"
                     /></i>
                     <div class="content-box">
                       <i
@@ -191,7 +194,10 @@
                 <div class="practice-box">
                   <a href="dispute.html">
                     <i
-                      ><img src="assets/images/dispute.jpg" alt="Practice"
+                      ><img
+                        src="assets/images/dispute.jpg"
+                        alt="Practice"
+                        style="height: 36rem"
                     /></i>
                     <div class="content-box">
                       <i
@@ -208,7 +214,10 @@
                 <div class="practice-box">
                   <a href="regulatory.html">
                     <i
-                      ><img src="assets/images/regulatory.jpg" alt="Practice"
+                      ><img
+                        src="assets/images/regulatory.jpg"
+                        alt="Practice"
+                        style="height: 36rem"
                     /></i>
                     <div class="content-box">
                       <i
@@ -228,6 +237,7 @@
                       ><img
                         src="assets/images/international.jpg"
                         alt="Practice"
+                        style="height: 36rem"
                     /></i>
                     <div class="content-box">
                       <i
@@ -244,7 +254,10 @@
                 <div class="practice-box">
                   <a href="technology.html">
                     <i
-                      ><img src="assets/images/technology.jpg" alt="Practice"
+                      ><img
+                        src="assets/images/technology.jpg"
+                        alt="Practice"
+                        style="height: 36rem"
                     /></i>
                     <div class="content-box">
                       <i
@@ -261,7 +274,10 @@
                 <div class="practice-box">
                   <a href="immigration.html">
                     <i
-                      ><img src="assets/images/practice-7.jpg" alt="Practice"
+                      ><img
+                        src="assets/images/immigrations.jpg"
+                        alt="Practice"
+                        style="height: 36rem"
                     /></i>
                     <div class="content-box">
                       <i
@@ -389,5 +405,40 @@
 
     <!-- Library - Theme JS -->
     <script src="assets/js/functions.js"></script>
+
+    <!-- Equal Height Script -->
+    <script>
+      $(document).ready(function () {
+        function equalizeHeights() {
+          // Reset heights
+          $(".practice-box").css("height", "auto");
+
+          // Get window width
+          var windowWidth = $(window).width();
+
+          // Only equalize on desktop and tablet
+          if (windowWidth >= 768) {
+            var maxHeight = 0;
+
+            // Find the tallest box
+            $(".practice-box").each(function () {
+              var height = $(this).outerHeight();
+              maxHeight = height > maxHeight ? height : maxHeight;
+            });
+
+            // Set all boxes to the max height
+            $(".practice-box").css("height", maxHeight + "px");
+          }
+        }
+
+        // Run on page load
+        equalizeHeights();
+
+        // Run on window resize
+        $(window).resize(function () {
+          equalizeHeights();
+        });
+      });
+    </script>
   </body>
 </html>

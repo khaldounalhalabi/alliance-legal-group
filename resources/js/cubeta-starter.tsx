@@ -6,7 +6,6 @@ import { createInertiaApp } from "@inertiajs/react";
 import React, { Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import "../css/cubeta-starter.css";
-import LandingLayout from "@/Components/landing/LandingLayout";
 
 const appName = import.meta.env.VITE_APP_NAME || "Laravel";
 
@@ -35,12 +34,9 @@ Promise.resolve()
                     throw new Error(`Page "${name}" not found`);
                 }
 
-                page.default.layout =
-                    !authPages.includes(name) && name.includes("dashboard")
-                        ? (page) => <DashboardLayout>{page}</DashboardLayout>
-                        : authPages.includes(name)
-                          ? (page) => <AuthLayout>{page}</AuthLayout>
-                          : (page) => <LandingLayout>{page}</LandingLayout>;
+                page.default.layout = authPages.includes(name)
+                    ? (page) => <AuthLayout>{page}</AuthLayout>
+                    : (page) => <DashboardLayout>{page}</DashboardLayout>;
 
                 return page;
             },

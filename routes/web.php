@@ -10,3 +10,4 @@ Route::post('/locale', [SetLocaleController::class, 'setLanguage'])
     ->name('set-locale');
 
 Route::view('/', 'index')->name('index');
+Route::view('/about', 'about')->name('about');

@@ -1,3 +1,4 @@
+import TableCells from "@/Components/icons/TableCells";
 import { NavMain } from "@/Components/nav-main";
 import { NavUser } from "@/Components/nav-user";
 import {
@@ -27,7 +28,13 @@ export function Sidebar({
             href?: string;
             icon?: Icon;
         }[];
-    }[] = [];
+    }[] = [
+        {
+            title: "About us content",
+            href: route("v1.web.protected.about.us.contents.index"),
+            icon: () => <TableCells />,
+        },
+    ];
 
     const { authUser } = usePage<MiddlewareProps>().props;
     return (

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SetLocaleController;
+use App\Http\Controllers\SiteController;
 use App\Http\Middleware\AcceptedLanguagesMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -9,6 +10,6 @@ Route::post('/locale', [SetLocaleController::class, 'setLanguage'])
     ->withoutMiddleware([AcceptedLanguagesMiddleware::class])
     ->name('set-locale');
 
-Route::view('/', 'index')->name('index');
+Route::get('/', [SiteController::class, 'index'])->name('index');
 Route::view('/about', 'about')->name('about');
 Route::view('/contact', 'contact')->name('contact');

@@ -565,16 +565,7 @@
                                 />
                             </i>
                             <h4>Our History</h4>
-                            <p>
-                                Founded in Manchester, Alliance Legal Group Ltd
-                                was established to bridge the gap between
-                                traditional legal practice and the modern
-                                demands of international business. Built on
-                                integrity, precision, and cross-border
-                                expertise, the firm has grown into a trusted
-                                legal partner for clients across the UK, Europe,
-                                and the Middle East.
-                            </p>
+                            <p>{{ $ourHistory->content }}</p>
                         </div>
                         <div class="about-details-box">
                             <i>
@@ -584,13 +575,7 @@
                                 />
                             </i>
                             <h4>Our Mission</h4>
-                            <p>
-                                To redefine legal excellence through innovation,
-                                global reach, and unwavering ethical standards —
-                                delivering legal services that empower clients
-                                to grow, adapt, and succeed in an interconnected
-                                world.
-                            </p>
+                            <p>{{ $ourMission->content }}</p>
                         </div>
                         <div class="about-details-box">
                             <i>
@@ -600,15 +585,7 @@
                                 />
                             </i>
                             <h4>Our Vision</h4>
-                            <p>
-                                To provide tailored, practical, and
-                                forward-thinking legal solutions that combine
-                                deep commercial insight with international
-                                perspective. We aim to protect our clients’
-                                interests, promote transparency, and build
-                                lasting relationships founded on trust,
-                                professionalism, and results.
-                            </p>
+                            <p>{{ $ourVision->content }}</p>
                         </div>
                     </div>
                 </div>

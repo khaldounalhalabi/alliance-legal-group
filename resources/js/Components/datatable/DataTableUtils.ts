@@ -1,4 +1,4 @@
-import React, { JSX, ReactNode, ThHTMLAttributes } from "react";
+import React, { HTMLProps, JSX, ReactNode, ThHTMLAttributes } from "react";
 
 export interface FilterParam {
     [key: string]: any;
@@ -17,7 +17,7 @@ export interface DataTableSchema<Data> {
         | ThHTMLAttributes<HTMLTableHeaderCellElement>
         | undefined
         | null;
-    cellProps?: ThHTMLAttributes<HTMLTableHeaderCellElement> | undefined | null;
+    cellProps?: HTMLProps<HTMLTableHeaderCellElement> | undefined | null;
     hidden?: number[];
     render?: (
         data: any,

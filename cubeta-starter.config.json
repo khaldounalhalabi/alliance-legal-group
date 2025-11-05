@@ -2,5 +2,27 @@
     "installed_web": true,
     "frontend_type": "React & Typescript",
     "installed_web_packages": true,
-    "installed_web_auth": true
+    "installed_web_auth": true,
+    "tables": [
+        {
+            "model_name": "AboutUsContent",
+            "table_name": "about_us_contents",
+            "attributes": [
+                {
+                    "name": "type",
+                    "type": "string",
+                    "nullable": false,
+                    "unique": true
+                },
+                {
+                    "name": "content",
+                    "type": "translatable",
+                    "nullable": false,
+                    "unique": false
+                }
+            ],
+            "relations": [],
+            "version": "v1"
+        }
+    ]
 }

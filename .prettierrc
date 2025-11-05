@@ -1,12 +1,15 @@
 {
     "plugins": [
         "prettier-plugin-blade",
-        "prettier-plugin-tailwindcss",
-        "prettier-plugin-organize-imports"
+        "prettier-plugin-organize-imports",
+        "prettier-plugin-tailwindcss"
     ],
+    "tailwindStylesheet": "./resources/css/cubeta-starter.css",
     "overrides": [
         {
-            "files": ["*.blade.php"],
+            "files": [
+                "*.blade.php"
+            ],
             "options": {
                 "parser": "blade"
             }

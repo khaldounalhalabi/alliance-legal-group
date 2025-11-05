@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\SetLocaleController;
+use App\Http\Middleware\AcceptedLanguagesMiddleware;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::post('/locale', [\App\Http\Controllers\SetLocaleController::class, 'setLanguage'])->middleware('web')->withoutMiddleware([App\Http\Middleware\AcceptedLanguagesMiddleware::class])->name('set-locale');
+Route::post('/locale', [SetLocaleController::class, 'setLanguage'])
+    ->middleware('web')
+    ->withoutMiddleware([AcceptedLanguagesMiddleware::class])
+    ->name('set-locale');
+
+Route::view('/', 'index')->name('index');

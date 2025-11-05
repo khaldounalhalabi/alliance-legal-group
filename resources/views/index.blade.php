@@ -745,7 +745,7 @@
         </div>
         <!-- Services Section /- -->
 
-        <x-team-members />
+        <x-team-members :team-members="$teamMembers" />
 
         <x-testimonials />
     </main>

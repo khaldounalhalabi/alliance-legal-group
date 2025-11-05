@@ -23,6 +23,32 @@
             ],
             "relations": [],
             "version": "v1"
+        },
+        {
+            "model_name": "TeamMember",
+            "table_name": "team_members",
+            "attributes": [
+                {
+                    "name": "name",
+                    "type": "translatable",
+                    "nullable": false,
+                    "unique": false
+                },
+                {
+                    "name": "position",
+                    "type": "translatable",
+                    "nullable": false,
+                    "unique": false
+                },
+                {
+                    "name": "image",
+                    "type": "file",
+                    "nullable": false,
+                    "unique": false
+                }
+            ],
+            "relations": [],
+            "version": "v1"
         }
     ]
 }

@@ -34,6 +34,11 @@ export function Sidebar({
             href: route("v1.web.protected.about.us.contents.index"),
             icon: () => <TableCells />,
         },
+        {
+            title: "Team Members",
+            href: route("v1.web.protected.team.members.index"),
+            icon: () => <TableCells />,
+        },
     ];
 
     const { authUser } = usePage<MiddlewareProps>().props;

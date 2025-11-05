@@ -14,5 +14,8 @@ Route::resource('/v1/about-us-contents', v1\AboutUsContentController::class)
     ->only([
         'index',
         'edit',
-        'update'
+        'update',
     ])->names('v1.web.protected.about.us.contents');
+
+Route::get('/v1/team-members/data', [v1\TeamMemberController::class, 'data'])->name('v1.web.protected.team.members.data');
+Route::resource('/v1/team-members', v1\TeamMemberController::class)->names('v1.web.protected.team.members');

@@ -77,10 +77,12 @@
                         <a href="{{ route("about") }}" title="About">About</a>
                     </li>
                     <li>
-                        <a href="services.html" title="Services">Services</a>
+                        <a href="#" title="Services">Services</a>
                     </li>
                     <li>
-                        <a href="contactus.html" title="Contact Us">Contact</a>
+                        <a href="{{ route("contact") }}" title="Contact Us">
+                            Contact
+                        </a>
                     </li>
                 </ul>
             </div>

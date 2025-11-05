@@ -34,17 +34,17 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="aboutus.html" title="About Us">
+                                <a href="{{route('about')}}" title="About Us">
                                     about us
                                 </a>
                             </li>
                             <li>
-                                <a href="services.html" title="Services">
+                                <a href="#" title="Services">
                                     Services
                                 </a>
                             </li>
                             <li>
-                                <a href="contactus.html" title="Contact">
+                                <a href="{{route('contact')}}" title="Contact">
                                     contact
                                 </a>
                             </li>
@@ -92,20 +92,33 @@
                         </div>
                         <div id="navbar-ftr" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
-                                <li><a href="#" title="Home">Home</a></li>
                                 <li>
-                                    <a href="#" title="About Us">About Us</a>
+                                    <a
+                                        href="{{ route("index") }}"
+                                        title="Home"
+                                    >
+                                        Home
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="{{ route("about") }}"
+                                        title="About Us"
+                                    >
+                                        About Us
+                                    </a>
                                 </li>
                                 <li>
                                     <a href="#" title="Services">services</a>
                                 </li>
-                                <li><a href="#" title="Gallery">gallery</a></li>
                                 <li>
-                                    <a href="#" title="Latest News">
-                                        latest news
+                                    <a
+                                        href="{{ route("contact") }}"
+                                        title="Contact"
+                                    >
+                                        Contact
                                     </a>
                                 </li>
-                                <li><a href="#" title="Contact">Contact</a></li>
                             </ul>
                         </div>
                     </nav>
@@ -156,3 +169,5 @@
 
 <!-- Library - Theme JS -->
 <script src="{{ asset("assets/js/functions.js") }}"></script>
+
+@stack('scripts')

@@ -23,6 +23,25 @@ class AboutUsContent extends Model
 {
     use HasFactory;
 
+    public const CACHE_KEY = 'about_us_contents';
+
+    protected static function booted(): void
+    {
+        parent::booted();
+
+        self::created(function () {
+            cache()->forget(self::CACHE_KEY);
+        });
+
+        self::updated(function () {
+            cache()->forget(self::CACHE_KEY);
+        });
+
+        self::deleted(function () {
+            cache()->forget(self::CACHE_KEY);
+        });
+    }
+
     protected $fillable = [
         'type',
         'content',

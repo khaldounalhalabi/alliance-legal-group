@@ -29,6 +29,25 @@ class Testimonial extends Model
     use HasFactory;
     use HasMedia;
 
+    public const CACHE_KEY = 'testimonials';
+
+    protected static function booted(): void
+    {
+        parent::booted();
+
+        self::created(function () {
+            cache()->forget(self::CACHE_KEY);
+        });
+
+        self::updated(function () {
+            cache()->forget(self::CACHE_KEY);
+        });
+
+        self::deleted(function () {
+            cache()->forget(self::CACHE_KEY);
+        });
+    }
+
     protected $fillable = [
         'customer_name',
         'customer_position',

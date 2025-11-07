@@ -26,23 +26,7 @@
                         <h3>about us</h3>
                     </div>
                     <!-- Section Header /- -->
-                    <p>
-                        Alliance Legal Group Ltd is an international corporate
-                        and commercial law firm headquartered in Manchester,
-                        United Kingdom. We advise corporations, investors, and
-                        entrepreneurs on complex cross-border transactions,
-                        regulatory compliance, and commercial strategy. Our
-                        mission is simple: to provide precise, ethical, and
-                        forward-thinking legal advice that empowers businesses
-                        to thrive in a global marketplace. Our Vision: To
-                        redefine international legal practice by blending deep
-                        local knowledge with global commercial awareness. Our
-                        Values: Integrity, Excellence, Innovation, Global
-                        Mindset, Client Focus. Global Presence: With a strong
-                        base in the UK and partnerships across Europe and the
-                        Middle East, we offer multilingual and business-minded
-                        legal support.
-                    </p>
+                    <p>{{ $aboutUs->content }}</p>
                     <div class="about-detail row">
                         <div class="col-sm-6">
                             <div class="about-box">
@@ -73,15 +57,7 @@
                     </div>
                     <!-- Section Header /- -->
                     <p>
-                        We understand that modern business doesn’t stop at
-                        borders. Our lawyers advise on international structures,
-                        multi-jurisdictional deals, and regulatory frameworks
-                        that shape cross-border commerce. Every client is
-                        unique. We build solutions around your business model,
-                        risk profile, and long-term goals — not templates. From
-                        startups to multinational corporations, our clients rely
-                        on us for clear, strategic, and actionable legal advice
-                        grounded in real-world business needs.
+                        {{ $whyUs->content }}
                     </p>
                     <div class="work-carousel">
                         <div class="item">
@@ -110,8 +86,8 @@
         </div>
         <!-- Container /- -->
 
-        <x-team-members />
+        <x-team-members :team-members="$teamMembers" />
 
-        <x-testimonials />
+        <x-testimonials :testimonials="$testimonials" />
     </main>
 @endsection

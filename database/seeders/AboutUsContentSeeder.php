@@ -37,5 +37,51 @@ class AboutUsContentSeeder extends Seeder
                 'ar' => 'تقديم حلول قانونية مخصصة وعملية وتطلعية تجمع بين الرؤية التجارية العميقة والمنظور الدولي. نهدف إلى حماية مصالح عملائنا وتعزيز الشفافية وبناء علاقات دائمة قائمة على الثقة والاحترافية والنتائج.'
             ]),
         ]);
+
+        AboutUsContent::create([
+            'type' => AboutUsKeyEnum::ABOUT_US->value,
+            'content' => Translatable::create([
+                'en' => 'Alliance Legal Group Ltd is an international corporate
+                        and commercial law firm headquartered in Manchester,
+                        United Kingdom. We advise corporations, investors, and
+                        entrepreneurs on complex cross-border transactions,
+                        regulatory compliance, and commercial strategy. Our
+                        mission is simple: to provide precise, ethical, and
+                        forward-thinking legal advice that empowers businesses
+                        to thrive in a global marketplace. Our Vision: To
+                        redefine international legal practice by blending deep
+                        local knowledge with global commercial awareness. Our
+                        Values: Integrity, Excellence, Innovation, Global
+                        Mindset, Client Focus. Global Presence: With a strong
+                        base in the UK and partnerships across Europe and the
+                        Middle East, we offer multilingual and business-minded
+                        legal support.',
+                'ar' => 'مجموعة أليانس القانونية المحدودة (Alliance Legal Group Ltd) هي شركة محاماة دولية متخصصة في قانون الشركات والقانون التجاري، ويقع مقرها الرئيسي في مانشستر، المملكة المتحدة. نحن نقدم المشورة للشركات والمستثمرين ورواد الأعمال بشأن المعاملات المعقدة عبر الحدود، والامتثال التنظيمي، والاستراتيجية التجارية.
+مهمتنا بسيطة: تقديم استشارات قانونية دقيقة وأخلاقية وتطلعية تُمكّن الشركات من الازدهار في السوق العالمية.
+رؤيتنا: إعادة تعريف الممارسة القانونية الدولية من خلال مزج المعرفة المحلية العميقة بالوعي التجاري العالمي.
+قيمنا: النزاهة، التميز، الابتكار، العقلية العالمية، التركيز على العميل.
+حضورنا العالمي: بفضل قاعدتنا القوية في المملكة المتحدة وشراكاتنا في جميع أنحاء أوروبا والشرق الأوسط، نقدم دعمًا قانونيًا متعدد اللغات وذا توجه تجاري.'
+            ])
+        ]);
+
+        AboutUsContent::create([
+            'type' => AboutUsKeyEnum::WHY_CHOSE_US->value,
+            'content' => Translatable::create([
+                'en' => 'We understand that modern business doesn’t stop at
+                        borders. Our lawyers advise on international structures,
+                        multi-jurisdictional deals, and regulatory frameworks
+                        that shape cross-border commerce. Every client is
+                        unique. We build solutions around your business model,
+                        risk profile, and long-term goals — not templates. From
+                        startups to multinational corporations, our clients rely
+                        on us for clear, strategic, and actionable legal advice
+                        grounded in real-world business needs.',
+                'ar' => 'نحن ندرك أن الأعمال الحديثة لا تتوقف عند الحدود. يقدم محامونا المشورة بشأن الهياكل الدولية، والصفقات متعددة الاختصاصات، والأطر التنظيمية التي تشكل التجارة العابرة للحدود.
+
+كل عميل فريد من نوعه. نحن نبني حلولًا قانونية تتمحور حول نموذج عملك، وملف تعريف المخاطر الخاص بك، وأهدافك طويلة الأجل - وليس القوالب الجاهزة.
+
+من الشركات الناشئة إلى الشركات متعددة الجنسيات، يعتمد عملاؤنا علينا للحصول على استشارات قانونية واضحة واستراتيجية وقابلة للتنفيذ، مستندة إلى احتياجات العمل في العالم الحقيقي.'
+            ])
+        ]);
     }
 }

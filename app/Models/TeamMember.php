@@ -28,11 +28,29 @@ class TeamMember extends Model
     use HasFactory;
     use HasMedia;
 
+    public const CACHE_KEY = 'team_members';
+
+    protected static function booted(): void
+    {
+        parent::booted();
+
+        self::created(function () {
+            cache()->forget(self::CACHE_KEY);
+        });
+
+        self::updated(function () {
+            cache()->forget(self::CACHE_KEY);
+        });
+
+        self::deleted(function () {
+            cache()->forget(self::CACHE_KEY);
+        });
+    }
+
     protected $fillable = [
         'name',
         'position',
         'image',
-
     ];
 
     protected function casts(): array

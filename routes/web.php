@@ -11,5 +11,5 @@ Route::post('/locale', [SetLocaleController::class, 'setLanguage'])
     ->name('set-locale');
 
 Route::get('/', [SiteController::class, 'index'])->name('index');
-Route::view('/about', 'about')->name('about');
+Route::get('/about', [SiteController::class, 'about'])->name('about');
 Route::view('/contact', 'contact')->name('contact');

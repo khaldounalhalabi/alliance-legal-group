@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AboutUsKeyEnum;
 use App\Models\AboutUsContent;
 use App\Models\TeamMember;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
@@ -18,11 +19,14 @@ class SiteController extends Controller
 
         $teamMembers = TeamMember::all();
 
+        $testimonials = Testimonial::all();
+
         return view('index', compact(
             'ourHistory',
             'ourMission',
             'ourVision',
-            'teamMembers'
+            'teamMembers',
+            'testimonials',
         ));
     }
 }

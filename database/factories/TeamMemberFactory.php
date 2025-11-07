@@ -17,7 +17,7 @@ class TeamMemberFactory extends Factory
         return [
             'name' => Translatable::fake('name')->toJson(),
             'position' => Translatable::fake()->toJson(),
-            'image' => UploadedFile::fake()->image('image.png'),
+            'image' => new UploadedFile(public_path("assets/images/team-" . fake()->numberBetween(1, 3) . ".jpg"), "profile-image.jpg"),
         ];
     }
 }

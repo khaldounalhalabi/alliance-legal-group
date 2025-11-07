@@ -747,6 +747,6 @@
 
         <x-team-members :team-members="$teamMembers" />
 
-        <x-testimonials />
+        <x-testimonials :testimonials="$testimonials" />
     </main>
 @endsection

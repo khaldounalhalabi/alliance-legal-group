@@ -19,3 +19,6 @@ Route::resource('/v1/about-us-contents', v1\AboutUsContentController::class)
 
 Route::get('/v1/team-members/data', [v1\TeamMemberController::class, 'data'])->name('v1.web.protected.team.members.data');
 Route::resource('/v1/team-members', v1\TeamMemberController::class)->names('v1.web.protected.team.members');
+
+Route::get('/v1/testimonials/data', [v1\TestimonialController::class, 'data'])->name('v1.web.protected.testimonials.data');
+Route::resource('/v1/testimonials', v1\TestimonialController::class)->names('v1.web.protected.testimonials');

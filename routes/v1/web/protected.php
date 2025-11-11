@@ -22,3 +22,11 @@ Route::resource('/v1/team-members', v1\TeamMemberController::class)->names('v1.w
 
 Route::get('/v1/testimonials/data', [v1\TestimonialController::class, 'data'])->name('v1.web.protected.testimonials.data');
 Route::resource('/v1/testimonials', v1\TestimonialController::class)->names('v1.web.protected.testimonials');
+
+Route::get('/v1/messages/data', [v1\MessageController::class, 'data'])->name('v1.web.protected.messages.data');
+Route::resource('/v1/messages', v1\MessageController::class)
+    ->only([
+        'index',
+        'show',
+        'destroy'
+    ])->names('v1.web.protected.messages');

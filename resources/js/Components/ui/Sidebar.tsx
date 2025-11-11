@@ -13,7 +13,13 @@ import {
 import { MiddlewareProps } from "@/types";
 import { Link, usePage } from "@inertiajs/react";
 import { type Icon } from "@tabler/icons-react";
-import { BadgePlus } from "lucide-react";
+import {
+    BadgePlus,
+    MessageCircleIcon,
+    TableOfContentsIcon,
+    TextIcon,
+    UsersIcon,
+} from "lucide-react";
 import React from "react";
 
 export function Sidebar({
@@ -32,17 +38,22 @@ export function Sidebar({
         {
             title: "About us content",
             href: route("v1.web.protected.about.us.contents.index"),
-            icon: () => <TableCells />,
+            icon: () => <TableOfContentsIcon />,
         },
         {
             title: "Team Members",
             href: route("v1.web.protected.team.members.index"),
-            icon: () => <TableCells />,
+            icon: () => <UsersIcon />,
         },
         {
-            title: "Testimonial",
+            title: "Testimonials",
             href: route("v1.web.protected.testimonials.index"),
-            icon: () => <TableCells />,
+            icon: () => <TextIcon />,
+        },
+        {
+            title: "Messages",
+            href: route("v1.web.protected.messages.index"),
+            icon: () => <MessageCircleIcon />,
         },
     ];
 

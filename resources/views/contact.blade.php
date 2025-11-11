@@ -87,51 +87,81 @@
             </div>
             <div class="col-md-8 col-xs-6 contact-form">
                 <h3>Leave a Comments</h3>
-                <form>
+                <form
+                    action="{{ route("contact.send.message") }}"
+                    method="POST"
+                >
+                    @csrf
                     <div class="form-group">
                         <input
                             type="text"
                             class="form-control"
                             placeholder="Enter Your Name*"
-                            name="contact-name"
+                            name="name"
                             id="input_name"
-                            required=""
+                            required
+                            value="{{ old("name") }}"
                         />
+                        @error("name")
+                            <div class="invalid-feedback text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <input
                             type="text"
                             class="form-control"
                             placeholder="Phone Number*"
-                            name="contact-phone"
+                            name="phone"
+                            value="{{ old("phone") }}"
                             id="input_phone"
-                            required=""
+                            required
                         />
+                        @error("phone")
+                            <div class="invalid-feedback text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <input
                             type="text"
                             class="form-control"
                             placeholder="Enter Your Address*"
-                            name="contact-address"
+                            name="address"
+                            value="{{ old("address") }}"
                             id="input_address"
-                            required=""
+                            required
                         />
+                        @error("address")
+                            <div class="invalid-feedback text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <textarea
                             class="form-control"
                             placeholder="Message"
-                            name="textarea-message"
+                            name="message"
                             id="textarea_message"
-                        ></textarea>
+                        >
+                            {{ trim(old("message")) }}
+                        </textarea>
+                        @error("message")
+                            <div class="invalid-feedback text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
-                    <button
-                        title="SEND MESSAGE"
-                        type="submit"
-                        id="btn_submit"
-                        name="post"
-                    >
+                    @if (session()->has("success"))
+                        <div class="alert alert-success" role="alert">
+                            {{ session("success") }}
+                        </div>
+                    @endif
+
+                    <button title="SEND MESSAGE" type="submit" name="post">
                         SEND MESSAGE
                     </button>
                     <div id="alert-msg" class="alert-msg"></div>

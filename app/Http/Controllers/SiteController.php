@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\AboutUsKeyEnum;
+use App\Http\Requests\v1\Message\StoreMessageRequest;
 use App\Models\AboutUsContent;
+use App\Models\Message;
 use App\Models\TeamMember;
 use App\Models\Testimonial;
 use Illuminate\Database\Eloquent\Collection;
@@ -53,5 +55,14 @@ class SiteController extends Controller
             'aboutUs',
             'whyUs',
         ));
+    }
+
+    public function sendMessage(StoreMessageRequest $request)
+    {
+        $data = $request->validated();
+        Message::create($data);
+        return redirect()
+            ->back()
+            ->with('success', trans('site.success'));
     }
 }

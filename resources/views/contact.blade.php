@@ -22,8 +22,8 @@
                 <div
                     class="map-canvas"
                     id="contact-map-canvas"
-                    data-lat="40.712784"
-                    data-lng="-74.005941"
+                    data-lat="{{ $lat?->value }}"
+                    data-lng="{{ $lng?->value }}"
                     data-pin="assets/images/marker-2.png"
                     data-string="5 Union Street, Ardwick, Manchester, M12 4JD"
                     data-zoom="10"
@@ -36,7 +36,7 @@
                     <h3>Contact Us?</h3>
                     <div class="contact-detail-box">
                         <h4>ADDRESS:</h4>
-                        <p>5 Union Street, Ardwick, Manchester, M12 4JD</p>
+                        <p>{{ $address?->value }}</p>
                     </div>
 
                     <div class="contact-detail-box">
@@ -67,19 +67,16 @@
                     <div class="contact-detail-box">
                         <h4>EMAIL ID:</h4>
                         <p>
-                            <a
-                                href="mailto:info@alliancelegalgroup.co.uk"
-                                title=""
-                            >
-                                info@alliancelegalgroup.co.uk
+                            <a href="mailto:{{ $email->value }}" title="">
+                                {{ $email->value }}
                             </a>
                         </p>
                     </div>
                     <div class="contact-detail-box">
                         <h4>PHONE:</h4>
                         <p>
-                            <a href="mailto:+4401612601985">
-                                +44 0161 260 1985
+                            <a href="mailto:{{ $phone->value }}">
+                                {{ $phone->value }}
                             </a>
                         </p>
                     </div>

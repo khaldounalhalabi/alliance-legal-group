@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\AboutUsKeyEnum;
+use App\Enums\AboutUsKeyEnum;
 use App\Models\AboutUsContent;
 use App\Serializers\Translatable;
 use Illuminate\Database\Seeder;

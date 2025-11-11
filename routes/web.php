@@ -12,5 +12,5 @@ Route::post('/locale', [SetLocaleController::class, 'setLanguage'])
 
 Route::get('/', [SiteController::class, 'index'])->name('index');
 Route::get('/about', [SiteController::class, 'about'])->name('about');
-Route::view('/contact', 'contact')->name('contact');
+Route::get('/contact', [SiteController::class, 'contactUs'])->name('contact');
 Route::post('/contact/send-message', [SiteController::class, 'sendMessage'])->name('contact.send.message');

@@ -28,5 +28,14 @@ Route::resource('/v1/messages', v1\MessageController::class)
     ->only([
         'index',
         'show',
-        'destroy'
+        'destroy',
     ])->names('v1.web.protected.messages');
+
+Route::get('/v1/contact-page-contents/data', [v1\ContactPageContentController::class, 'data'])->name('v1.web.protected.contact.page.contents.data');
+Route::resource('/v1/contact-page-contents', v1\ContactPageContentController::class)
+    ->only([
+        'index',
+        'show',
+        'edit',
+        'update',
+    ])->names('v1.web.protected.contact.page.contents');

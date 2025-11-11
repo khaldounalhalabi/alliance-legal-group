@@ -55,6 +55,11 @@ export function Sidebar({
             href: route("v1.web.protected.messages.index"),
             icon: () => <MessageCircleIcon />,
         },
+        {
+            title: "Contact Us Page Content",
+            href: route("v1.web.protected.contact.page.contents.index"),
+            icon: () => <TableOfContentsIcon />,
+        },
     ];
 
     const { authUser } = usePage<MiddlewareProps>().props;

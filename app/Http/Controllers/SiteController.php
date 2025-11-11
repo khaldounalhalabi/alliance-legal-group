@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\AboutUsKeyEnum;
+use App\Enums\AboutUsKeyEnum;
+use App\Enums\ContactUsContentKeyEnum;
 use App\Http\Requests\v1\Message\StoreMessageRequest;
 use App\Models\AboutUsContent;
+use App\Models\ContactPageContent;
 use App\Models\Message;
 use App\Models\TeamMember;
 use App\Models\Testimonial;
@@ -64,5 +66,29 @@ class SiteController extends Controller
         return redirect()
             ->back()
             ->with('success', trans('site.success'));
+    }
+
+    public function contactUs()
+    {
+        /** @var Collection<ContactPageContent>|ContactPageContent[] $data */
+        $data = cache()->remember(
+            ContactPageContent::CACHE_KEY,
+            now()->addYear(),
+            fn() => ContactPageContent::all()
+        );
+
+        $address = $data->firstWhere('key', ContactUsContentKeyEnum::ADDRESS->value);
+        $email = $data->firstWhere('key', ContactUsContentKeyEnum::EMAIL->value);
+        $phone = $data->firstWhere('key', ContactUsContentKeyEnum::PHONE->value);
+        $lng = $data->firstWhere('key', ContactUsContentKeyEnum::LOCATION_LNG->value);
+        $lat = $data->firstWhere('key', ContactUsContentKeyEnum::LOCATION_LAT->value);
+
+        return view('contact', compact(
+            'address',
+            'email',
+            'phone',
+            'lng',
+            'lat'
+        ));
     }
 }

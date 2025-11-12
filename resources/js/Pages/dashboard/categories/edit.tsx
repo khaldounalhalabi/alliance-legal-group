@@ -5,6 +5,7 @@ import Form from "@/Components/form/Form";
 import PageCard from "@/Components/ui/PageCard";
 import TranslatableInputsContext from "@/Contexts/TranslatableInputsContext";
 import Category from "@/Models/Category";
+import Media from "@/Models/Media";
 import { useForm } from "@inertiajs/react";
 import { FormEvent } from "react";
 
@@ -13,11 +14,12 @@ const Edit = ({ category }: { category: Category }) => {
         _method?: "PUT" | "POST";
         name: string;
         description: string;
-        cover?: File | undefined;
+        cover?: File | undefined | Media;
     }>({
         _method: "PUT",
         name: category?.name,
         description: category?.description,
+        cover: category?.cover,
     });
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -48,7 +50,6 @@ const Edit = ({ category }: { category: Category }) => {
                                 setData("cover", e.target.files?.[0])
                             }
                             type={"file"}
-                            required
                         />
 
                         <div className={"md:col-span-2"}>

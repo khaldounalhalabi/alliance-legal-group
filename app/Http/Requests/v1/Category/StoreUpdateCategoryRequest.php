@@ -3,7 +3,9 @@
 namespace App\Http\Requests\v1\Category;
 
 use App\Rules\ValidTranslatableJson;
+use App\Serializers\SerializedMedia;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreUpdateCategoryRequest extends FormRequest
 {
@@ -23,7 +25,15 @@ class StoreUpdateCategoryRequest extends FormRequest
         return [
             'name' => ['json', new ValidTranslatableJson, 'required'],
             'description' => ['json', new ValidTranslatableJson, 'required'],
-            'cover' => ['required', 'file', 'max:10000'],
+            'cover' => [
+                'required',
+                Rule::when(is_array($this->input('cover')), [
+                    SerializedMedia::validator()
+                ]),
+                Rule::when($this->hasFile('cover'), [
+                    'image:allow_svg', 'max:10000', 'mimes:jpeg,png,jpg,gif,svg,webp'
+                ])
+            ],
         ];
     }
 }

@@ -1,36 +1,33 @@
 import Input from "@/Components/form/fields/Input";
+import ApiSelect from "@/Components/form/fields/selects/ApiSelect";
 import TranslatableTextEditor from "@/Components/form/fields/TranslatableEditor";
 import TranslatableInput from "@/Components/form/fields/TranslatableInput";
 import Form from "@/Components/form/Form";
 import PageCard from "@/Components/ui/PageCard";
 import TranslatableInputsContext from "@/Contexts/TranslatableInputsContext";
 import Category from "@/Models/Category";
-import Media from "@/Models/Media";
 import { translate } from "@/Models/Translatable";
+import Http from "@/Modules/Http/Http";
 import { useForm } from "@inertiajs/react";
 import { FormEvent } from "react";
 
-const Edit = ({ category }: { category: Category }) => {
+const Create = () => {
     const { post, setData, processing } = useForm<{
         _method?: "PUT" | "POST";
         name: string;
         description: string;
-        cover?: File | undefined | Media;
-    }>({
-        _method: "PUT",
-        name: category?.name,
-        description: category?.description,
-        cover: category?.cover,
-    });
+        category_id: number;
+        cover?: File | undefined;
+        image?: File | undefined;
+    }>();
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
-        post(route("v1.web.protected.categories.update", category.id));
+        post(route("v1.web.protected.services.store"));
     };
 
     return (
-        <PageCard title={`Edit Category: ${translate(category.name)}`}>
+        <PageCard title="Add New Service">
             <TranslatableInputsContext>
                 <Form onSubmit={onSubmit} processing={processing}>
                     <div
@@ -40,7 +37,6 @@ const Edit = ({ category }: { category: Category }) => {
                             name="name"
                             label={"Name"}
                             onChange={(e) => setData("name", e.target.value)}
-                            defaultValue={category.name}
                             required
                         />
 
@@ -51,8 +47,40 @@ const Edit = ({ category }: { category: Category }) => {
                                 setData("cover", e.target.files?.[0])
                             }
                             type={"file"}
+                            required
                         />
-
+                        <Input
+                            name="image"
+                            label={"Image"}
+                            onChange={(e) =>
+                                setData("image", e.target.files?.[0])
+                            }
+                            type={"file"}
+                            required
+                        />
+                        <ApiSelect
+                            name="category_id"
+                            label={"Category"}
+                            api={(page, search) =>
+                                Http.make<Category[]>().get(
+                                    route("v1.web.protected.categories.data"),
+                                    { page: page, search: search },
+                                )
+                            }
+                            getDataArray={(response) => response?.data ?? []}
+                            getIsLast={(data) =>
+                                data?.paginate?.is_last_page ?? false
+                            }
+                            getTotalPages={(data) =>
+                                data?.paginate?.total_pages ?? 0
+                            }
+                            onChange={(e) =>
+                                setData("category_id", Number(e.target.value))
+                            }
+                            getOptionLabel={(data) => translate(data.name)}
+                            optionValue={"id"}
+                            required
+                        />
                         <div className={"md:col-span-2"}>
                             <TranslatableTextEditor
                                 name="description"
@@ -60,7 +88,6 @@ const Edit = ({ category }: { category: Category }) => {
                                 onChange={(e) =>
                                     setData("description", e.target.value)
                                 }
-                                defaultValue={category.description}
                                 required
                             />
                         </div>
@@ -71,4 +98,4 @@ const Edit = ({ category }: { category: Category }) => {
     );
 };
 
-export default Edit;
+export default Create;

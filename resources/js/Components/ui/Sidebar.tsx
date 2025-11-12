@@ -1,4 +1,3 @@
-import TableCells from "@/Components/icons/TableCells";
 import { NavMain } from "@/Components/nav-main";
 import { NavUser } from "@/Components/nav-user";
 import {
@@ -16,6 +15,7 @@ import { type Icon } from "@tabler/icons-react";
 import {
     BadgePlus,
     IdCardIcon,
+    LucideHandshake,
     MessageCircleIcon,
     TableOfContentsIcon,
     TextIcon,
@@ -62,9 +62,14 @@ export function Sidebar({
             icon: () => <TableOfContentsIcon />,
         },
         {
-            title: "Categorys",
+            title: "Categories",
             href: route("v1.web.protected.categories.index"),
             icon: () => <IdCardIcon />,
+        },
+        {
+            title: "Services",
+            href: route("v1.web.protected.services.index"),
+            icon: () => <LucideHandshake />,
         },
     ];
 

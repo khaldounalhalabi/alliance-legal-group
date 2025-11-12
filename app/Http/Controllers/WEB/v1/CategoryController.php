@@ -5,10 +5,7 @@ namespace App\Http\Controllers\WEB\v1;
 use App\Http\Controllers\WebController;
 use App\Http\Requests\v1\Category\StoreUpdateCategoryRequest;
 use App\Http\Resources\v1\CategoryResource;
-use App\Models\Category;
 use App\Services\v1\Category\CategoryService;
-use Exception;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class CategoryController extends WebController

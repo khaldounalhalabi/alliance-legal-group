@@ -1,13 +1,15 @@
 import ActionsButtons from "@/Components/datatable/ActionsButtons";
 import DataTable from "@/Components/datatable/DataTable";
-import Testimonial from "@/Models/Testimonial";
+import Service from "@/Models/Service";
+import { translate } from "@/Models/Translatable";
 import Http from "@/Modules/Http/Http";
+import { Link } from "@inertiajs/react";
 
 const Index = () => {
     return (
         <DataTable
-            title="Testimonials"
-            createUrl={route("v1.web.protected.testimonials.create")}
+            title="Services"
+            createUrl={route("v1.web.protected.services.create")}
             getDataArray={(res) => res.data}
             getTotalPages={(res) => res?.paginate?.total_pages ?? 0}
             getTotalRecords={(res) => res.paginate?.total ?? 0}
@@ -19,8 +21,8 @@ const Index = () => {
                 perPage?: number | undefined,
                 params?: object | undefined,
             ) =>
-                Http.make<Testimonial[]>().get(
-                    route("v1.web.protected.testimonials.data"),
+                Http.make<Service[]>().get(
+                    route("v1.web.protected.services.data"),
                     {
                         page: page,
                         search: search,
@@ -38,25 +40,37 @@ const Index = () => {
                     sortable: true,
                 },
                 {
-                    name: "customer_name",
-                    label: "Customer Name",
+                    name: "name",
+                    label: "Name",
                     translatable: true,
                     sortable: true,
                 },
                 {
-                    name: "customer_position",
-                    label: "Customer Position",
+                    name: "category.name",
+                    label: "Category Name",
                     translatable: true,
-                    sortable: true,
+                    render: (cell, record, setHidden, revalidate) => {
+                        return (
+                            record?.category_id && (
+                                <Link
+                                    className="underline hover:text-primary"
+                                    href={route(
+                                        "v1.web.protected.categories.show",
+                                        record?.category_id,
+                                    )}
+                                >
+                                    {translate(record?.category?.name)}
+                                </Link>
+                            )
+                        );
+                    },
                 },
                 {
                     label: "Options",
-                    render: (_data, record, setHidden) => (
+                    render: (_data, record, setHidden, revalidate) => (
                         <ActionsButtons
                             buttons={["delete", "edit", "show"]}
-                            baseUrl={route(
-                                "v1.web.protected.testimonials.index",
-                            )}
+                            baseUrl={route("v1.web.protected.services.index")}
                             id={record?.id ?? 0}
                             setHidden={setHidden}
                         />

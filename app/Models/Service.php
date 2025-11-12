@@ -7,25 +7,26 @@ use App\Casts\Translatable;
 use App\Serializers\Translatable as TranslatableSerializer;
 use App\Traits\HasMedia;
 use Carbon\Carbon;
-use Database\Factories\CategoryFactory;
+use Database\Factories\ServiceFactory;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int                                                             $id
  * @property TranslatableSerializer                                          $name
  * @property TranslatableSerializer                                          $description
+ * @property int                                                             $category_id
  * @property array{url:string,size:string,extension:string,mime_type:string} $cover
+ * @property array{url:string,size:string,extension:string,mime_type:string} $image
+ * @property Category|null                                                   $category
  * @property Carbon                                                          $created_at
  * @property Carbon                                                          $updated_at
- * @mixin Builder<Category>
- * @use  HasFactory<CategoryFactory>
- * @property EloquentCollection<Service>|null                                $services
+ * @mixin Builder<Service>
+ * @use  HasFactory<ServiceFactory>
  */
-class Category extends Model
+class Service extends Model
 {
     use HasFactory;
     use HasMedia;
@@ -33,7 +34,10 @@ class Category extends Model
     protected $fillable = [
         'name',
         'description',
+        'category_id',
         'cover',
+        'image',
+
     ];
 
     public static function searchableArray(): array
@@ -41,16 +45,15 @@ class Category extends Model
         return [
             'name',
             'description',
+
         ];
     }
 
     public static function relationsSearchableArray(): array
     {
         return [
-            'services' => [
-                'name',
-                'description',
-            ],
+            'category' => ['name', 'description'],
+
         ];
     }
 
@@ -60,16 +63,18 @@ class Category extends Model
             'name',
             'description',
             'cover',
-            'service_ids',
+            'image',
+            'category.name',
+
         ];
     }
 
     /**
-     * @return  HasMany<Service, static>
+     * @return  BelongsTo<Category, static>
      */
-    public function services(): HasMany
+    public function category(): BelongsTo
     {
-        return $this->hasMany(Service::class);
+        return $this->belongsTo(Category::class);
     }
 
     protected function casts(): array
@@ -78,6 +83,7 @@ class Category extends Model
             'name' => Translatable::class,
             'description' => Translatable::class,
             'cover' => MediaCast::class,
+            'image' => MediaCast::class,
         ];
     }
 }

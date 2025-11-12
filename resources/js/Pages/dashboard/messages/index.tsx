@@ -6,7 +6,7 @@ import Http from "@/Modules/Http/Http";
 const Index = () => {
     return (
         <DataTable
-            title="Messages Table"
+            title="Messages"
             getDataArray={(res) => res.data}
             getTotalPages={(res) => res?.paginate?.total_pages ?? 0}
             getTotalRecords={(res) => res.paginate?.total ?? 0}

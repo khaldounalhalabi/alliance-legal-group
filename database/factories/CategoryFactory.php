@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\Service;
 use App\Serializers\Translatable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\UploadedFile;
@@ -21,8 +22,13 @@ class CategoryFactory extends Factory
 
         return [
             'name' => Translatable::fake()->toJson(),
-            'description' => Translatable::fake("words")->toJson(),
+            'description' => Translatable::fake('words')->toJson(),
             'cover' => new UploadedFile($file->getPathname(), $file->getFilename()),
         ];
+    }
+
+    public function withServices(int $count = 1): static
+    {
+        return $this->has(Service::factory($count));
     }
 }

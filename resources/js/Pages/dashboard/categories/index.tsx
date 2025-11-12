@@ -6,7 +6,7 @@ import Http from "@/Modules/Http/Http";
 const Index = () => {
     return (
         <DataTable
-            title="Category Table"
+            title="Categories"
             createUrl={route("v1.web.protected.categories.create")}
             getDataArray={(res) => res.data}
             getTotalPages={(res) => res?.paginate?.total_pages ?? 0}

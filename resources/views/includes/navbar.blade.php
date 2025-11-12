@@ -11,12 +11,12 @@
                 <div class="top-left">
                     <p>
                         <i class="fa fa-map-marker"></i>
-                        5 Union Street, Ardwick, Manchester, M12 4JD
+                        {{ $address->value }}
                     </p>
                     <p>
                         <i class="fa fa-phone"></i>
                         Mobile:
-                        <a href="tel:+4401612601985">+44 0161 260 1985</a>
+                        <a href="tel:+4401612601985">{{ $phone->value }}</a>
                     </p>
                 </div>
             </div>

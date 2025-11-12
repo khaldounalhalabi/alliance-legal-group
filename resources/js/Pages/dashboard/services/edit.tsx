@@ -57,7 +57,6 @@ const Edit = ({ service }: { service: Service }) => {
                                 setData("cover", e.target.files?.[0])
                             }
                             type={"file"}
-                            required
                         />
                         <Input
                             name="image"
@@ -66,7 +65,6 @@ const Edit = ({ service }: { service: Service }) => {
                                 setData("image", e.target.files?.[0])
                             }
                             type={"file"}
-                            required
                         />
                         <ApiSelect
                             name="category_id"

@@ -41,7 +41,7 @@ class Translatable implements JsonSerializable, Arrayable, Stringable
     {
         if (is_string($value) && Str::isJson($value)) {
             $this->data = json_decode($value, true);
-        } elseif (is_string($value) && !Str::isJson($value)){
+        } elseif (is_string($value) && !Str::isJson($value)) {
             $this->data[config('cubeta-starter.default_locale')] = $value;
         } else {
             $this->data = $value;
@@ -85,9 +85,17 @@ class Translatable implements JsonSerializable, Arrayable, Stringable
         $result = [];
         foreach (config('cubeta-starter.available_locales') as $locale) {
             if ($locale == 'ar') {
-                $result["$locale"] = fake('ar_SA')->{"$fakerType"};
+                if ($fakerType == "words") {
+                    $result[$locale] = fake("ar_SA")->words(150, true);
+                } else {
+                    $result["$locale"] = fake('ar_SA')->{"$fakerType"};
+                }
             } else {
-                $result["$locale"] = fake()->{"$fakerType"};
+                if ($fakerType == "words") {
+                    $result[$locale] = fake()->words(150, true);
+                } else {
+                    $result["$locale"] = fake()->{"$fakerType"};
+                }
             }
         }
 

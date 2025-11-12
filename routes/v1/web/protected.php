@@ -39,3 +39,6 @@ Route::resource('/v1/contact-page-contents', v1\ContactPageContentController::cl
         'edit',
         'update',
     ])->names('v1.web.protected.contact.page.contents');
+
+Route::get('/v1/categories/data', [v1\CategoryController::class, 'data'])->name('v1.web.protected.categories.data');
+Route::resource('/v1/categories', v1\CategoryController::class)->names('v1.web.protected.categories');

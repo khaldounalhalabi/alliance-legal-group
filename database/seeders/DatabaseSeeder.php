@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             TestimonialSeeder::class,
             MessageSeeder::class,
             ContactPageContentSeeder::class,
+            CategorySeeder::class,
         ]);
     }
 }

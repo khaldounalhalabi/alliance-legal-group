@@ -15,6 +15,7 @@ import { Link, usePage } from "@inertiajs/react";
 import { type Icon } from "@tabler/icons-react";
 import {
     BadgePlus,
+    IdCardIcon,
     MessageCircleIcon,
     TableOfContentsIcon,
     TextIcon,
@@ -59,6 +60,11 @@ export function Sidebar({
             title: "Contact Us Page Content",
             href: route("v1.web.protected.contact.page.contents.index"),
             icon: () => <TableOfContentsIcon />,
+        },
+        {
+            title: "Categorys",
+            href: route("v1.web.protected.categories.index"),
+            icon: () => <IdCardIcon />,
         },
     ];
 

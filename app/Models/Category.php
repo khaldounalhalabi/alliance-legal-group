@@ -37,6 +37,25 @@ class Category extends Model
         'cover_sentence'
     ];
 
+    public const CACHE_KEY = 'categories';
+
+    protected static function booted(): void
+    {
+        parent::booted();
+
+        self::created(function () {
+            cache()->forget(self::CACHE_KEY);
+        });
+
+        self::updated(function () {
+            cache()->forget(self::CACHE_KEY);
+        });
+
+        self::deleted(function () {
+            cache()->forget(self::CACHE_KEY);
+        });
+    }
+
     public static function searchableArray(): array
     {
         return [

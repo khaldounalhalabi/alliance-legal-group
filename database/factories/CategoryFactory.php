@@ -22,7 +22,10 @@ class CategoryFactory extends Factory
 
         return [
             'name' => Translatable::fake()->toJson(),
-            'description' => Translatable::fake('words')->toJson(),
+            'description' => Translatable::create([
+                'en' => $this->faker->longHtmlContent(),
+                'ar' => $this->faker->longHtmlContent(),
+            ]),
             'cover' => new UploadedFile($file->getPathname(), $file->getFilename()),
             'cover_sentence' => Translatable::fake('sentence')->toJson()
         ];
@@ -30,6 +33,10 @@ class CategoryFactory extends Factory
 
     public function withServices(int $count = 1): static
     {
-        return $this->has(Service::factory($count));
+        return $this->afterCreating(function (Category $category) use ($count) {
+            Service::factory($count)->create([
+                'category_id' => $category->id,
+            ]);
+        });
     }
 }

@@ -6,6 +6,7 @@ use App\Enums\AboutUsKeyEnum;
 use App\Enums\ContactUsContentKeyEnum;
 use App\Http\Requests\v1\Message\StoreMessageRequest;
 use App\Models\AboutUsContent;
+use App\Models\Category;
 use App\Models\ContactPageContent;
 use App\Models\Message;
 use App\Models\TeamMember;
@@ -28,12 +29,18 @@ class SiteController extends Controller
         /** @var Collection<Testimonial> $testimonials */
         $testimonials = cache()->remember(Testimonial::CACHE_KEY, now()->addYear(), fn() => Testimonial::all());
 
+        /**
+         * @var Collection<Category>|Category[]
+         */
+        $categories = cache()->remember(Category::CACHE_KEY, now()->addYear(), fn() => Category::all());
+
         return view('index', compact(
             'ourHistory',
             'ourMission',
             'ourVision',
             'teamMembers',
             'testimonials',
+            'categories',
         ));
     }
 
@@ -90,5 +97,16 @@ class SiteController extends Controller
             'lng',
             'lat'
         ));
+    }
+
+    public function showCategory($categoryId)
+    {
+        $category = Category::with('services')->find($categoryId);
+
+        if (!$category) {
+            abort(404);
+        }
+
+        return view('categories.show', compact('category'));
     }
 }

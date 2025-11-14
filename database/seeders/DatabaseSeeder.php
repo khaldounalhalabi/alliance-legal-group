@@ -29,7 +29,6 @@ class DatabaseSeeder extends Seeder
             MessageSeeder::class,
             ContactPageContentSeeder::class,
             CategorySeeder::class,
-            ServiceSeeder::class,
         ]);
     }
 }

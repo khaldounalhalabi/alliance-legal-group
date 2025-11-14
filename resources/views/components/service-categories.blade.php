@@ -21,7 +21,7 @@
                             <img
                                 src="{{ $category->cover->url }}"
                                 alt="Features"
-                                style="aspect-ratio: 1 / 1"
+                                style="aspect-ratio: 1 / 0.8; width:40rem;"
                             />
                             <div class="feature-content">
                                 <i>

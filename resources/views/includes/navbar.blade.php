@@ -77,7 +77,12 @@
                         <a href="{{ route("about") }}" title="About">About</a>
                     </li>
                     <li>
-                        <a href="#" title="Services">Services</a>
+                        <a
+                            href="{{ route("services.index") }}"
+                            title="Services"
+                        >
+                            Services
+                        </a>
                     </li>
                     <li>
                         <a href="{{ route("contact") }}" title="Contact Us">

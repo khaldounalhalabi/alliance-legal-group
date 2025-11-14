@@ -9,6 +9,7 @@ use App\Models\AboutUsContent;
 use App\Models\Category;
 use App\Models\ContactPageContent;
 use App\Models\Message;
+use App\Models\Service;
 use App\Models\TeamMember;
 use App\Models\Testimonial;
 use Illuminate\Database\Eloquent\Collection;
@@ -108,5 +109,12 @@ class SiteController extends Controller
         }
 
         return view('categories.show', compact('category'));
+    }
+
+    public function indexServices()
+    {
+        $services = Service::paginate(perPage: 12);
+
+        return view('services.index', compact('services'));
     }
 }

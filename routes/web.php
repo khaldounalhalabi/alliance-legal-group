@@ -15,3 +15,4 @@ Route::get('/about', [SiteController::class, 'about'])->name('about');
 Route::get('/contact', [SiteController::class, 'contactUs'])->name('contact');
 Route::post('/contact/send-message', [SiteController::class, 'sendMessage'])->name('contact.send.message');
 Route::get('/categories/{categoryId}', [SiteController::class, 'showCategory'])->name('categories.show');
+Route::get('/services', [SiteController::class, 'indexServices'])->name('services.index');

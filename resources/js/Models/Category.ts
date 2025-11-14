@@ -3,6 +3,7 @@ import Service from "@/Models/Service";
 interface Category {
     id: number;
     name: string;
+    cover_sentence:string;
     description: string;
     cover?: Media | undefined;
     services?: Service[];

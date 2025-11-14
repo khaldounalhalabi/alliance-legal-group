@@ -15,7 +15,9 @@ class Translatable implements CastsAttributes
      */
     public function get($model, string $key, mixed $value, array $attributes): mixed
     {
-        return new SerializersTranslatable($value);
+        return $value
+            ? new SerializersTranslatable($value)
+            : null;
     }
 
     /**

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->json('name');
+            $table->json("cover_sentence");
             $table->json('description');
             $table->json('cover');
             $table->timestamps();

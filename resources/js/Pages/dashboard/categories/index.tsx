@@ -1,5 +1,6 @@
 import ActionsButtons from "@/Components/datatable/ActionsButtons";
 import DataTable from "@/Components/datatable/DataTable";
+import ImagePreview from "@/Components/show/ImagePreview";
 import Category from "@/Models/Category";
 import Http from "@/Modules/Http/Http";
 
@@ -42,6 +43,23 @@ const Index = () => {
                     label: "Name",
                     translatable: true,
                     sortable: true,
+                },
+                {
+                    name: "cover_sentence",
+                    label: "Cover Sentence",
+                    translatable: true,
+                    sortable: true,
+                },
+                {
+                    name: "cover",
+                    label: "Cover",
+                    render(data) {
+                        return (
+                            <div className="aspect-square h-16 w-16">
+                                <ImagePreview src={data.url} />
+                            </div>
+                        );
+                    },
                 },
                 {
                     label: "Options",

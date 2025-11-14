@@ -20,6 +20,7 @@ class CategoryResource extends BaseResource
             'name' => $this->name,
             'description' => $this->description,
             'cover' => $this->cover,
+            'cover_sentence' => $this->cover_sentence,
             'services' => ServiceResource::collection($this->whenLoaded('services')),
         ];
     }

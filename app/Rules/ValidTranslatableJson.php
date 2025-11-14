@@ -5,9 +5,20 @@ namespace App\Rules;
 use Closure;
 use Exception;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Support\Facades\Validator;
 
 class ValidTranslatableJson implements ValidationRule
 {
+    /**
+     * @var string[]
+     */
+    private array $rules = [];
+
+    public function __construct(?array $rules = [])
+    {
+        $this->rules = $rules ?? [];
+    }
+
     public function hasNestedArrays($array): bool
     {
         foreach ($array as $element) {
@@ -44,6 +55,21 @@ class ValidTranslatableJson implements ValidationRule
 
             if (!count($theDifferenceBetweenTheProvidedLanguages) == 0) {
                 $fail(implode(',', $theDifferenceBetweenTheProvidedLanguages) . " doesn't exist in your project locales");
+            }
+
+            if (!empty($this->rules)) {
+                foreach ($translationArray as $locale => $value) {
+                    $validator = Validator::make([
+                        $attribute => $value,
+                    ], [
+                        $attribute => $this->rules,
+                    ]);
+
+                    if ($validator->fails()) {
+                        $localeUpper = strtoupper($locale);
+                        $fail("{$localeUpper} : {$validator->errors()->first()}");
+                    }
+                }
             }
         } catch (Exception) {
             $fail("invalid {$attribute}");

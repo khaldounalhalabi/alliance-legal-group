@@ -24,6 +24,7 @@ class CategoryFactory extends Factory
             'name' => Translatable::fake()->toJson(),
             'description' => Translatable::fake('words')->toJson(),
             'cover' => new UploadedFile($file->getPathname(), $file->getFilename()),
+            'cover_sentence' => Translatable::fake('sentence')->toJson()
         ];
     }
 

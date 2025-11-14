@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @property int                                                             $id
  * @property TranslatableSerializer                                          $name
+ * @property TranslatableSerializer                                          $cover_sentence
  * @property TranslatableSerializer                                          $description
  * @property array{url:string,size:string,extension:string,mime_type:string} $cover
  * @property Carbon                                                          $created_at
@@ -29,11 +30,11 @@ class Category extends Model
 {
     use HasFactory;
     use HasMedia;
-
     protected $fillable = [
         'name',
         'description',
         'cover',
+        'cover_sentence'
     ];
 
     public static function searchableArray(): array
@@ -41,6 +42,7 @@ class Category extends Model
         return [
             'name',
             'description',
+            'cover_sentence',
         ];
     }
 
@@ -61,6 +63,7 @@ class Category extends Model
             'description',
             'cover',
             'service_ids',
+            'cover_sentence',
         ];
     }
 
@@ -78,6 +81,7 @@ class Category extends Model
             'name' => Translatable::class,
             'description' => Translatable::class,
             'cover' => MediaCast::class,
+            'cover_sentence' => Translatable::class,
         ];
     }
 }

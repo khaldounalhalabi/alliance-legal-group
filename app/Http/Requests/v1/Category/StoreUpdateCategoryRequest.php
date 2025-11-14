@@ -23,15 +23,18 @@ class StoreUpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['json', new ValidTranslatableJson, 'required'],
-            'description' => ['json', new ValidTranslatableJson, 'required'],
+            'name' => ['json', new ValidTranslatableJson(['string', 'max:75', 'min:3']), 'required'],
+            'cover_sentence' => ['json', new ValidTranslatableJson(['string', 'max:75', 'min:3']), 'required'],
+            'description' => ['json', new ValidTranslatableJson(['string']), 'required'],
             'cover' => [
                 'required',
                 Rule::when(is_array($this->input('cover')), [
                     SerializedMedia::validator()
                 ]),
                 Rule::when($this->hasFile('cover'), [
-                    'image:allow_svg', 'max:10000', 'mimes:jpeg,png,jpg,gif,svg,webp'
+                    'image:allow_svg',
+                    'max:10000',
+                    'mimes:jpeg,png,jpg,gif,svg,webp'
                 ])
             ],
         ];

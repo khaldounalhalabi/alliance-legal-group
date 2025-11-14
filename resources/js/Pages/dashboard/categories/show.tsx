@@ -27,6 +27,10 @@ const Show = ({ category }: { category: Category }) => {
         >
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                 <SmallTextField label="Name" value={translate(category.name)} />
+                <SmallTextField
+                    label="Cover Sentence"
+                    value={translate(category.cover_sentence)}
+                />
                 <Label label={"Cover"} col className={"md:col-span-2"}>
                     <Gallery sources={[category?.cover?.url]} />
                 </Label>

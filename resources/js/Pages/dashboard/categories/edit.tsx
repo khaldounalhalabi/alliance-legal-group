@@ -16,11 +16,13 @@ const Edit = ({ category }: { category: Category }) => {
         name: string;
         description: string;
         cover?: File | undefined | Media;
+        cover_sentence: string;
     }>({
         _method: "PUT",
         name: category?.name,
         description: category?.description,
         cover: category?.cover,
+        cover_sentence: category?.cover_sentence,
     });
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -41,6 +43,16 @@ const Edit = ({ category }: { category: Category }) => {
                             label={"Name"}
                             onChange={(e) => setData("name", e.target.value)}
                             defaultValue={category.name}
+                            required
+                        />
+
+                        <TranslatableInput
+                            name="cover_sentence"
+                            label={"Cover Sentence"}
+                            onChange={(e) =>
+                                setData("cover_sentence", e.target.value)
+                            }
+                            defaultValue={category.cover_sentence}
                             required
                         />
 

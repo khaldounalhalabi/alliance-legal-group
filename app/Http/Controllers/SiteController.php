@@ -117,4 +117,18 @@ class SiteController extends Controller
 
         return view('services.index', compact('services'));
     }
+
+    public function showService($serviceId)
+    {
+        $service = Service::with([
+            'category',
+            'category.services' => fn($query) => $query->where('id', '!=', $serviceId)
+        ])->find($serviceId);
+
+        if (!$service) {
+            abort(404);
+        }
+
+        return view('services.show', compact('service'));
+    }
 }

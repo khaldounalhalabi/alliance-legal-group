@@ -8,7 +8,11 @@
 @section("content")
     <div
         class="container-fluid no-left-padding no-right-padding page-banner"
-        style="background-image: url('{{ $category->cover->url }}')"
+        style="
+            background-image: url('{{ $category->cover->url }}');
+            background-size: 100%;
+            background-position: center;
+        "
     >
         <!-- Container -->
         <div class="container">
@@ -56,7 +60,13 @@
                         </h3>
                         <ul>
                             @foreach ($category->services as $service)
-                                <li><a href="#">{{ $service->name }}</a></li>
+                                <li>
+                                    <a
+                                        href="{{ route("services.show", $service->id) }}"
+                                    >
+                                        {{ $service->name }}
+                                    </a>
+                                </li>
                             @endforeach
                         </ul>
                     </aside>

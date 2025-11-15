@@ -23,7 +23,10 @@ class ServiceFactory extends Factory
 
         return [
             'name' => Translatable::fake('sentence')->toJson(),
-            'description' => Translatable::fake('words')->toJson(),
+            'description' => Translatable::create([
+                'en' => $this->faker->longHtmlContent(),
+                'ar' => $this->faker->longHtmlContent(),
+            ]),
             'category_id' => Category::inRandomOrder()->first()->id,
             'cover' => new UploadedFile($cover->getPathname(), $cover->getFilename()),
             'image' => new UploadedFile($image->getPathname(), $image->getFilename()),

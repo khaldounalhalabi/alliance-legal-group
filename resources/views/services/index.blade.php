@@ -45,7 +45,9 @@
                     @foreach ($services as $service)
                         <div class="col-md-3 col-xs-6">
                             <div class="practice-box">
-                                <a href="corporate.html">
+                                <a
+                                    href="{{ route("services.show", $service->id) }}"
+                                >
                                     <i>
                                         <img
                                             src="{{ $service->cover->url }}"
@@ -73,7 +75,9 @@
                         </div>
                     @endforeach
                 </div>
-                <div style="margin-top: 2rem">{{ $services->links("vendor.pagination.ow") }}</div>
+                <div style="margin-top: 2rem">
+                    {{ $services->links("vendor.pagination.ow") }}
+                </div>
             </div>
             <!-- Container /- -->
         </div>

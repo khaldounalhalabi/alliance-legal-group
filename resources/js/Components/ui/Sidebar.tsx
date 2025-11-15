@@ -1,3 +1,4 @@
+import TableCells from "@/Components/icons/TableCells";
 import { NavMain } from "@/Components/nav-main";
 import { NavUser } from "@/Components/nav-user";
 import {
@@ -17,6 +18,7 @@ import {
     IdCardIcon,
     LucideHandshake,
     MessageCircleIcon,
+    Sticker,
     TableOfContentsIcon,
     TextIcon,
     UsersIcon,
@@ -70,6 +72,11 @@ export function Sidebar({
             title: "Services",
             href: route("v1.web.protected.services.index"),
             icon: () => <LucideHandshake />,
+        },
+        {
+            title: "Blog Posts",
+            href: route("v1.web.protected.blog.posts.index"),
+            icon: () => <Sticker />,
         },
     ];
 

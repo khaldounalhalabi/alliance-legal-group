@@ -30,31 +30,14 @@ class Category extends Model
 {
     use HasFactory;
     use HasMedia;
+
+    public const CACHE_KEY = 'categories';
     protected $fillable = [
         'name',
         'description',
         'cover',
-        'cover_sentence'
+        'cover_sentence',
     ];
-
-    public const CACHE_KEY = 'categories';
-
-    protected static function booted(): void
-    {
-        parent::booted();
-
-        self::created(function () {
-            cache()->forget(self::CACHE_KEY);
-        });
-
-        self::updated(function () {
-            cache()->forget(self::CACHE_KEY);
-        });
-
-        self::deleted(function () {
-            cache()->forget(self::CACHE_KEY);
-        });
-    }
 
     public static function searchableArray(): array
     {
@@ -73,6 +56,23 @@ class Category extends Model
                 'description',
             ],
         ];
+    }
+
+    protected static function booted(): void
+    {
+        parent::booted();
+
+        self::created(function () {
+            cache()->forget(self::CACHE_KEY);
+        });
+
+        self::updated(function () {
+            cache()->forget(self::CACHE_KEY);
+        });
+
+        self::deleted(function () {
+            cache()->forget(self::CACHE_KEY);
+        });
     }
 
     public function exportable(): array

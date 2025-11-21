@@ -14,12 +14,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $id
+ * @property int                    $id
  * @property TranslatableSerializer $name
  * @property TranslatableSerializer $position
- * @property SerializedMedia $image
- * @property Carbon $created_at
- * @property Carbon $updated_at
+ * @property SerializedMedia        $image
+ * @property Carbon                 $created_at
+ * @property Carbon                 $updated_at
  * @mixin Builder<TeamMember>
  * @use  HasFactory<TeamMemberFactory>
  */
@@ -29,6 +29,27 @@ class TeamMember extends Model
     use HasMedia;
 
     public const CACHE_KEY = 'team_members';
+    protected $fillable = [
+        'name',
+        'position',
+        'image',
+    ];
+
+    public static function searchableArray(): array
+    {
+        return [
+            'name',
+            'position',
+
+        ];
+    }
+
+    public static function relationsSearchableArray(): array
+    {
+        return [
+
+        ];
+    }
 
     protected static function booted(): void
     {
@@ -47,21 +68,6 @@ class TeamMember extends Model
         });
     }
 
-    protected $fillable = [
-        'name',
-        'position',
-        'image',
-    ];
-
-    protected function casts(): array
-    {
-        return [
-            'name' => Translatable::class,
-            'position' => Translatable::class,
-            'image' => MediaCast::class,
-        ];
-    }
-
     public function exportable(): array
     {
         return [
@@ -72,19 +78,12 @@ class TeamMember extends Model
         ];
     }
 
-    public static function searchableArray(): array
+    protected function casts(): array
     {
         return [
-            'name',
-            'position',
-
-        ];
-    }
-
-    public static function relationsSearchableArray(): array
-    {
-        return [
-
+            'name' => Translatable::class,
+            'position' => Translatable::class,
+            'image' => MediaCast::class,
         ];
     }
 }

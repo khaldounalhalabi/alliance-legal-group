@@ -28,13 +28,13 @@ class BaseBulkAction
     /** @var array{array{name:string,method:string,rules:array}} */
     protected array $actions = [
         [
-            'name'   => 'delete',
+            'name' => 'delete',
             'method' => 'delete',
-            'rules'  => [
-                'ids'   => ['array'],
-                'ids.*' => ['numeric']
-            ]
-        ]
+            'rules' => [
+                'ids' => ['array'],
+                'ids.*' => ['numeric'],
+            ],
+        ],
     ];
 
     public function __construct(Builder|QueryBuilder $query, Request $request)
@@ -74,16 +74,13 @@ class BaseBulkAction
         return $eqAction['method'] ?? null;
     }
 
-    protected function getSelected(): array
-    {
-        return Arr::wrap(request('ids', []));
-    }
-
     /**
      * you may define certain rules that will break the execution this can be done
      * by requests validation rules or be return false for a specific condition
      * in this method
-     * @param array $rules
+     *
+     * @param  array  $rules
+     *
      * @return true
      */
     protected function validateRequestData(array $rules = []): true
@@ -92,10 +89,17 @@ class BaseBulkAction
         return true;
     }
 
+    protected function getSelected(): array
+    {
+        return Arr::wrap(request('ids', []));
+    }
+
     /**
      * this is a demonstration you may define other bulk actions but this assumes
      * that you have a delete bulk action for a given model
+     *
      * @param $item
+     *
      * @return void
      */
     protected function delete($item): void

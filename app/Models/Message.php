@@ -9,14 +9,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $id
+ * @property int    $id
  * @property string $name
  * @property string $phone
  * @property string $address
  * @property string $message
  * @property Carbon $created_at
  * @property Carbon $updated_at
- *
  * @mixin Builder<Message>
  * @use  HasFactory<MessageFactory>
  */
@@ -32,7 +31,18 @@ class Message extends Model
 
     ];
 
-    protected function casts(): array
+    public static function searchableArray(): array
+    {
+        return [
+            'name',
+            'phone',
+            'address',
+            'message',
+
+        ];
+    }
+
+    public static function relationsSearchableArray(): array
     {
         return [
 
@@ -50,18 +60,7 @@ class Message extends Model
         ];
     }
 
-    public static function searchableArray(): array
-    {
-        return [
-            'name',
-            'phone',
-            'address',
-            'message',
-
-        ];
-    }
-
-    public static function relationsSearchableArray(): array
+    protected function casts(): array
     {
         return [
 

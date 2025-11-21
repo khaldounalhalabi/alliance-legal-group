@@ -7,8 +7,6 @@ use App\Http\Requests\v1\Testimonial\StoreUpdateTestimonialRequest;
 use App\Http\Resources\v1\TestimonialResource;
 use App\Models\Testimonial;
 use App\Services\v1\Testimonial\TestimonialService;
-use Exception;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class TestimonialController extends WebController

@@ -46,7 +46,7 @@ class AboutUsContentController extends WebController
     {
         $aboutUsContent = $this->aboutUsContentService->view($aboutUsContentId, $this->relations);
 
-        if (! $aboutUsContent) {
+        if (!$aboutUsContent) {
             abort(404);
         }
 
@@ -57,7 +57,8 @@ class AboutUsContentController extends WebController
 
     public function update(StoreUpdateAboutUsContentRequest $request, $aboutUsContentId)
     {
-        $aboutUsContent = $this->aboutUsContentService->update($request->validated(), $aboutUsContentId, $this->relations);
+        $aboutUsContent = $this->aboutUsContentService->update($request->validated(), $aboutUsContentId,
+            $this->relations);
         if ($aboutUsContent) {
             return redirect()
                 ->route('v1.web.protected.about.us.contents.index')
@@ -76,8 +77,8 @@ class AboutUsContentController extends WebController
         return rest()
             ->when(
                 $result,
-                fn ($rest) => $rest->ok()->deleteSuccess(),
-                fn ($rest) => $rest->noData(),
+                fn($rest) => $rest->ok()->deleteSuccess(),
+                fn($rest) => $rest->noData(),
             )->send();
     }
 

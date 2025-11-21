@@ -43,13 +43,12 @@ class ResetPasswordCodeEmail extends Mailable
             view: 'emails.reset-password-email',
             with: [
                 'code' => $this->code,
-            ]
+            ],
         );
     }
 
     /**
      * Get the attachments for the message.
-     *
      * @return array<int, Attachment>
      */
     public function attachments(): array

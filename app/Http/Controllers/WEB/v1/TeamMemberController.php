@@ -7,8 +7,6 @@ use App\Http\Requests\v1\TeamMember\StoreUpdateTeamMemberRequest;
 use App\Http\Resources\v1\TeamMemberResource;
 use App\Models\TeamMember;
 use App\Services\v1\TeamMember\TeamMemberService;
-use Exception;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class TeamMemberController extends WebController
@@ -74,7 +72,7 @@ class TeamMemberController extends WebController
     {
         $teamMember = $this->teamMemberService->view($teamMemberId, $this->relations);
 
-        if (! $teamMember) {
+        if (!$teamMember) {
             abort(404);
         }
 
@@ -104,8 +102,8 @@ class TeamMemberController extends WebController
         return rest()
             ->when(
                 $result,
-                fn ($rest) => $rest->ok()->deleteSuccess(),
-                fn ($rest) => $rest->noData(),
+                fn($rest) => $rest->ok()->deleteSuccess(),
+                fn($rest) => $rest->noData(),
             )->send();
     }
 }

@@ -9,7 +9,6 @@ use App\Traits\Makable;
 
 /**
  * @extends BaseService<AboutUsContent>
- *
  * @property AboutUsContentRepository $repository
  */
 class AboutUsContentService extends BaseService

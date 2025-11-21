@@ -19,10 +19,8 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
  */
 abstract class BaseRepository
 {
-    protected string $modelClass = Model::class;
-
     private static $instance;
-
+    protected string $modelClass = Model::class;
     protected Model $model;
 
     private array $modelTableColumns;
@@ -55,20 +53,20 @@ abstract class BaseRepository
         $this->modelTableColumns = $this->getTableColumns();
     }
 
+    public function getTableColumns(): array
+    {
+        return [...$this->model->getFillable(), 'id'];
+    }
+
     public static function make(): static
     {
         if (is_null(self::$instance)) {
             self::$instance = new static;
-        } elseif (! (self::$instance instanceof static)) {
+        } elseif (!(self::$instance instanceof static)) {
             self::$instance = new static;
         }
 
         return self::$instance;
-    }
-
-    public function getTableColumns(): array
-    {
-        return [...$this->model->getFillable(), 'id'];
     }
 
     /**
@@ -99,37 +97,8 @@ abstract class BaseRepository
         return $query;
     }
 
-    private function addSearch($query): mixed
-    {
-        if (request()->has('search')) {
-            $keyword = request()->search;
-
-            if (count($this->searchableKeys) > 0) {
-                foreach ($this->searchableKeys as $search_attribute) {
-                    $query->orWhere($search_attribute, 'LIKE', "%{$keyword}%");
-                }
-            }
-
-            if (count($this->relationSearchableKeys) > 0) {
-
-                foreach ($this->relationSearchableKeys as $relation => $values) {
-
-                    foreach ($values as $key => $search_attribute) {
-                        $query->orWhereHas($relation, function ($q) use ($keyword, $search_attribute) {
-                            $q->where($search_attribute, 'LIKE', "%{$keyword}%");
-                        });
-                    }
-                }
-            }
-            $query->orWhere('id', $keyword);
-        }
-
-        return $query;
-    }
-
     /**
      * this function implement already defined filters in the model
-     *
      * @return Builder|MODEL
      */
     private function filterFields(Builder $query): Builder
@@ -147,7 +116,7 @@ abstract class BaseRepository
                 $value = array_values($value);
             }
 
-            if (! $value) {
+            if (!$value) {
                 continue;
             }
 
@@ -159,17 +128,18 @@ abstract class BaseRepository
                 unset($tables[count($tables) - 1]);
                 $relation = implode('.', $tables);
 
-                $query = $query->whereRelation($relation, function (Builder $q) use ($col, $range, $method, $operator, $value) {
-                    $relTable = $q->getModel()->getTable();
-                    if ($range) {
-                        return $this->handleRangeQuery($value, $q, $relTable, $col);
-                    }
-                    if ($operator === 'like') {
-                        return $q->{$method}("$relTable.$col", $operator, '%'.$value.'%');
-                    }
+                $query = $query->whereRelation($relation,
+                    function (Builder $q) use ($col, $range, $method, $operator, $value) {
+                        $relTable = $q->getModel()->getTable();
+                        if ($range) {
+                            return $this->handleRangeQuery($value, $q, $relTable, $col);
+                        }
+                        if ($operator === 'like') {
+                            return $q->{$method}("$relTable.$col", $operator, '%'.$value.'%');
+                        }
 
-                    return $q->{$method}("$relTable.$col", $operator, $value);
-                });
+                        return $q->{$method}("$relTable.$col", $operator, $value);
+                    });
             } else {
                 if ($range) {
                     $query = $this->handleRangeQuery($value, $query, $this->tableName, $field);
@@ -179,6 +149,76 @@ abstract class BaseRepository
                     $query = $query->{$method}($this->tableName.'.'.$field, $operator, $value);
                 }
             }
+        }
+
+        return $query;
+    }
+
+    protected function unsetEmptyParams(string|array|null $param = null): string|array|null
+    {
+        if (!$param) {
+            return null;
+        }
+        if (is_array($param)) {
+            foreach ($param as $value) {
+                if (strlen(trim(preg_replace('/\s+/', '', $value))) != 0) {
+                    return $param;
+                }
+            }
+
+            return null;
+        } elseif (strlen(trim(preg_replace('/\s+/', '', $param))) == 0) {
+            return null;
+        } else {
+            return $param;
+        }
+    }
+
+    /**
+     * @param  mixed  $value
+     *
+     * @return Builder|MODEL
+     */
+    private function handleRangeQuery(array $value, Builder $query, string $table, string $column): Builder
+    {
+        if (count($value) == 2) {
+            if (!isset($value[0]) && isset($value[1])) {
+                $query = $query->where("$table.$column", '<=', $value[1]);
+            } elseif (isset($value[0]) && !isset($value[1])) {
+                $query->where("$table.$column", '>=', $value[0]);
+            } elseif (isset($value[0]) && isset($value[1])) {
+                $query = $query
+                    ->where("$table.$column", '>=', $value[0])
+                    ->where("$table.$column", '<=', $value[1]);
+            }
+        } elseif (count($value) > 2) {
+            $query->whereIn("$table.$column", array_values(array_filter($value)));
+        }
+
+        return $query;
+    }
+
+    private function addSearch($query): mixed
+    {
+        if (request()->has('search')) {
+            $keyword = request()->search;
+
+            if (count($this->searchableKeys) > 0) {
+                foreach ($this->searchableKeys as $search_attribute) {
+                    $query->orWhere($search_attribute, 'LIKE', "%{$keyword}%");
+                }
+            }
+
+            if (count($this->relationSearchableKeys) > 0) {
+                foreach ($this->relationSearchableKeys as $relation => $values) {
+                    foreach ($values as $key => $search_attribute) {
+                        $query->orWhereHas($relation, function ($q) use ($keyword, $search_attribute) {
+                            $q->where($search_attribute, 'LIKE', "%{$keyword}%");
+                        });
+                    }
+                }
+            }
+            $query->orWhere('id', $keyword);
         }
 
         return $query;
@@ -249,6 +289,7 @@ abstract class BaseRepository
 
     /**
      * @param  string|int|Model|MODEL  $id
+     *
      * @return MODEL|null|Model
      */
     public function update(array $data, string|int|Model $id, array $relationships = []): ?Model
@@ -259,7 +300,7 @@ abstract class BaseRepository
             $item = $this->modelClass::find($id);
         }
 
-        if (! $item) {
+        if (!$item) {
             return null;
         }
 
@@ -269,33 +310,11 @@ abstract class BaseRepository
     }
 
     /**
-     * @param  mixed  $value
-     * @return Builder|MODEL
-     */
-    private function handleRangeQuery(array $value, Builder $query, string $table, string $column): Builder
-    {
-        if (count($value) == 2) {
-            if (! isset($value[0]) && isset($value[1])) {
-                $query = $query->where("$table.$column", '<=', $value[1]);
-            } elseif (isset($value[0]) && ! isset($value[1])) {
-                $query->where("$table.$column", '>=', $value[0]);
-            } elseif (isset($value[0]) && isset($value[1])) {
-                $query = $query->where("$table.$column", '>=', $value[0])
-                    ->where("$table.$column", '<=', $value[1]);
-            }
-        } elseif (count($value) > 2) {
-            $query->whereIn("$table.$column", array_values(array_filter($value)));
-        }
-
-        return $query;
-    }
-
-    /**
      * @throws Exception
      */
     public function export(array $ids = []): BinaryFileResponse
     {
-        if (! count($ids)) {
+        if (!count($ids)) {
             $collection = $this->globalQuery()->get();
         } else {
             $collection = $this->globalQuery()->whereIn('id', $ids)->get();
@@ -317,32 +336,12 @@ abstract class BaseRepository
     {
         return Excel::download(
             new BaseExporter(collect(), $this->model, null, true),
-            $this->model->getTable().'-example.xlsx'
+            $this->model->getTable().'-example.xlsx',
         );
     }
 
     public function import(): void
     {
         Excel::import(new BaseImporter($this->model), request()->file('excel_file'));
-    }
-
-    protected function unsetEmptyParams(string|array|null $param = null): string|array|null
-    {
-        if (! $param) {
-            return null;
-        }
-        if (is_array($param)) {
-            foreach ($param as $value) {
-                if (strlen(trim(preg_replace('/\s+/', '', $value))) != 0) {
-                    return $param;
-                }
-            }
-
-            return null;
-        } elseif (strlen(trim(preg_replace('/\s+/', '', $param))) == 0) {
-            return null;
-        } else {
-            return $param;
-        }
     }
 }

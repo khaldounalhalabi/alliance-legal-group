@@ -29,11 +29,11 @@ class StoreUpdateTestimonialRequest extends FormRequest
             'customer_image' => [
                 'nullable',
                 Rule::when(is_array($this->input('customer_image')), [
-                    SerializedMedia::validator()
+                    SerializedMedia::validator(),
                 ]),
                 Rule::when($this->hasFile('customer_image'), [
-                    'image:allow_svg', 'max:10000', 'mimes:jpeg,png,jpg,gif,svg,webp'
-                ])
+                    'image:allow_svg', 'max:10000', 'mimes:jpeg,png,jpg,gif,svg,webp',
+                ]),
             ],
         ];
     }

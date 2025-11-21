@@ -16,17 +16,18 @@ class Authenticate
     public function handle(Request $request, Closure $next, string $guard): Response
     {
         if ($guard == 'api') {
-            if (! auth('api')?->user()) {
-                return rest()->notAuthorized()
+            if (!auth('api')?->user()) {
+                return rest()
+                    ->notAuthorized()
                     ->message(trans('site.unauthorized_user'))
                     ->send();
             }
         } elseif ($guard == 'web') {
-            if (! auth('web')->user()) {
+            if (!auth('web')->user()) {
                 return redirect()->route('v1.web.public.login.page');
             }
         } else {
-            if (! auth($guard)->user()) {
+            if (!auth($guard)->user()) {
                 abort(Response::HTTP_UNAUTHORIZED);
             }
         }

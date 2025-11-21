@@ -4,7 +4,6 @@ namespace App\Http\Requests\v1\AboutUsContent;
 
 use App\Rules\ValidTranslatableJson;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class StoreUpdateAboutUsContentRequest extends FormRequest
 {

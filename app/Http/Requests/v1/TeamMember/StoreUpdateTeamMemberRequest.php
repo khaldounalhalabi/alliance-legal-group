@@ -28,11 +28,11 @@ class StoreUpdateTeamMemberRequest extends FormRequest
             'image' => [
                 'nullable',
                 Rule::when(is_array($this->input('image')), [
-                    SerializedMedia::validator()
+                    SerializedMedia::validator(),
                 ]),
                 Rule::when($this->hasFile('image'), [
-                    'image:allow_svg', 'max:10000', 'mimes:jpeg,png,jpg,gif,svg,webp'
-                ])
+                    'image:allow_svg', 'max:10000', 'mimes:jpeg,png,jpg,gif,svg,webp',
+                ]),
             ],
         ];
     }

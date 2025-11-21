@@ -20,8 +20,12 @@ class BaseExporter implements FromCollection, WithMapping, WithHeadings, WithCus
 
     public bool $isExample = false;
 
-    public function __construct(Collection|array $collection, Model $model, ?array $requestCols, bool $isExample = false)
-    {
+    public function __construct(
+        Collection|array $collection,
+        Model $model,
+        ?array $requestCols,
+        bool $isExample = false,
+    ) {
         $this->collection = $collection;
         $this->model = $model;
         $this->requestCols = $requestCols;
@@ -55,7 +59,6 @@ class BaseExporter implements FromCollection, WithMapping, WithHeadings, WithCus
             : $this->model->getFillable();
 
         foreach ($columns as $col) {
-
             if ($this->requestCols && !in_array($col, $this->requestCols)) {
                 continue;
             }

@@ -11,11 +11,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $id
- * @property string $type
+ * @property int                    $id
+ * @property string                 $type
  * @property TranslatableSerializer $content
- * @property Carbon $created_at
- * @property Carbon $updated_at
+ * @property Carbon                 $created_at
+ * @property Carbon                 $updated_at
  * @mixin Builder<AboutUsContent>
  * @use  HasFactory<AboutUsContentFactory>
  */
@@ -24,6 +24,25 @@ class AboutUsContent extends Model
     use HasFactory;
 
     public const CACHE_KEY = 'about_us_contents';
+    protected $fillable = [
+        'type',
+        'content',
+    ];
+
+    public static function searchableArray(): array
+    {
+        return [
+            'type',
+            'content',
+        ];
+    }
+
+    public static function relationsSearchableArray(): array
+    {
+        return [
+
+        ];
+    }
 
     protected static function booted(): void
     {
@@ -42,18 +61,6 @@ class AboutUsContent extends Model
         });
     }
 
-    protected $fillable = [
-        'type',
-        'content',
-    ];
-
-    protected function casts(): array
-    {
-        return [
-            'content' => Translatable::class,
-        ];
-    }
-
     public function exportable(): array
     {
         return [
@@ -62,18 +69,10 @@ class AboutUsContent extends Model
         ];
     }
 
-    public static function searchableArray(): array
+    protected function casts(): array
     {
         return [
-            'type',
-            'content',
-        ];
-    }
-
-    public static function relationsSearchableArray(): array
-    {
-        return [
-
+            'content' => Translatable::class,
         ];
     }
 }

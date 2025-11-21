@@ -5,10 +5,7 @@ namespace App\Http\Controllers\WEB\v1;
 use App\Http\Controllers\WebController;
 use App\Http\Requests\v1\ContactPageContent\UpdateContactPageContentRequest;
 use App\Http\Resources\v1\ContactPageContentResource;
-use App\Models\ContactPageContent;
 use App\Services\v1\ContactPageContent\ContactPageContentService;
-use Exception;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ContactPageContentController extends WebController
@@ -62,7 +59,8 @@ class ContactPageContentController extends WebController
 
     public function update(UpdateContactPageContentRequest $request, $contactPageContentId)
     {
-        $contactPageContent = $this->contactPageContentService->update($request->validated(), $contactPageContentId, $this->relations);
+        $contactPageContent = $this->contactPageContentService->update($request->validated(), $contactPageContentId,
+            $this->relations);
         if ($contactPageContent) {
             return redirect()
                 ->route('v1.web.protected.contact.page.contents.index')

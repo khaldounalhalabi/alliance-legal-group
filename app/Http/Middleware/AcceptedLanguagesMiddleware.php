@@ -14,7 +14,6 @@ class AcceptedLanguagesMiddleware
      */
     public function handle(Request $request, Closure $next): mixed
     {
-
         if ($request->acceptsHtml()) {
             // Get the locale from the session
             $locale = Session::get('locale');

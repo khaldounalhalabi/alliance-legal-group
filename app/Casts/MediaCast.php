@@ -20,9 +20,33 @@ class MediaCast implements CastsAttributes
         $this->private = $privateOrPublic == "private";
     }
 
+    public static function deleteFiles(array $media): void
+    {
+        if (isset($media['url'])) {
+            self::deleteFileByUrl($media['url']);
+        } else {
+            foreach ($media as $file) {
+                if (is_array($file) && isset($file['url'])) {
+                    self::deleteFileByUrl($file['url']);
+                }
+            }
+        }
+    }
+
+    private static function deleteFileByUrl(string $url): void
+    {
+        $path = str_replace(asset('storage/'), '', $url);
+        $fullPath = storage_path("app/public/$path");
+        if (file_exists($fullPath)) {
+            unlink($fullPath);
+        }
+    }
+
     /**
      * Cast the given value.
-     * @param array<string, mixed> $attributes
+     *
+     * @param  array<string, mixed>  $attributes
+     *
      * @throws Exception
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): SerializedMedia|array|null
@@ -53,15 +77,17 @@ class MediaCast implements CastsAttributes
                         return null;
                     }
                     return $file;
-                }, $data
-                )
-            )
+                }, $data,
+                ),
+            ),
         );
     }
 
     /**
      * Prepare the given value for storage.
-     * @param array<string, mixed> $attributes
+     *
+     * @param  array<string, mixed>  $attributes
+     *
      * @throws Exception
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): string|null|false
@@ -102,8 +128,8 @@ class MediaCast implements CastsAttributes
         if (!is_array($value)) {
             throw ValidationException::withMessages([
                 $key => [
-                    "Invalid stored data in the media column [$key]"
-                ]
+                    "Invalid stored data in the media column [$key]",
+                ],
             ]);
         }
 
@@ -122,27 +148,5 @@ class MediaCast implements CastsAttributes
         }
 
         return json_encode($stored, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-    }
-
-    private static function deleteFileByUrl(string $url): void
-    {
-        $path = str_replace(asset('storage/'), '', $url);
-        $fullPath = storage_path("app/public/$path");
-        if (file_exists($fullPath)) {
-            unlink($fullPath);
-        }
-    }
-
-    public static function deleteFiles(array $media): void
-    {
-        if (isset($media['url'])) {
-            self::deleteFileByUrl($media['url']);
-        } else {
-            foreach ($media as $file) {
-                if (is_array($file) && isset($file['url'])) {
-                    self::deleteFileByUrl($file['url']);
-                }
-            }
-        }
     }
 }

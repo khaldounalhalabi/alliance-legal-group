@@ -7,8 +7,6 @@ use App\Http\Requests\v1\BlogPost\StoreUpdateBlogPostRequest;
 use App\Http\Resources\v1\BlogPostResource;
 use App\Models\BlogPost;
 use App\Services\v1\BlogPost\BlogPostService;
-use Exception;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class BlogPostController extends WebController
@@ -74,7 +72,7 @@ class BlogPostController extends WebController
     {
         $blogPost = $this->blogPostService->view($blogPostId, $this->relations);
 
-        if (! $blogPost) {
+        if (!$blogPost) {
             abort(404);
         }
 

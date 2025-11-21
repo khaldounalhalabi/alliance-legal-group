@@ -3,36 +3,14 @@
 namespace App\Serializers;
 
 use Exception;
-use Stringable;
-use JsonSerializable;
-use Illuminate\Support\Str;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Str;
+use JsonSerializable;
+use Stringable;
 
 class Translatable implements JsonSerializable, Arrayable, Stringable
 {
     private array $data = [];
-
-    public function __get(string $name)
-    {
-        if (!in_array($name, config('cubeta-starter.available_locales'))) {
-            throw new Exception("Undefined Property [$name]  , try to add it to the cubeta-starter config file in available_locals array");
-        }
-
-        return $this->data["$name"] ?? "";
-    }
-
-    public function __set(string $name, mixed $value)
-    {
-        if (!in_array($name, config('cubeta-starter.available_locales'))) {
-            throw new Exception("Undefined Property [$name]  , try to add it to the cubeta-starter config file in available_locals array");
-        }
-
-        if (!is_string($value)) {
-            throw new Exception("Only String Values Allowed To Be Stored As Translatable Property");
-        }
-
-        $this->data["$name"] = $value;
-    }
 
     /**
      * @throws Exception
@@ -53,32 +31,22 @@ class Translatable implements JsonSerializable, Arrayable, Stringable
     /**
      * @throws Exception
      */
+    private function validateLocaleKeys(): void
+    {
+        foreach ($this->data as $locale => $value) {
+            if (!in_array($locale, config('cubeta-starter.available_locales'))) {
+                throw new Exception("Undefined locale [$locale]  , try to add it to the cubeta-starter config file in available_locals array");
+            }
+        }
+    }
+
+    /**
+     * @throws Exception
+     */
     public static function create(string|array $value): Translatable
     {
         return new static($value);
     }
-
-    public function translate(?string $locale = null)
-    {
-        $locale = $locale ?? app()->getLocale();
-        return $this->{$locale};
-    }
-
-    public function toArray()
-    {
-        return $this->data;
-    }
-
-    public function toJson(): bool|string
-    {
-        return json_encode($this->data, JSON_UNESCAPED_SLASHES + JSON_UNESCAPED_UNICODE);
-    }
-
-    public function jsonSerialize(): mixed
-    {
-        return $this->toJson();
-    }
-
 
     public static function fake($fakerType = "word"): Translatable
     {
@@ -102,21 +70,52 @@ class Translatable implements JsonSerializable, Arrayable, Stringable
         return new self($result);
     }
 
+    public function __get(string $name)
+    {
+        if (!in_array($name, config('cubeta-starter.available_locales'))) {
+            throw new Exception("Undefined Property [$name]  , try to add it to the cubeta-starter config file in available_locals array");
+        }
+
+        return $this->data["$name"] ?? "";
+    }
+
+    public function __set(string $name, mixed $value)
+    {
+        if (!in_array($name, config('cubeta-starter.available_locales'))) {
+            throw new Exception("Undefined Property [$name]  , try to add it to the cubeta-starter config file in available_locals array");
+        }
+
+        if (!is_string($value)) {
+            throw new Exception("Only String Values Allowed To Be Stored As Translatable Property");
+        }
+
+        $this->data["$name"] = $value;
+    }
+
+    public function toArray()
+    {
+        return $this->data;
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        return $this->toJson();
+    }
+
+    public function toJson(): bool|string
+    {
+        return json_encode($this->data, JSON_UNESCAPED_SLASHES + JSON_UNESCAPED_UNICODE);
+    }
+
     public function __toString(): string
     {
         return $this->translate();
     }
 
-    /**
-     * @throws Exception
-     */
-    private function validateLocaleKeys(): void
+    public function translate(?string $locale = null)
     {
-        foreach ($this->data as $locale => $value) {
-            if (!in_array($locale, config('cubeta-starter.available_locales'))) {
-                throw new Exception("Undefined locale [$locale]  , try to add it to the cubeta-starter config file in available_locals array");
-            }
-        }
+        $locale = $locale ?? app()->getLocale();
+        return $this->{$locale};
     }
 
     /**
@@ -124,7 +123,9 @@ class Translatable implements JsonSerializable, Arrayable, Stringable
      * if a corresponding value for the requested locale doesn't exist, it will loop on the available locales defined
      * in the config and get the first one with a value, finally if there is no value with any locale it will returns an
      * empty string
-     * @param string|null $locale
+     *
+     * @param  string|null  $locale
+     *
      * @return string
      */
     public function forceTranslate(?string $locale = null): string

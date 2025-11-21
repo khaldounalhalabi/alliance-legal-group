@@ -10,18 +10,16 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 /**
- * @property int $id
- * @property string $first_name
- * @property string $last_name
- * @property string $email
+ * @property int         $id
+ * @property string      $first_name
+ * @property string      $last_name
+ * @property string      $email
  * @property Carbon|null $email_verified_at
- * @property string $password
+ * @property string      $password
  * @property string|null $reset_password_code
- * @property Carbon $created_at
- * @property Carbon $updated_at
- *
+ * @property Carbon      $created_at
+ * @property Carbon      $updated_at
  * @mixin Builder<User>
- *
  * @use HasFactory<UserFactory>
  */
 class User extends Authenticatable
@@ -32,7 +30,6 @@ class User extends Authenticatable
 
     /**
      * The attributes that are mass assignable.
-     *
      * @var list<string>
      */
     protected $fillable = [
@@ -46,7 +43,6 @@ class User extends Authenticatable
 
     /**
      * The attributes that should be hidden for serialization.
-     *
      * @var list<string>
      */
     protected $hidden = [
@@ -56,7 +52,6 @@ class User extends Authenticatable
 
     /**
      * Get the attributes that should be cast.
-     *
      * @return array<string, string>
      */
     protected function casts(): array

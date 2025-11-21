@@ -29,13 +29,13 @@ class StoreUpdateCategoryRequest extends FormRequest
             'cover' => [
                 'required',
                 Rule::when(is_array($this->input('cover')), [
-                    SerializedMedia::validator()
+                    SerializedMedia::validator(),
                 ]),
                 Rule::when($this->hasFile('cover'), [
                     'image:allow_svg',
                     'max:10000',
-                    'mimes:jpeg,png,jpg,gif,svg,webp'
-                ])
+                    'mimes:jpeg,png,jpg,gif,svg,webp',
+                ]),
             ],
         ];
     }

@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
         $data = cache()->remember(
             ContactPageContent::CACHE_KEY,
             now()->addYear(),
-            fn() => ContactPageContent::all()
+            fn() => ContactPageContent::all(),
         );
 
         $address = $data->firstWhere('key', ContactUsContentKeyEnum::ADDRESS->value);

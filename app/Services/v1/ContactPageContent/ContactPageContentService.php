@@ -9,7 +9,6 @@ use App\Traits\Makable;
 
 /**
  * @extends BaseService<ContactPageContent>
- *
  * @property ContactPageContentRepository $repository
  */
 class ContactPageContentService extends BaseService

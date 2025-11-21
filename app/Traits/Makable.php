@@ -10,7 +10,7 @@ trait Makable
     {
         if (is_null(self::$instance)) {
             self::$instance = new static;
-        } elseif (! (self::$instance instanceof static)) {
+        } elseif (!(self::$instance instanceof static)) {
             self::$instance = new static;
         }
         self::$instance->init();

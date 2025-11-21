@@ -19,17 +19,6 @@ class ValidTranslatableJson implements ValidationRule
         $this->rules = $rules ?? [];
     }
 
-    public function hasNestedArrays($array): bool
-    {
-        foreach ($array as $element) {
-            if (is_array($element)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         try {
@@ -54,7 +43,7 @@ class ValidTranslatableJson implements ValidationRule
             $theDifferenceBetweenTheProvidedLanguages = array_diff($translationLanguages, $availableLanguages);
 
             if (!count($theDifferenceBetweenTheProvidedLanguages) == 0) {
-                $fail(implode(',', $theDifferenceBetweenTheProvidedLanguages) . " doesn't exist in your project locales");
+                $fail(implode(',', $theDifferenceBetweenTheProvidedLanguages)." doesn't exist in your project locales");
             }
 
             if (!empty($this->rules)) {
@@ -74,5 +63,16 @@ class ValidTranslatableJson implements ValidationRule
         } catch (Exception) {
             $fail("invalid {$attribute}");
         }
+    }
+
+    public function hasNestedArrays($array): bool
+    {
+        foreach ($array as $element) {
+            if (is_array($element)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

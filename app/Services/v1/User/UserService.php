@@ -12,23 +12,21 @@ use Illuminate\Support\Facades\Mail;
 
 /**
  * @extends BaseService<User>
- *
  * @property UserRepository $repository
  */
 class UserService extends BaseService
 {
     use Makable;
 
-    private string $guard = 'web';
-
     protected string $repositoryClass = UserRepository::class;
+    private string $guard = 'web';
 
     /**
      * @throws Exception
      */
     public function setGuard(string $guard = 'api'): void
     {
-        if (! in_array($guard, array_keys(config('auth.guards')))) {
+        if (!in_array($guard, array_keys(config('auth.guards')))) {
             throw new Exception("Undefined Guard : [$guard]");
         }
 
@@ -42,11 +40,11 @@ class UserService extends BaseService
     {
         $user = auth($this->guard)->user();
 
-        if (! $user) {
+        if (!$user) {
             return null;
         }
 
-        if ($role && ! $user->hasRole($role)) {
+        if ($role && !$user->hasRole($role)) {
             return null;
         }
 
@@ -56,7 +54,7 @@ class UserService extends BaseService
         /** @noinspection PhpVoidFunctionResultUsedInspection */
         $token = auth($this->guard)->login($user);
 
-        if (! request()->acceptsHtml()) {
+        if (!request()->acceptsHtml()) {
             $refreshToken = auth($this->guard)->setTTL(ttl: config('jwt.refresh_ttl'))->refresh();
 
             return [$user->load($relations), $token, $refreshToken];
@@ -75,18 +73,18 @@ class UserService extends BaseService
             'password' => $data['password'],
         ]);
 
-        if (! $token) {
+        if (!$token) {
             return null;
         }
 
         /** @noinspection PhpVoidFunctionResultUsedInspection */
         $user = auth($this->guard)->user();
 
-        if ($role && ! $user->hasRole($role)) {
+        if ($role && !$user->hasRole($role)) {
             return null;
         }
 
-        if (! request()->acceptsHtml()) {
+        if (!request()->acceptsHtml()) {
             $refreshToken = auth($this->guard)->setTTL(ttl: config('jwt.refresh_|ttl'))->refresh();
 
             return [$user->load($relations), $token, $refreshToken];
@@ -126,13 +124,33 @@ class UserService extends BaseService
         /** @noinspection PhpVoidFunctionResultUsedInspection */
         $token = auth($this->guard)->login($user);
 
-        if (! request()->acceptsHtml()) {
+        if (!request()->acceptsHtml()) {
             $refreshToken = auth($this->guard)->setTTL(ttl: config('jwt.refresh_ttl'))->refresh();
 
             return [$user->load($relations), $token, $refreshToken];
         }
 
         return $user->load($relations);
+    }
+
+    public function passwordResetRequest(string $email): bool
+    {
+        $user = $this->repository->getUserByEmail($email);
+
+        if (!$user) {
+            return false;
+        }
+
+        $user->reset_password_code = $this->generateVerificationCode();
+        $user->save();
+
+        Mail::to($user)
+            ->send(new ResetPasswordCodeEmail(
+                $user->reset_password_code,
+                $user->email,
+            ));
+
+        return true;
     }
 
     private function generateVerificationCode(): string
@@ -143,26 +161,6 @@ class UserService extends BaseService
         } while ($user != null);
 
         return $code;
-    }
-
-    public function passwordResetRequest(string $email): bool
-    {
-        $user = $this->repository->getUserByEmail($email);
-
-        if (! $user) {
-            return false;
-        }
-
-        $user->reset_password_code = $this->generateVerificationCode();
-        $user->save();
-
-        Mail::to($user)
-            ->send(new ResetPasswordCodeEmail(
-                $user->reset_password_code,
-                $user->email
-            ));
-
-        return true;
     }
 
     public function passwordReset(string $verificationCode, string $password): bool
@@ -184,11 +182,11 @@ class UserService extends BaseService
     {
         $user = auth($this->guard)->user();
 
-        if (! $user) {
+        if (!$user) {
             return null;
         }
 
-        if ($role && ! $user->hasRole($role)) {
+        if ($role && !$user->hasRole($role)) {
             return null;
         }
 

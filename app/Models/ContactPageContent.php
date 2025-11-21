@@ -9,12 +9,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $id
+ * @property int    $id
  * @property string $key
  * @property string $value
  * @property Carbon $created_at
  * @property Carbon $updated_at
- *
  * @mixin Builder<ContactPageContent>
  * @use  HasFactory<ContactPageContentFactory>
  */
@@ -22,12 +21,27 @@ class ContactPageContent extends Model
 {
     use HasFactory;
 
+    public const CACHE_KEY = 'contact_us_page_content';
     protected $fillable = [
         'key',
         'value',
     ];
 
-    public const CACHE_KEY = 'contact_us_page_content';
+    public static function searchableArray(): array
+    {
+        return [
+            'key',
+            'value',
+
+        ];
+    }
+
+    public static function relationsSearchableArray(): array
+    {
+        return [
+
+        ];
+    }
 
     protected static function booted(): void
     {
@@ -46,13 +60,6 @@ class ContactPageContent extends Model
         });
     }
 
-    protected function casts(): array
-    {
-        return [
-
-        ];
-    }
-
     public function exportable(): array
     {
         return [
@@ -62,16 +69,7 @@ class ContactPageContent extends Model
         ];
     }
 
-    public static function searchableArray(): array
-    {
-        return [
-            'key',
-            'value',
-
-        ];
-    }
-
-    public static function relationsSearchableArray(): array
+    protected function casts(): array
     {
         return [
 

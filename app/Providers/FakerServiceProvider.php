@@ -23,8 +23,8 @@ class FakerServiceProvider extends ServiceProvider
         });
 
         $this->app->bind(
-            Generator::class . ':' . $this->app['config']->get('app.faker_locale', 'en_US'),
-            Generator::class
+            Generator::class.':'.$this->app['config']->get('app.faker_locale', 'en_US'),
+            Generator::class,
         );
     }
 }

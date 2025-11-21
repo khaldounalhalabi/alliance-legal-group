@@ -62,7 +62,7 @@
                                     <div class="content-box">
                                         <i>
                                             <img
-                                                src="assets/images/practice-icon-{{ fake()->numberBetween(1, 9) }}.png"
+                                                src="{{ asset("assets/images/practice-icon-" . fake()->numberBetween(1, 8) . ".png") }}"
                                                 alt="Icon"
                                             />
                                         </i>

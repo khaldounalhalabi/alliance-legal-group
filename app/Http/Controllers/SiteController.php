@@ -30,8 +30,12 @@ class SiteController extends Controller
         /** @var Collection<Testimonial> $testimonials */
         $testimonials = cache()->remember(Testimonial::CACHE_KEY, now()->addYear(), fn() => Testimonial::all());
 
+        /** @var Collection<Service> $services */
+        $services = cache()->remember("services_slider", now()->addMinutes(5),
+            fn() => Service::inRandomOrder()->limit(5)->get());
+
         /**
-         * @var Collection<Category>|Category[]
+         * @var Collection<Category>|Category[] $categories
          */
         $categories = cache()->remember(Category::CACHE_KEY, now()->addYear(), fn() => Category::all());
 
@@ -42,6 +46,7 @@ class SiteController extends Controller
             'teamMembers',
             'testimonials',
             'categories',
+            'services',
         ));
     }
 
@@ -82,7 +87,7 @@ class SiteController extends Controller
         $data = cache()->remember(
             ContactPageContent::CACHE_KEY,
             now()->addYear(),
-            fn() => ContactPageContent::all()
+            fn() => ContactPageContent::all(),
         );
 
         $address = $data->firstWhere('key', ContactUsContentKeyEnum::ADDRESS->value);
@@ -96,7 +101,7 @@ class SiteController extends Controller
             'email',
             'phone',
             'lng',
-            'lat'
+            'lat',
         ));
     }
 
@@ -122,7 +127,7 @@ class SiteController extends Controller
     {
         $service = Service::with([
             'category',
-            'category.services' => fn($query) => $query->where('id', '!=', $serviceId)
+            'category.services' => fn($query) => $query->where('id', '!=', $serviceId),
         ])->find($serviceId);
 
         if (!$service) {

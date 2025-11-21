@@ -1,4 +1,3 @@
-import TableCells from "@/Components/icons/TableCells";
 import { NavMain } from "@/Components/nav-main";
 import { NavUser } from "@/Components/nav-user";
 import {
@@ -15,6 +14,7 @@ import { Link, usePage } from "@inertiajs/react";
 import { type Icon } from "@tabler/icons-react";
 import {
     BadgePlus,
+    CircleQuestionMark,
     IdCardIcon,
     LucideHandshake,
     MessageCircleIcon,
@@ -77,6 +77,11 @@ export function Sidebar({
             title: "Blog Posts",
             href: route("v1.web.protected.blog.posts.index"),
             icon: () => <Sticker />,
+        },
+        {
+            title: "Frequently Asked Questions",
+            href: route("v1.web.protected.frequently.asked.questions.index"),
+            icon: () => <CircleQuestionMark />,
         },
     ];
 

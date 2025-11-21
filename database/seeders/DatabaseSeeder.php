@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Database\Seeders\BlogPostSeeder;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -31,6 +30,7 @@ class DatabaseSeeder extends Seeder
             ContactPageContentSeeder::class,
             CategorySeeder::class,
             BlogPostSeeder::class,
+            FrequentlyAskedQuestionSeeder::class,
         ]);
     }
 }

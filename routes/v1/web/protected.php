@@ -21,13 +21,13 @@ Route::resource('/v1/about-us-contents', v1\AboutUsContentController::class)
 
 Route::get(
     '/v1/team-members/data',
-    [v1\TeamMemberController::class, 'data']
+    [v1\TeamMemberController::class, 'data'],
 )->name('v1.web.protected.team.members.data');
 Route::resource('/v1/team-members', v1\TeamMemberController::class)->names('v1.web.protected.team.members');
 
 Route::get(
     '/v1/testimonials/data',
-    [v1\TestimonialController::class, 'data']
+    [v1\TestimonialController::class, 'data'],
 )->name('v1.web.protected.testimonials.data');
 Route::resource('/v1/testimonials', v1\TestimonialController::class)->names('v1.web.protected.testimonials');
 
@@ -41,7 +41,7 @@ Route::resource('/v1/messages', v1\MessageController::class)
 
 Route::get(
     '/v1/contact-page-contents/data',
-    [v1\ContactPageContentController::class, 'data']
+    [v1\ContactPageContentController::class, 'data'],
 )->name('v1.web.protected.contact.page.contents.data');
 Route::resource('/v1/contact-page-contents', v1\ContactPageContentController::class)
     ->only([
@@ -59,3 +59,8 @@ Route::resource('/v1/services', v1\ServiceController::class)->names('v1.web.prot
 
 Route::get('/v1/blog-posts/data', [v1\BlogPostController::class, 'data'])->name('v1.web.protected.blog.posts.data');
 Route::resource('/v1/blog-posts', v1\BlogPostController::class)->names('v1.web.protected.blog.posts');
+
+Route::get('/v1/frequently-asked-questions/data',
+    [v1\FrequentlyAskedQuestionController::class, 'data'])->name('v1.web.protected.frequently.asked.questions.data');
+Route::resource('/v1/frequently-asked-questions',
+    v1\FrequentlyAskedQuestionController::class)->names('v1.web.protected.frequently.asked.questions');

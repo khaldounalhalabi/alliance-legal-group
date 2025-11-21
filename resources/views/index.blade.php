@@ -16,5 +16,19 @@
         <x-team-members :team-members="$teamMembers" />
 
         <x-testimonials :testimonials="$testimonials" />
+
+        <!-- Faq And Latest Post -->
+        <div class="container">
+            <!-- Row -->
+            <div class="row">
+                <x-faqs-drawer
+                    :faqs="$faqs"
+                    class="col-md-6 col-xs-12 faq-section"
+                />
+                <x-latest-blog-posts :posts="$latestPosts" />
+            </div>
+            <!-- Row /- -->
+        </div>
+        <!-- Faq And Latest Post /- -->
     </main>
 @endsection

@@ -6,8 +6,10 @@ use App\Enums\AboutUsKeyEnum;
 use App\Enums\ContactUsContentKeyEnum;
 use App\Http\Requests\v1\Message\StoreMessageRequest;
 use App\Models\AboutUsContent;
+use App\Models\BlogPost;
 use App\Models\Category;
 use App\Models\ContactPageContent;
+use App\Models\FrequentlyAskedQuestion;
 use App\Models\Message;
 use App\Models\Service;
 use App\Models\TeamMember;
@@ -39,6 +41,13 @@ class SiteController extends Controller
          */
         $categories = cache()->remember(Category::CACHE_KEY, now()->addYear(), fn() => Category::all());
 
+        /** @var Collection<FrequentlyAskedQuestion>|FrequentlyAskedQuestion[] $faqs */
+        $faqs = cache()->remember("faqs_slider", now()->addMinutes(5),
+            fn() => FrequentlyAskedQuestion::inRandomOrder()->limit(4)->get());
+
+        $latestPosts = cache()->remember("latest_posts", now()->addMinutes(5),
+            fn() => BlogPost::orderBy('created_at', 'desc')->limit(3)->get());
+
         return view('index', compact(
             'ourHistory',
             'ourMission',
@@ -47,6 +56,8 @@ class SiteController extends Controller
             'testimonials',
             'categories',
             'services',
+            'faqs',
+            'latestPosts',
         ));
     }
 

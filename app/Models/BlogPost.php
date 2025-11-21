@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Casts\MediaCast;
 use App\Casts\Translatable;
+use App\Serializers\SerializedMedia;
 use App\Serializers\Translatable as TranslatableSerializer;
 use App\Traits\HasMedia;
 use Carbon\Carbon;
@@ -13,14 +14,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int                                                             $id
- * @property TranslatableSerializer                                          $title
- * @property TranslatableSerializer                                          $small_description
- * @property TranslatableSerializer                                          $content
- * @property TranslatableSerializer                                          $author_name
- * @property array{url:string,size:string,extension:string,mime_type:string} $cover
- * @property Carbon                                                          $created_at
- * @property Carbon                                                          $updated_at
+ * @property int                    $id
+ * @property TranslatableSerializer $title
+ * @property TranslatableSerializer $small_description
+ * @property TranslatableSerializer $content
+ * @property TranslatableSerializer $author_name
+ * @property SerializedMedia        $cover
+ * @property Carbon                 $created_at
+ * @property Carbon                 $updated_at
  * @mixin Builder<BlogPost>
  * @use  HasFactory<BlogPostFactory>
  */

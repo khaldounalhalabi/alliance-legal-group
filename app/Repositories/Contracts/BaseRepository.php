@@ -68,7 +68,7 @@ abstract class BaseRepository
 
     public function getTableColumns(): array
     {
-        return $this->model->getFillable();
+        return [...$this->model->getFillable(), 'id'];
     }
 
     /**

@@ -23,29 +23,48 @@
                 <!-- Widget Links -->
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <aside class="widget widget_categories">
-                        <h3 class="widget-title">categories</h3>
+                        <h3 class="widget-title">
+                            {{ trans("site.quick_links") }}
+                        </h3>
                         <ul>
                             <li>
                                 <a
                                     href="{{ route("index") }}"
                                     title="Homepage"
                                 >
-                                    homepage
+                                    {{ trans("site.home") }}
                                 </a>
                             </li>
                             <li>
-                                <a href="{{route('about')}}" title="About Us">
-                                    about us
+                                <a
+                                    href="{{ route("about") }}"
+                                    title="{{ trans("site.about_us") }}"
+                                >
+                                    {{ trans("site.about_us") }}
                                 </a>
                             </li>
                             <li>
-                                <a href="#" title="Services">
-                                    Services
+                                <a
+                                    href="{{ route("services.index") }}"
+                                    title="{{ trans("site.services") }}"
+                                >
+                                    {{ trans("site.services") }}
                                 </a>
                             </li>
                             <li>
-                                <a href="{{route('contact')}}" title="Contact">
-                                    contact
+                                <a
+                                    href="{{ route("blog.posts") }}"
+                                    title="{{ trans("site.blog") }}"
+                                >
+                                    {{ trans("site.blog") }}
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="{{ route("contact") }}"
+                                    title="{{ trans("site.contact") }}"
+                                >
+                                    {{ trans("site.contact") }}
                                 </a>
                             </li>
                         </ul>
@@ -65,12 +84,7 @@
             <!-- Row -->
             <div class="row">
                 <div class="col-md-4">
-                    <p>
-                        Alliance Legal Group Ltd is a company incorporated in
-                        England and Wales under Company No. 14034382. Authorised
-                        and regulated by the Solicitors Regulation Authority
-                        (SRA).
-                    </p>
+                    <p>{{ trans("site.licence") }}</p>
                 </div>
                 <div class="col-md-8 col-sm-12 col-xs-12">
                     <!-- Ownavigation -->
@@ -84,7 +98,9 @@
                                 aria-expanded="false"
                                 aria-controls="navbar"
                             >
-                                <span class="sr-only">Toggle navigation</span>
+                                <span class="sr-only">
+                                    {{ trans("site.toggle_navigation") }}
+                                </span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
@@ -95,28 +111,41 @@
                                 <li>
                                     <a
                                         href="{{ route("index") }}"
-                                        title="Home"
+                                        title="{{ trans("site.home") }}"
                                     >
-                                        Home
+                                        {{ trans("site.home") }}
                                     </a>
                                 </li>
                                 <li>
                                     <a
                                         href="{{ route("about") }}"
-                                        title="About Us"
+                                        title="{{ trans("site.about_us") }}"
                                     >
-                                        About Us
+                                        {{ trans("site.about_us") }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" title="Services">services</a>
+                                    <a
+                                        href="{{ route("services.index") }}"
+                                        title="{{ trans("site.services") }}"
+                                    >
+                                        {{ trans("site.services") }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="{{ route("blog.posts") }}"
+                                        title="{{ trans("site.blog") }}"
+                                    >
+                                        {{ trans("site.blog") }}
+                                    </a>
                                 </li>
                                 <li>
                                     <a
                                         href="{{ route("contact") }}"
-                                        title="Contact"
+                                        title="{{ trans("site.contact") }}"
                                     >
-                                        Contact
+                                        {{ trans("site.contact") }}
                                     </a>
                                 </li>
                             </ul>
@@ -170,4 +199,4 @@
 <!-- Library - Theme JS -->
 <script src="{{ asset("assets/js/functions.js") }}"></script>
 
-@stack('scripts')
+@stack("scripts")

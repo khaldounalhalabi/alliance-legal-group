@@ -66,4 +66,13 @@ return [
     'services' => 'Services',
     'contact' => 'Contact',
     'blog' => 'Blog',
+    'quick_links' => 'Quick Links',
+    'licence' => <<<TEXT
+                     Alliance Legal Group Ltd is a company incorporated in
+                     England and Wales under Company No. 14034382. Authorised
+                     and regulated by the Solicitors Regulation Authority
+                     (SRA).
+                     TEXT
+    ,
+
 ];

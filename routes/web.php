@@ -19,3 +19,4 @@ Route::get('/services', [SiteController::class, 'indexServices'])->name('service
 Route::get('/services/{serviceId}', [SiteController::class, 'showService'])->name('services.show');
 Route::get('/blog', [SiteController::class, 'blogPosts'])->name('blog.posts');
 Route::get('/blog/{blogPostId}', [SiteController::class, 'showBlogPost'])->name('blog.posts.show');
+Route::get('/faqs', [SiteController::class, 'faqs'])->name('faqs');

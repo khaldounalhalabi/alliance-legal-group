@@ -23,6 +23,7 @@
             <div class="row">
                 <x-faqs-drawer
                     :faqs="$faqs"
+                    :showMoreButton="true"
                     class="col-md-6 col-xs-12 faq-section"
                 />
                 <x-latest-blog-posts :posts="$latestPosts" />

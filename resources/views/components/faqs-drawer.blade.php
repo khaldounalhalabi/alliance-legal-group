@@ -1,5 +1,6 @@
 @props([
     "faqs" => [],
+    "showMoreButton" => false,
 ])
 
 @php
@@ -11,7 +12,7 @@
 @if (count($faqs))
     <div {{ $attributes }}>
         <div class="section-header">
-            <h3>frequently asked question</h3>
+            <h3>frequently asked questions</h3>
         </div>
         <div
             class="panel-group"
@@ -53,5 +54,8 @@
                 </div>
             @endforeach
         </div>
+        @if ($showMoreButton)
+            <a href="{{ route("faqs") }}">Show More</a>
+        @endif
     </div>
 @endif

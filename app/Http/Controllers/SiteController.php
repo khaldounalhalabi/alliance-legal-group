@@ -170,4 +170,10 @@ class SiteController extends Controller
 
         return view('blog-posts.show', compact('post', 'latestPosts'));
     }
+
+    public function faqs()
+    {
+        $faqs = FrequentlyAskedQuestion::all();
+        return view('faqs.index', compact('faqs'));
+    }
 }

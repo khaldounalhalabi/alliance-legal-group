@@ -6,8 +6,12 @@
         <div class="container">
             <h3>ABOUT</h3>
             <ol class="breadcrumb">
-                <li><a href="{{ route("index") }}">Home</a></li>
-                <li class="active">About Us</li>
+                <li>
+                    <a href="{{ route("index") }}">
+                        {{ trans("site.home") }}
+                    </a>
+                </li>
+                <li class="active">{{ trans("site.about_us") }}</li>
             </ol>
         </div>
         <!-- Container /- -->
@@ -23,7 +27,7 @@
                 <div class="col-md-6 col-xs-12 about-section2 no-top-margin">
                     <!-- Section Header -->
                     <div class="section-header">
-                        <h3>about us</h3>
+                        <h3>{{ trans("site.about_us") }}</h3>
                     </div>
                     <!-- Section Header /- -->
                     <p>{{ $aboutUs->content }}</p>
@@ -31,19 +35,23 @@
                         <div class="col-sm-6">
                             <div class="about-box">
                                 <i class="icon icon-Bulb"></i>
-                                <h4>brilliant ideas</h4>
+                                <h4>{{ trans("site.brilliant_ideas") }}</h4>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="about-box">
                                 <i class="icon icon-User"></i>
-                                <h4>professional specialists</h4>
+                                <h4>
+                                    {{ trans("site.professional_specialists") }}
+                                </h4>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="about-box">
                                 <i class="icon icon-WorldGlobe"></i>
-                                <h4>multi cases dealing</h4>
+                                <h4>
+                                    {{ trans("site.multi_cases_dealing") }}
+                                </h4>
                             </div>
                         </div>
                     </div>
@@ -53,7 +61,7 @@
                 <div class="col-md-6 col-xs-12 work-section no-top-margin">
                     <!-- Section Header -->
                     <div class="section-header">
-                        <h3>WHY CHOOSE US</h3>
+                        <h3>{{ trans("site.why_choose_us") }}</h3>
                     </div>
                     <!-- Section Header /- -->
                     <p>

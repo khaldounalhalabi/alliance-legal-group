@@ -74,5 +74,8 @@ return [
                      (SRA).
                      TEXT
     ,
-
+    'brilliant_ideas' => 'Brilliant ideas',
+    'professional_specialists' => 'Professional specialists',
+    'multi_cases_dealing' => 'Multi cases dealing',
+    'why_choose_us' => 'Why choose us',
 ];

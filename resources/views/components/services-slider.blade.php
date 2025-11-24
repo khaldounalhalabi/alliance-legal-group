@@ -43,7 +43,7 @@
                                         alt="Icon"
                                     />
                                 </i>
-                                <h4>
+                                <h4 class="service-card-title">
                                     {{ $service->name }}
                                 </h4>
                             </div>

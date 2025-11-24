@@ -1,9 +1,9 @@
 @php
-    use App\Models\Service;
+    use App\Models\BlogPost;
     use Illuminate\Pagination\LengthAwarePaginator;
 
     /**
-     * @var LengthAwarePaginator<int, Service>
+     * @var LengthAwarePaginator<int, BlogPost> $posts
      */
 @endphp
 
@@ -13,10 +13,10 @@
     <div class="container-fluid no-left-padding no-right-padding page-banner">
         <!-- Container -->
         <div class="container">
-            <h3>services</h3>
+            <h3>Blog</h3>
             <ol class="breadcrumb">
                 <li><a href="{{ route("index") }}">Home</a></li>
-                <li class="active">services</li>
+                <li class="active">Blog</li>
             </ol>
         </div>
         <!-- Container /- -->
@@ -24,22 +24,21 @@
     <!-- Page Banner /- -->
 
     <main class="site-main">
-        <!-- Our Practice Section -->
         <div
             class="container-fluid no-left-padding no-right-padding no-top-padding our-practice-section bg-transparent"
         >
             <!-- Container -->
             <div class="container">
                 <div class="row">
-                    @foreach ($services as $service)
+                    @foreach ($posts as $post)
                         <div class="col-md-3 col-xs-6">
                             <div class="practice-box">
                                 <a
-                                    href="{{ route("services.show", $service->id) }}"
+                                    href="{{ route("blog.posts.show", $post->id) }}"
                                 >
                                     <i>
                                         <img
-                                            src="{{ $service->cover->url }}"
+                                            src="{{ $post->cover->url }}"
                                             alt="Practice"
                                             style="
                                                 aspect-ratio: 1/1;
@@ -49,14 +48,8 @@
                                         />
                                     </i>
                                     <div class="content-box">
-                                        <i>
-                                            <img
-                                                src="{{ asset("assets/images/practice-icon-" . fake()->numberBetween(1, 8) . ".png") }}"
-                                                alt="Icon"
-                                            />
-                                        </i>
                                         <h4 class="service-card-title">
-                                            {{ $service->name }}
+                                            {{ $post->title }}
                                         </h4>
                                     </div>
                                 </a>
@@ -65,11 +58,10 @@
                     @endforeach
                 </div>
                 <div style="margin-top: 2rem">
-                    {{ $services->links("vendor.pagination.ow") }}
+                    {{ $posts->links("vendor.pagination.ow") }}
                 </div>
             </div>
             <!-- Container /- -->
         </div>
-        <!-- Our Practice Section /- -->
     </main>
 @endsection

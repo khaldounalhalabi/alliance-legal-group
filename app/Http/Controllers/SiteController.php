@@ -45,6 +45,7 @@ class SiteController extends Controller
         $faqs = cache()->remember("faqs_slider", now()->addMinutes(5),
             fn() => FrequentlyAskedQuestion::inRandomOrder()->limit(4)->get());
 
+        /** @var Collection<BlogPost>|BlogPost[] $latestPosts */
         $latestPosts = cache()->remember("latest_posts", now()->addMinutes(5),
             fn() => BlogPost::orderBy('created_at', 'desc')->limit(3)->get());
 
@@ -129,7 +130,7 @@ class SiteController extends Controller
 
     public function indexServices()
     {
-        $services = Service::paginate(perPage: 12);
+        $services = Service::paginate(12);
 
         return view('services.index', compact('services'));
     }
@@ -146,5 +147,27 @@ class SiteController extends Controller
         }
 
         return view('services.show', compact('service'));
+    }
+
+    public function blogPosts()
+    {
+        $posts = BlogPost::paginate(12);
+
+        return view('blog-posts.index', compact('posts'));
+    }
+
+    public function showBlogPost($blogPostId)
+    {
+        /** @var Collection<BlogPost>|BlogPost[] $latestPosts */
+        $latestPosts = cache()->remember("latest_posts", now()->addMinutes(5),
+            fn() => BlogPost::orderBy('created_at', 'desc')->limit(3)->get());
+
+        $post = BlogPost::find($blogPostId);
+
+        if (!$post) {
+            abort(404);
+        }
+
+        return view('blog-posts.show', compact('post', 'latestPosts'));
     }
 }

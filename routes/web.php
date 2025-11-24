@@ -17,3 +17,5 @@ Route::post('/contact/send-message', [SiteController::class, 'sendMessage'])->na
 Route::get('/categories/{categoryId}', [SiteController::class, 'showCategory'])->name('categories.show');
 Route::get('/services', [SiteController::class, 'indexServices'])->name('services.index');
 Route::get('/services/{serviceId}', [SiteController::class, 'showService'])->name('services.show');
+Route::get('/blog', [SiteController::class, 'blogPosts'])->name('blog.posts');
+Route::get('/blog/{blogPostId}', [SiteController::class, 'showBlogPost'])->name('blog.posts.show');

@@ -9,7 +9,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use SplFileInfo;
 
-/**اي 
+/**اي
  * @extends Factory<BlogPost>
  */
 class BlogPostFactory extends Factory
@@ -20,13 +20,13 @@ class BlogPostFactory extends Factory
         $file = fake()->randomElement(File::allFiles(storage_path('/app/private/required/services')));
 
         return [
-            'title' => Translatable::fake('word')->toJson(),
-            'small_description' => Translatable::fake('word')->toJson(),
+            'title' => Translatable::fake('sentence')->toJson(),
+            'small_description' => Translatable::fake('sentence')->toJson(),
             'content' => Translatable::create([
                 'en' => $this->faker->longHtmlContent(),
                 'ar' => $this->faker->longHtmlContent(),
             ]),
-            'author_name' => Translatable::fake('word')->toJson(),
+            'author_name' => Translatable::fake('name')->toJson(),
             'cover' => new UploadedFile($file->getPathname(), $file->getFilename()),
         ];
     }

@@ -85,6 +85,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ route("blog.posts") }}" title="Blog">
+                            Blog
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route("contact") }}" title="Contact Us">
                             Contact
                         </a>

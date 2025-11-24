@@ -13,10 +13,14 @@
     <div class="container-fluid no-left-padding no-right-padding page-banner">
         <!-- Container -->
         <div class="container">
-            <h3>Blog</h3>
+            <h3>{{ trans("site.blog") }}</h3>
             <ol class="breadcrumb">
-                <li><a href="{{ route("index") }}">Home</a></li>
-                <li class="active">Blog</li>
+                <li>
+                    <a href="{{ route("index") }}">
+                        {{ trans("site.home") }}
+                    </a>
+                </li>
+                <li class="active">{{ trans("site.blog") }}</li>
             </ol>
         </div>
         <!-- Container /- -->

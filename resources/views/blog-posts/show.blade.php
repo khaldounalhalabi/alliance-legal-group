@@ -22,7 +22,11 @@
         <div class="container">
             <h3>{{ $post->title }}</h3>
             <ol class="breadcrumb">
-                <li><a href="{{ route("index") }}">Home</a></li>
+                <li>
+                    <a href="{{ route("index") }}">
+                        {{ trans("site.home") }}
+                    </a>
+                </li>
                 <li class="active">{{ $post->title }}</li>
             </ol>
         </div>
@@ -50,7 +54,9 @@
                     <div class="col-md-3 col-sm-5 col-xs-6 widget-area">
                         <!-- Widget : Practice -->
                         <aside class="widget widget_practice">
-                            <h3 class="widget-title">Latest Posts:</h3>
+                            <h3 class="widget-title">
+                                {{ trans("site.latest_posts") }}
+                            </h3>
                             <ul>
                                 @foreach ($latestPosts as $lp)
                                     <li>

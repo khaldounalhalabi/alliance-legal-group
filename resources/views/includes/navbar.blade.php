@@ -15,7 +15,7 @@
                     </p>
                     <p>
                         <i class="fa fa-phone"></i>
-                        Mobile:
+                        {{ trans("site.mobile") }}:
                         <a href="tel:+4401612601985">{{ $phone->value }}</a>
                     </p>
                 </div>
@@ -39,7 +39,9 @@
                     aria-expanded="false"
                     aria-controls="navbar"
                 >
-                    <span class="sr-only">Toggle navigation</span>
+                    <span class="sr-only">
+                        {{ trans("site.toggle_navigation") }}
+                    </span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -63,7 +65,7 @@
                             letter-spacing: 1px;
                         "
                     >
-                        Alliance Legal Group
+                        {{ trans("site.company_name") }}
                     </span>
                 </a>
             </div>
@@ -71,27 +73,31 @@
             <div id="navbar" class="navbar-collapse navbar-right collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="{{ route("index") }}" title="Home">Home</a>
+                        <a href="{{ route("index") }}" title="Home">
+                            {{ trans("site.home") }}
+                        </a>
                     </li>
                     <li>
-                        <a href="{{ route("about") }}" title="About">About</a>
+                        <a href="{{ route("about") }}" title="About">
+                            {{ trans("site.about") }}
+                        </a>
                     </li>
                     <li>
                         <a
                             href="{{ route("services.index") }}"
                             title="Services"
                         >
-                            Services
+                            {{ trans("site.services") }}
                         </a>
                     </li>
                     <li>
                         <a href="{{ route("blog.posts") }}" title="Blog">
-                            Blog
+                            {{ trans("site.blog") }}
                         </a>
                     </li>
                     <li>
                         <a href="{{ route("contact") }}" title="Contact Us">
-                            Contact
+                            {{ trans("site.contact") }}
                         </a>
                     </li>
                 </ul>

@@ -59,4 +59,11 @@ return [
     'latest_posts' => 'Latest Posts',
     'latest' => 'Latest',
     'company_name' => 'Alliance Legal Group',
+    'mobile' => 'Mobile',
+    'toggle_navigation' => 'Toggle navigation',
+    'home' => 'Home',
+    'about' => 'About',
+    'services' => 'Services',
+    'contact' => 'Contact',
+    'blog' => 'Blog',
 ];

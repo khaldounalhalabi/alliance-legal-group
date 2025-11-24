@@ -21,12 +21,12 @@
                             <img
                                 src="{{ $category->cover->url }}"
                                 alt="Features"
-                                style="aspect-ratio: 1 / 0.8; width:40rem;"
+                                style="aspect-ratio: 1 / 0.8; width: 40rem"
                             />
                             <div class="feature-content">
                                 <i>
                                     <img
-                                        src="assets/images/feature-icon.png"
+                                        src="{{ asset("assets/images/feature-icon.png") }}"
                                         alt="Icon"
                                     />
                                 </i>

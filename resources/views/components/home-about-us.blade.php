@@ -17,7 +17,7 @@
         <div class="col-md-offset-6 col-md-6 col-xs-12 about-content">
             <!-- Section Header -->
             <div class="section-header">
-                <h3>ABOUT US</h3>
+                <h3>{{ trans("site.about_us") }}</h3>
             </div>
             <!-- Section Header /- -->
             <div class="about-details">
@@ -28,7 +28,7 @@
                             alt="Icon"
                         />
                     </i>
-                    <h4>Our History</h4>
+                    <h4>{{ trans("site.our_history") }}</h4>
                     <p>{{ $ourHistory->content }}</p>
                 </div>
                 <div class="about-details-box">
@@ -38,7 +38,7 @@
                             alt="Icon"
                         />
                     </i>
-                    <h4>Our Mission</h4>
+                    <h4>{{ trans("site.our_mission") }}</h4>
                     <p>{{ $ourMission->content }}</p>
                 </div>
                 <div class="about-details-box">
@@ -48,7 +48,7 @@
                             alt="Icon"
                         />
                     </i>
-                    <h4>Our Vision</h4>
+                    <h4>{{ trans("site.our_vision") }}</h4>
                     <p>{{ $ourVision->content }}</p>
                 </div>
             </div>

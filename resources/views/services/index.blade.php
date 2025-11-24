@@ -1,6 +1,6 @@
 @php
-    use Illuminate\Pagination\LengthAwarePaginator;
     use App\Models\Service;
+    use Illuminate\Pagination\LengthAwarePaginator;
 
     /**
      * @var LengthAwarePaginator<int, Service>
@@ -26,7 +26,7 @@
         <div class="container">
             <h3>services</h3>
             <ol class="breadcrumb">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="{{ route("index") }}">Home</a></li>
                 <li class="active">services</li>
             </ol>
         </div>

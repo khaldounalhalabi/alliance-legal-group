@@ -32,7 +32,7 @@
                         <a href="#">
                             <img
                                 src="{{ $post->cover->url }}"
-                                style="width: 8rem; aspect-ratio: 1/1"
+                                style="width: 12rem; aspect-ratio: 1.5/1"
                                 alt="Post"
                             />
                         </a>

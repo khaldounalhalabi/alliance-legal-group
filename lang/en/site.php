@@ -54,4 +54,6 @@ return [
     'our_services' => 'Our Services',
     'team_members' => 'Team members',
     'what_is_our_customer_says' => 'What is our customer say’s',
+    'frequently_asked_questions' => 'Frequently asked questions',
+    'show_more' => 'Show More',
 ];

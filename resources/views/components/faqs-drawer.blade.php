@@ -12,7 +12,7 @@
 @if (count($faqs))
     <div {{ $attributes }}>
         <div class="section-header">
-            <h3>frequently asked questions</h3>
+            <h3>{{ trans("site.frequently_asked_questions") }}</h3>
         </div>
         <div
             class="panel-group"
@@ -55,7 +55,7 @@
             @endforeach
         </div>
         @if ($showMoreButton)
-            <a href="{{ route("faqs") }}">Show More</a>
+            <a href="{{ route("faqs") }}">{{ trans("site.show_more") }}</a>
         @endif
     </div>
 @endif

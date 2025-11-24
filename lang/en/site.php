@@ -97,4 +97,5 @@ return [
     ],
     'enter_your_email' => 'Enter your email',
     'enter_your_address' => 'Enter your address',
+    'services_under_this_category' => 'Services Under This Category',
 ];

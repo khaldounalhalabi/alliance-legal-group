@@ -20,7 +20,11 @@
                 {{ $category->name }}
             </h3>
             <ol class="breadcrumb">
-                <li><a href="{{ route("index") }}">Home</a></li>
+                <li>
+                    <a href="{{ route("index") }}">
+                        {{ trans("site.home") }}
+                    </a>
+                </li>
                 <li class="active">{{ $category->name }}</li>
             </ol>
         </div>
@@ -56,7 +60,7 @@
                     <!-- Widget : Categories -->
                     <aside class="widget widget_categories">
                         <h3 class="widget-title">
-                            Services Under This Category
+                            {{ trans("site.services_under_this_category") }}
                         </h3>
                         <ul>
                             @foreach ($category->services as $service)

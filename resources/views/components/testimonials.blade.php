@@ -15,7 +15,7 @@
     <div class="container">
         <!-- Section Header -->
         <div class="section-header text-center">
-            <h3>what is our customer say’s</h3>
+            <h3>{{ trans("site.what_is_our_customer_says") }}</h3>
         </div>
         <!-- Section Header /- -->
         <div class="col-md-offset-2 col-md-8 no-left-padding no-right-padding">
@@ -27,7 +27,9 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
                     @foreach ($testimonials as $testimonial)
-                        <div class="item {{$loop->index == 0 ? 'active' : ''}}">
+                        <div
+                            class="item {{ $loop->index == 0 ? "active" : "" }}"
+                        >
                             <div class="testimonial-content">
                                 <div class="testimonial-box">
                                     <i>

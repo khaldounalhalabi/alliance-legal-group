@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Enums\ContactUsContentKeyEnum;
 use App\Models\ContactPageContent;
+use App\Services\PageTitleResolver;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -15,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(PageTitleResolver::class, function ($app) {
+            return new PageTitleResolver();
+        });
     }
 
     /**
@@ -35,5 +38,10 @@ class AppServiceProvider extends ServiceProvider
 
         View::share('address', $address);
         View::share('phone', $phone);
+
+        // Share the page title resolver with all views
+        View::composer('*', function ($view) {
+            $view->with('pageTitle', app(PageTitleResolver::class)->getTitle());
+        });
     }
 }

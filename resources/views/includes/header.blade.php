@@ -7,7 +7,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>Home - Alliance Legal Group</title>
+    <title>{{ $pageTitle }}</title>
 
     <!-- Standard Favicon -->
     <link

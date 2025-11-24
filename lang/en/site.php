@@ -58,4 +58,5 @@ return [
     'show_more' => 'Show More',
     'latest_posts' => 'Latest Posts',
     'latest' => 'Latest',
+    'company_name' => 'Alliance Legal Group',
 ];

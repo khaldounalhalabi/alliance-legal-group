@@ -23,7 +23,7 @@
                     <div class="team-box">
                         <i>
                             <img
-                                src="{{ $member->image->url }}"
+                                src="{{ $member->image?->url ?? asset("/assets/images/profile.jpg") }}"
                                 alt="Team"
                             />
                         </i>

@@ -19,6 +19,13 @@
                         <a href="tel:+4401612601985">{{ $phone->value }}</a>
                     </p>
                 </div>
+                <div class="top-login">
+                    <form class="lang-dropdown">
+                        <div class="form-group">
+                            <div id="basic" data-input-name="country"></div>
+                        </div>
+                    </form>
+                </div>
             </div>
             <!-- Container /- -->
         </div>

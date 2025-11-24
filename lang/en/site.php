@@ -51,4 +51,6 @@ return [
     'our_history' => 'Our History',
     'our_mission' => 'Our Mission',
     'our_vision' => 'Our Vision',
+    'our_services' => 'Our Services',
+
 ];

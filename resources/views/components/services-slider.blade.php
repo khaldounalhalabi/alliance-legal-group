@@ -16,7 +16,7 @@
     <div class="container">
         <!-- Section Header -->
         <div class="section-header text-center">
-            <h3>Our Services</h3>
+            <h3>{{ trans("site.our_services") }}</h3>
         </div>
         <!-- Section Header /- -->
         <!-- Row -->

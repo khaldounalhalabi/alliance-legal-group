@@ -11,7 +11,7 @@
 @if (count($posts))
     <div class="col-md-6 col-xs-12 latest-post-section">
         <div class="section-header">
-            <h3>latest posts</h3>
+            <h3>{{ trans("site.latest_posts") }}</h3>
         </div>
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active">
@@ -21,7 +21,7 @@
                     role="tab"
                     data-toggle="tab"
                 >
-                    LATEST
+                    {{ trans("site.latest") }}
                 </a>
             </li>
         </ul>

@@ -56,4 +56,6 @@ return [
     'what_is_our_customer_says' => 'What is our customer say’s',
     'frequently_asked_questions' => 'Frequently asked questions',
     'show_more' => 'Show More',
+    'latest_posts' => 'Latest Posts',
+    'latest' => 'Latest',
 ];

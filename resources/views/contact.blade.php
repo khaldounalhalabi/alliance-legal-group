@@ -6,8 +6,12 @@
         <div class="container">
             <h3>Contact</h3>
             <ol class="breadcrumb">
-                <li><a href="{{ route("index") }}">Home</a></li>
-                <li class="active">Contact</li>
+                <li>
+                    <a href="{{ route("index") }}">
+                        {{ trans("site.home") }}
+                    </a>
+                </li>
+                <li class="active">{{ trans("site.contact") }}</li>
             </ol>
         </div>
         <!-- Container /- -->
@@ -33,39 +37,49 @@
             <div class="clearfix"></div>
             <div class="col-md-4 col-xs-6 contact-content">
                 <div class="contact-details">
-                    <h3>Contact Us?</h3>
+                    <h3>{{ trans("site.contact_us") }}</h3>
                     <div class="contact-detail-box">
-                        <h4>ADDRESS:</h4>
+                        <h4>{{ trans("site.address") }}:</h4>
                         <p>{{ $address?->value }}</p>
                     </div>
 
                     <div class="contact-detail-box">
-                        <h4>Office 1</h4>
-                        <p>UAE, Dubai</p>
+                        <h4>
+                            {{ trans("site.office", ["office_number" => 1]) }}
+                        </h4>
+                        <p>{{ trans("site.branch_address.dubai") }}</p>
                     </div>
 
                     <div class="contact-detail-box">
-                        <h4>Office 2</h4>
-                        <p>Qatar, Doha</p>
+                        <h4>
+                            {{ trans("site.office", ["office_number" => 2]) }}
+                        </h4>
+                        <p>{{ trans("site.branch_address.qatar") }}</p>
                     </div>
 
                     <div class="contact-detail-box">
-                        <h4>Office 3</h4>
-                        <p>Ireland, Dublin</p>
+                        <h4>
+                            {{ trans("site.office", ["office_number" => 3]) }}
+                        </h4>
+                        <p>{{ trans("site.branch_address.ireland") }}</p>
                     </div>
 
                     <div class="contact-detail-box">
-                        <h4>Office 4</h4>
-                        <p>Lebanon Beirut</p>
+                        <h4>
+                            {{ trans("site.office", ["office_number" => 4]) }}
+                        </h4>
+                        <p>{{ trans("site.branch_address.lebanon") }}</p>
                     </div>
 
                     <div class="contact-detail-box">
-                        <h4>Office 5</h4>
-                        <p>Kingdom of Saudi Arabia</p>
+                        <h4>
+                            {{ trans("site.office", ["office_number" => 5]) }}
+                        </h4>
+                        <p>{{ trans("site.branch_address.saudi_arabia") }}</p>
                     </div>
 
                     <div class="contact-detail-box">
-                        <h4>EMAIL ID:</h4>
+                        <h4>{{ trans("site.email") }}</h4>
                         <p>
                             <a href="mailto:{{ $email->value }}" title="">
                                 {{ $email->value }}
@@ -73,7 +87,7 @@
                         </p>
                     </div>
                     <div class="contact-detail-box">
-                        <h4>PHONE:</h4>
+                        <h4>{{ trans("site.phone") }}:</h4>
                         <p>
                             <a href="mailto:{{ $phone->value }}">
                                 {{ $phone->value }}
@@ -83,7 +97,7 @@
                 </div>
             </div>
             <div class="col-md-8 col-xs-6 contact-form">
-                <h3>Leave a Comments</h3>
+                <h3>{{ trans("site.leave_a_comment") }}</h3>
                 <form
                     action="{{ route("contact.send.message") }}"
                     method="POST"
@@ -93,7 +107,7 @@
                         <input
                             type="text"
                             class="form-control"
-                            placeholder="Enter Your Name*"
+                            placeholder="{{ trans("site.enter_your_email") }}"
                             name="name"
                             id="input_name"
                             required
@@ -109,7 +123,7 @@
                         <input
                             type="text"
                             class="form-control"
-                            placeholder="Phone Number*"
+                            placeholder="{{ trans("site.phone_number") }}"
                             name="phone"
                             value="{{ old("phone") }}"
                             id="input_phone"
@@ -125,7 +139,7 @@
                         <input
                             type="text"
                             class="form-control"
-                            placeholder="Enter Your Address*"
+                            placeholder="{{ trans("site.enter_your_address") }}"
                             name="address"
                             value="{{ old("address") }}"
                             id="input_address"
@@ -140,7 +154,7 @@
                     <div class="form-group">
                         <textarea
                             class="form-control"
-                            placeholder="Message"
+                            placeholder="{{ trans("site.message") }}"
                             name="message"
                             id="textarea_message"
                         >
@@ -158,8 +172,12 @@
                         </div>
                     @endif
 
-                    <button title="SEND MESSAGE" type="submit" name="post">
-                        SEND MESSAGE
+                    <button
+                        title="{{ trans("site.send_message") }}"
+                        type="submit"
+                        name="post"
+                    >
+                        {{ trans("site.send_message") }}
                     </button>
                     <div id="alert-msg" class="alert-msg"></div>
                 </form>

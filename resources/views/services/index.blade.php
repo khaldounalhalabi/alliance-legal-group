@@ -15,8 +15,12 @@
         <div class="container">
             <h3>services</h3>
             <ol class="breadcrumb">
-                <li><a href="{{ route("index") }}">Home</a></li>
-                <li class="active">services</li>
+                <li>
+                    <a href="{{ route("index") }}">
+                        {{ trans("site.home") }}
+                    </a>
+                </li>
+                <li class="active">{{ trans("site.our_services") }}</li>
             </ol>
         </div>
         <!-- Container /- -->

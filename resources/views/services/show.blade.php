@@ -19,7 +19,11 @@
         <div class="container">
             <h3>{{ $service->name }}</h3>
             <ol class="breadcrumb">
-                <li><a href="{{ route("index") }}">Home</a></li>
+                <li>
+                    <a href="{{ route("index") }}">
+                        {{ trans("site.home") }}
+                    </a>
+                </li>
                 <li class="active">{{ $service->name }}</li>
             </ol>
         </div>
@@ -52,7 +56,7 @@
                         <!-- Widget : Practice -->
                         <aside class="widget widget_practice">
                             <h3 class="widget-title">
-                                Services From The Same Category
+                                {{ trans("site.services_from_the_same_category") }}
                             </h3>
                             <ul>
                                 @foreach ($service->category->services as $subService)

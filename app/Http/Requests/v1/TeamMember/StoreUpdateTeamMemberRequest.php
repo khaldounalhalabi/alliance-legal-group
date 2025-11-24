@@ -25,6 +25,22 @@ class StoreUpdateTeamMemberRequest extends FormRequest
         return [
             'name' => ['json', new ValidTranslatableJson, 'required'],
             'position' => ['json', new ValidTranslatableJson, 'required'],
+            'summary' => ['json', new ValidTranslatableJson, 'nullable'],
+            'education' => ['json', new ValidTranslatableJson, 'nullable'],
+            'professional_background' => ['json', new ValidTranslatableJson, 'nullable'],
+            'skills' => ['nullable', 'array'],
+            'skills.*' => ['string', 'max:255'],
+            'practice_areas' => ['nullable', 'array'],
+            'practice_areas.*' => ['string', 'max:255'],
+            'bar_admissions' => ['nullable', 'array'],
+            'bar_admissions.*' => ['string', 'max:255'],
+            'languages' => ['nullable', 'array'],
+            'languages.*' => ['string', 'max:100'],
+            'achievements' => ['nullable', 'array'],
+            'achievements.*' => ['string', 'max:500'],
+            'email' => ['nullable', 'email', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:50'],
+            'years_of_experience' => ['nullable', 'integer', 'min:0', 'max:100'],
             'image' => [
                 'nullable',
                 Rule::when(is_array($this->input('image')), [

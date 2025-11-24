@@ -85,7 +85,7 @@ const TranslatableTextarea: React.FC<TranslatableProps> = ({
                     }
                 >
                     <Label htmlFor={`${name}_id`}>
-                        {label}
+                        {label} - {lang.toUpperCase()}
                         {required && (
                             <span className="text-sm text-destructive">*</span>
                         )}

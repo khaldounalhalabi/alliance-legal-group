@@ -20,6 +20,17 @@ class TeamMemberResource extends BaseResource
             'name' => $this->name,
             'position' => $this->position,
             'image' => $this->image,
+            'summary' => $this->summary,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'years_of_experience' => $this->years_of_experience,
+            'education' => $this->education,
+            'professional_background' => $this->professional_background,
+            'skills' => $this->skills,
+            'practice_areas' => $this->practice_areas,
+            'bar_admissions' => $this->bar_admissions,
+            'languages' => $this->languages,
+            'achievements' => $this->achievements,
         ];
     }
 }

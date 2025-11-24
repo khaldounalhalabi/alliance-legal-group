@@ -20,7 +20,10 @@
         <div class="team-carousel">
             @foreach ($teamMembers as $member)
                 <div class="col-md-12">
-                    <div class="team-box">
+                    <a
+                        href="{{ route("team.members.show", $member->id) }}"
+                        class="team-box"
+                    >
                         <i>
                             <img
                                 src="{{ $member->image?->url ?? asset("/assets/images/profile.jpg") }}"
@@ -29,7 +32,7 @@
                         </i>
                         <h4>{{ $member->name }}</h4>
                         <span>{{ $member->position }}</span>
-                    </div>
+                    </a>
                 </div>
             @endforeach
         </div>

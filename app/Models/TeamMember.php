@@ -17,6 +17,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property int                    $id
  * @property TranslatableSerializer $name
  * @property TranslatableSerializer $position
+ * @property TranslatableSerializer $summary
+ * @property TranslatableSerializer $education
+ * @property TranslatableSerializer $professional_background
+ * @property array                  $skills
+ * @property array                  $practice_areas
+ * @property array                  $bar_admissions
+ * @property array                  $languages
+ * @property array                  $achievements
+ * @property string                 $email
+ * @property string                 $phone
+ * @property int                    $years_of_experience
  * @property SerializedMedia        $image
  * @property Carbon                 $created_at
  * @property Carbon                 $updated_at
@@ -32,6 +43,17 @@ class TeamMember extends Model
     protected $fillable = [
         'name',
         'position',
+        'summary',
+        'education',
+        'professional_background',
+        'skills',
+        'practice_areas',
+        'bar_admissions',
+        'languages',
+        'achievements',
+        'email',
+        'phone',
+        'years_of_experience',
         'image',
     ];
 
@@ -40,7 +62,7 @@ class TeamMember extends Model
         return [
             'name',
             'position',
-
+            'summary',
         ];
     }
 
@@ -73,6 +95,17 @@ class TeamMember extends Model
         return [
             'name',
             'position',
+            'summary',
+            'education',
+            'professional_background',
+            'skills',
+            'practice_areas',
+            'bar_admissions',
+            'languages',
+            'achievements',
+            'email',
+            'phone',
+            'years_of_experience',
             'image',
 
         ];
@@ -83,6 +116,15 @@ class TeamMember extends Model
         return [
             'name' => Translatable::class,
             'position' => Translatable::class,
+            'summary' => Translatable::class,
+            'education' => Translatable::class,
+            'professional_background' => Translatable::class,
+            'skills' => 'array',
+            'practice_areas' => 'array',
+            'bar_admissions' => 'array',
+            'languages' => 'array',
+            'achievements' => 'array',
+            'years_of_experience' => 'integer',
             'image' => MediaCast::class,
         ];
     }

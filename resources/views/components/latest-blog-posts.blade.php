@@ -29,7 +29,7 @@
             <div role="tabpanel" class="tab-pane active" id="images">
                 @foreach ($posts as $post)
                     <div class="latest-post">
-                        <a href="#">
+                        <a href="{{ route("blog.posts.show", $post->id) }}">
                             <img
                                 src="{{ $post->cover->url }}"
                                 style="width: 12rem; aspect-ratio: 1.5/1"
@@ -37,12 +37,16 @@
                             />
                         </a>
                         <h4>
-                            <a href="#">
+                            <a
+                                href="{{ route("blog.posts.show", $post->id) }}"
+                            >
                                 {{ $post->title }}
                             </a>
                         </h4>
                         <span>
-                            <a href="#">
+                            <a
+                                href="{{ route("blog.posts.show", $post->id) }}"
+                            >
                                 {{ $post->created_at->format("F d,Y") }}
                             </a>
                         </span>

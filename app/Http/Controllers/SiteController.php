@@ -176,4 +176,15 @@ class SiteController extends Controller
         $faqs = FrequentlyAskedQuestion::all();
         return view('faqs.index', compact('faqs'));
     }
+
+    public function showTeamMember($teamMemberId)
+    {
+        $teamMember = TeamMember::find($teamMemberId);
+
+        if (!$teamMember) {
+            abort(404);
+        }
+
+        return view('team-members.show', compact('teamMember'));
+    }
 }

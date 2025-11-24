@@ -20,3 +20,5 @@ Route::get('/services/{serviceId}', [SiteController::class, 'showService'])->nam
 Route::get('/blog', [SiteController::class, 'blogPosts'])->name('blog.posts');
 Route::get('/blog/{blogPostId}', [SiteController::class, 'showBlogPost'])->name('blog.posts.show');
 Route::get('/faqs', [SiteController::class, 'faqs'])->name('faqs');
+
+Route::get('/team/{teamMemberId}', [SiteController::class, 'showTeamMember'])->name('team.members.show');

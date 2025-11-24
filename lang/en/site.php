@@ -99,4 +99,13 @@ return [
     'enter_your_address' => 'Enter your address',
     'services_under_this_category' => 'Services Under This Category',
     'services_from_the_same_category' => 'Services From The Same Category',
+    'years_of_experience' => 'Years of experience',
+    'contact_information' => 'Contact Information',
+    'languages' => 'Languages',
+    'bar_admissions' => 'Bar Admissions',
+    'practice_areas' => 'Practice Areas',
+    'education' => 'Education',
+    'professional_background' => 'Professional Background',
+    'skills' => 'Skills & Expertise',
+    'achievements' => 'Achievements & Awards',
 ];

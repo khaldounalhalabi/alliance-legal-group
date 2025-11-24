@@ -17,7 +17,11 @@
         <div class="container">
             <h3>{{ $teamMember->name }}</h3>
             <ol class="breadcrumb">
-                <li><a href="{{ route("index") }}">Home</a></li>
+                <li>
+                    <a href="{{ route("index") }}">
+                        {{ trans("site.home") }}
+                    </a>
+                </li>
                 <li class="active">{{ $teamMember->name }}</li>
             </ol>
         </div>
@@ -48,7 +52,7 @@
                                 <p class="experience">
                                     <i class="fa fa-briefcase"></i>
                                     {{ $teamMember->years_of_experience }}
-                                    Years of experience
+                                    {{ trans("site.years_of_experience") }}
                                 </p>
                             @endif
                         </div>
@@ -80,7 +84,7 @@
 
                         @if ($teamMember->languages && count($teamMember->languages) > 0)
                             <div class="sidebar-section">
-                                <h5>Languages</h5>
+                                <h5>{{ trans("site.languages") }}</h5>
                                 <ul class="simple-list">
                                     @foreach ($teamMember->languages as $language)
                                         <li>{{ $language }}</li>
@@ -91,7 +95,7 @@
 
                         @if ($teamMember->bar_admissions && count($teamMember->bar_admissions) > 0)
                             <div class="sidebar-section">
-                                <h5>Bar Admissions</h5>
+                                <h5>{{ trans("site.bar_admissions") }}</h5>
                                 <ul class="simple-list">
                                     @foreach ($teamMember->bar_admissions as $bar)
                                         <li>{{ $bar }}</li>
@@ -108,7 +112,7 @@
                     <div class="team-profile-details">
                         @if ($teamMember->summary)
                             <div class="profile-section">
-                                <h4>About</h4>
+                                <h4>{{ trans("site.about") }}</h4>
                                 <div class="summary-text">
                                     {!! nl2br(e($teamMember->summary)) !!}
                                 </div>
@@ -117,7 +121,7 @@
 
                         @if ($teamMember->practice_areas && count($teamMember->practice_areas) > 0)
                             <div class="profile-section">
-                                <h4>Practice Areas</h4>
+                                <h4>{{ trans("site.practice_areas") }}</h4>
                                 <div class="practice-areas-grid">
                                     @foreach ($teamMember->practice_areas as $area)
                                         <div class="practice-area-item">
@@ -131,7 +135,7 @@
 
                         @if ($teamMember->education)
                             <div class="profile-section">
-                                <h4>Education</h4>
+                                <h4>{{ trans("site.education") }}</h4>
                                 <div class="education-content">
                                     {!! nl2br(e($teamMember->education)) !!}
                                 </div>
@@ -140,7 +144,9 @@
 
                         @if ($teamMember->professional_background)
                             <div class="profile-section">
-                                <h4>Professional Background</h4>
+                                <h4>
+                                    {{ trans("site.professional_background") }}
+                                </h4>
                                 <div class="background-text">
                                     {!! nl2br(e($teamMember->professional_background)) !!}
                                 </div>
@@ -149,7 +155,7 @@
 
                         @if ($teamMember->skills && count($teamMember->skills) > 0)
                             <div class="profile-section">
-                                <h4>Skills & Expertise</h4>
+                                <h4>{{ trans("site.skills") }}</h4>
                                 <div class="skills-container">
                                     @foreach ($teamMember->skills as $skill)
                                         <span class="skill-badge">
@@ -162,7 +168,7 @@
 
                         @if ($teamMember->achievements && count($teamMember->achievements) > 0)
                             <div class="profile-section">
-                                <h4>Achievements & Awards</h4>
+                                <h4>{{ trans("site.achievements") }}</h4>
                                 <ul class="achievements-list">
                                     @foreach ($teamMember->achievements as $achievement)
                                         <li>

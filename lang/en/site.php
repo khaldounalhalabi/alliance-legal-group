@@ -35,6 +35,16 @@ return [
 
     /****** general error ******/
     'something_went_wrong' => 'Some thing went wong process failed',
-    'server_error' => "Sorry we can't handle your request we have faced a problem" ,
+    'server_error' => "Sorry we can't handle your request we have faced a problem",
 
+
+    /** content */
+    'profound_international_expertise' => 'Profound international expertise',
+    'profound_international_expertise_description' => 'Profound international expertise built on years of advising clients across jurisdictions, industries, and regulatory systems.',
+    'tailored_legal_solutions' => 'Tailored legal solutions',
+    'tailored_legal_solutions_description' => 'Strategic, personalised legal solutions designed to align with your business goals and deliver measurable results.',
+    'comprehensive_transition_and_compliance_support' => 'Comprehensive transition and compliance support',
+    'comprehensive_transition_and_compliance_support_description' => 'End-to-end legal guidance to support corporate transitions, regulatory change, and full compliance with local and international standards.',
+    'proactive_and_practical_legal_advice' => 'Proactive and practical legal advice',
+    'proactive_and_practical_legal_advice_description' => 'Forward-thinking legal advice that turns complex challenges into clear, actionable strategies for your business.',
 ];

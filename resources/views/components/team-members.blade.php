@@ -13,7 +13,7 @@
     <div class="container">
         <!-- Section Header -->
         <div class="section-header text-center">
-            <h3>team members</h3>
+            <h3>{{ trans("site.team_members") }}</h3>
         </div>
         <!-- Section Header /- -->
         <!-- Row -->

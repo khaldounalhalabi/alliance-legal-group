@@ -6,6 +6,7 @@ use App\Enums\ContactUsContentKeyEnum;
 use App\Models\ContactPageContent;
 use App\Services\PageTitleResolver;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,18 +27,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        /** @var Collection<ContactPageContent>|ContactPageContent[] $data */
-        $data = cache()->remember(
-            ContactPageContent::CACHE_KEY,
-            now()->addYear(),
-            fn() => ContactPageContent::all(),
-        );
+        if (Schema::hasTable('cache') && Schema::hasTable('contact_page_contents')) {
+            /** @var Collection<ContactPageContent>|ContactPageContent[] $data */
+            $data = cache()->remember(
+                ContactPageContent::CACHE_KEY,
+                now()->addYear(),
+                fn() => ContactPageContent::all(),
+            );
 
-        $address = $data->firstWhere('key', ContactUsContentKeyEnum::ADDRESS->value);
-        $phone = $data->firstWhere('key', ContactUsContentKeyEnum::PHONE->value);
+            $address = $data->firstWhere('key', ContactUsContentKeyEnum::ADDRESS->value);
+            $phone = $data->firstWhere('key', ContactUsContentKeyEnum::PHONE->value);
 
-        View::share('address', $address);
-        View::share('phone', $phone);
+            View::share('address', $address);
+            View::share('phone', $phone);
+        }
 
         // Share the page title resolver with all views
         View::composer('*', function ($view) {

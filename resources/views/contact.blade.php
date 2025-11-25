@@ -4,14 +4,14 @@
     <div class="container-fluid no-left-padding no-right-padding page-banner">
         <!-- Container -->
         <div class="container">
-            <h3>Contact</h3>
+            <h3>{{ trans("site.contact_us") }}</h3>
             <ol class="breadcrumb">
                 <li>
                     <a href="{{ route("index") }}">
                         {{ trans("site.home") }}
                     </a>
                 </li>
-                <li class="active">{{ trans("site.contact") }}</li>
+                <li class="active">{{ trans("site.contact_us") }}</li>
             </ol>
         </div>
         <!-- Container /- -->

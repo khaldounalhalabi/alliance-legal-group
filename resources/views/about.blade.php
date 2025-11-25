@@ -4,7 +4,7 @@
     <div class="container-fluid no-left-padding no-right-padding page-banner">
         <!-- Container -->
         <div class="container">
-            <h3>ABOUT</h3>
+            <h3>{{ trans("site.about") }}</h3>
             <ol class="breadcrumb">
                 <li>
                     <a href="{{ route("index") }}">

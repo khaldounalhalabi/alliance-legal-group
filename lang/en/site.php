@@ -110,4 +110,5 @@ return [
     'achievements' => 'Achievements & Awards',
     'uk' => 'United Kingdom',
     'syria' => 'Syria',
+    'read_more' => 'Read More',
 ];

@@ -35,9 +35,9 @@
                                 </p>
                                 <a
                                     href="{{ route("categories.show", $category->id) }}"
-                                    title="Read More"
+                                    title="{{trans('site.read_more')}}"
                                 >
-                                    Read More
+                                    {{trans('site.read_more')}}
                                     <i class="arrow_right"></i>
                                 </a>
                             </div>

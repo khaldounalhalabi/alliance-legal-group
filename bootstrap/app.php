@@ -2,7 +2,6 @@
 
 use App\Http\Middleware\AcceptedLanguagesMiddleware;
 use App\Http\Middleware\Authenticate;
-use App\Http\Middleware\DashboardMiddleware;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -16,10 +15,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
         then: function () {
             Route::middleware(['web',])
-                ->group(base_path('routes\v1\web\public.php'));
+                ->group(base_path('routes/v1/web/public.php'));
 
             Route::middleware(['web', 'authenticated:web'])
-                ->group(base_path('routes\v1\web\protected.php'));
+                ->group(base_path('routes/v1/web/protected.php'));
         },
     )
     ->withMiddleware(function (Middleware $middleware): void {

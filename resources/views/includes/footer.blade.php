@@ -199,4 +199,39 @@
 <!-- Library - Theme JS -->
 <script src="{{ asset("assets/js/functions.js") }}"></script>
 
+<script type="module">
+    $(document).ready(function () {
+        $('#basic').flagStrap({
+            countries: {
+                GB: '{{ trans("site.uk") }}',
+                SY: '{{ trans("site.syria") }}',
+            },
+        });
+
+        $('#basic')
+            .find('select')
+            .change(function () {
+                const value = $(this).val();
+                let localeMap = {
+                    GB: 'en',
+                    SY: 'ar',
+                };
+
+                let selectedLocale = localeMap[value] || value.toLowerCase();
+
+                fetch('{{ route("set-locale") }}', {
+                    method: 'POST',
+                    body: JSON.stringify({ lang: selectedLocale }),
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                    },
+                }).then(() => {
+                    window.location.reload();
+                });
+            });
+    });
+</script>
+
 @stack("scripts")

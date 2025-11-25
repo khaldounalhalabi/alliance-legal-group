@@ -8,11 +8,11 @@ class SetLocaleController extends Controller
 {
     public function setLanguage(Request $request)
     {
-        $lang = $request->lang;
+        $request->validate([
+            'lang' => 'required|in:'.implode(',', config('cubeta-starter.available_locales')),
+        ]);
 
-        if (!in_array($lang, config('cubeta-starter.available_locales'))) {
-            return response()->json(['message' => 'failed'], 404);
-        }
+        $lang = $request->input('lang');
 
         session()->put('locale', $lang);
 

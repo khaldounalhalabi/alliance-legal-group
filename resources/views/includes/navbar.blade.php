@@ -1,3 +1,14 @@
+@php
+    function getCountryBasedOnLocale(): string
+    {
+        $locale = app()->getLocale();
+        return match ($locale) {
+            "ar" => "SY",
+            default => "GB",
+        };
+    }
+@endphp
+
 <!-- Header Section -->
 <header class="header_s header_s1">
     <!-- SidePanel -->
@@ -22,7 +33,11 @@
                 <div class="top-login">
                     <form class="lang-dropdown">
                         <div class="form-group">
-                            <div id="basic" data-input-name="country"></div>
+                            <div
+                                id="basic"
+                                data-selected-country="{{ getCountryBasedOnLocale() }}"
+                                data-input-name="country"
+                            ></div>
                         </div>
                     </form>
                 </div>

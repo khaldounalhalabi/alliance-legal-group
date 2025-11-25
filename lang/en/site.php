@@ -108,4 +108,6 @@ return [
     'professional_background' => 'Professional Background',
     'skills' => 'Skills & Expertise',
     'achievements' => 'Achievements & Awards',
+    'uk' => 'United Kingdom',
+    'syria' => 'Syria',
 ];

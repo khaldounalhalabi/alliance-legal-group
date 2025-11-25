@@ -8,7 +8,10 @@
 <!--[if IE 9]>
 <html class="ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
-<html lang="en">
+<html
+    lang="{{ app()->getLocale() }}"
+    dir="{{ app()->getLocale() == "ar" ? "rtl" : "ltr" }}"
+>
     <!--<![endif]-->
 
     @include("includes.header")

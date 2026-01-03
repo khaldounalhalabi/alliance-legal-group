@@ -106,6 +106,7 @@ class SiteController extends Controller
         $address = $data->firstWhere('key', ContactUsContentKeyEnum::ADDRESS->value);
         $email = $data->firstWhere('key', ContactUsContentKeyEnum::EMAIL->value);
         $phone = $data->firstWhere('key', ContactUsContentKeyEnum::PHONE->value);
+        $whatsapp = $data->firstWhere('key', ContactUsContentKeyEnum::WHATSAPP->value);
         $lng = $data->firstWhere('key', ContactUsContentKeyEnum::LOCATION_LNG->value);
         $lat = $data->firstWhere('key', ContactUsContentKeyEnum::LOCATION_LAT->value);
 
@@ -115,6 +116,7 @@ class SiteController extends Controller
             'phone',
             'lng',
             'lat',
+            'whatsapp'
         ));
     }
 

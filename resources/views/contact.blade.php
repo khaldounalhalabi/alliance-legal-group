@@ -140,6 +140,17 @@
                             </a>
                         </p>
                     </div>
+                    <div class="contact-detail-box">
+                        <h4>{{ trans("site.whatsapp") }}:</h4>
+                        <p>
+                            <a
+                                href="https://wa.me/{{ str($whatsapp->value)->remove("+")->remove(" ") }}"
+                                target="_blank"
+                            >
+                                {{ $phone->value }}
+                            </a>
+                        </p>
+                    </div>
                 </div>
             </div>
             <div class="col-md-8 col-xs-6 contact-form">

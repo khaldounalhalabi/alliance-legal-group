@@ -116,4 +116,5 @@ return [
     'portal_notice' => 'We are currently upgrading our client portal to provide you with a more secure and seamless experience. This feature will be available shortly.',
     'need_immediate_help' => 'Need immediate access to your file?',
     'contact_portal_support' => 'Please reach out to your dedicated case handler or contact our main office for assistance.',
+    'whatsapp' => 'Whatsapp',
 ];

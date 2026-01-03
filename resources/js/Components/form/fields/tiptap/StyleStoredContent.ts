@@ -1,11 +1,4 @@
 const selectors = `.tiptap-content-viewer {
-blockquote {
-        border-left: 3px solid var(--primary);
-        margin: 1.5rem 0;
-        padding-left: 1rem;
-    }
-
-
     /* Code and preformatted text styles */
 
     code {
@@ -14,19 +7,6 @@ blockquote {
         color: var(--primary);
         font-size: 0.85rem;
         padding: 0.25em 0.3em;
-    }
-
-    /* Link styles */
-
-    a {
-        color: var(--color-blue-300);
-        cursor: pointer;
-        text-underline: var(--color-blue-300);
-        text-underline-mode: auto;
-
-        &:hover {
-            color: var(--color-blue-500);
-        }
     }
 
     /* Image styles */
@@ -63,43 +43,6 @@ blockquote {
         list-style-type: decimal;
     }
 
-
-    /* Heading styles */
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        line-height: 1.1;
-        margin-top: 2.5rem;
-        text-wrap: pretty;
-    }
-
-    h1,
-    h2 {
-        margin-top: 3.5rem;
-        margin-bottom: 1.5rem;
-    }
-
-    h1 {
-        font-size: 1.4rem;
-    }
-
-    h2 {
-        font-size: 1.2rem;
-    }
-
-    h3 {
-        font-size: 1.1rem;
-    }
-
-    h4,
-    h5,
-    h6 {
-        font-size: 1rem;
-    }
 
     /** Horizontal rule */
 

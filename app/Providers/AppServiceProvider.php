@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(PageTitleResolver::class, function ($app) {
-            return new PageTitleResolver();
+            return new PageTitleResolver;
         });
     }
 
@@ -32,14 +32,16 @@ class AppServiceProvider extends ServiceProvider
             $data = cache()->remember(
                 ContactPageContent::CACHE_KEY,
                 now()->addYear(),
-                fn() => ContactPageContent::all(),
+                fn () => ContactPageContent::all(),
             );
 
             $address = $data->firstWhere('key', ContactUsContentKeyEnum::ADDRESS->value);
             $phone = $data->firstWhere('key', ContactUsContentKeyEnum::PHONE->value);
+            $email = $data->firstWhere('key', ContactUsContentKeyEnum::EMAIL->value);
 
             View::share('address', $address);
             View::share('phone', $phone);
+            View::share('email', $email);
         }
 
         // Share the page title resolver with all views

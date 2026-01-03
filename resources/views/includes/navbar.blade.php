@@ -25,6 +25,13 @@
                         {{ $address->value }}
                     </p>
                     <p>
+                        <i class="fa fa-envelope"></i>
+                        {{ trans("site.email") }}:
+                        <a href="mailto:{{ $email->value }}">
+                            {{ $email->value }}
+                        </a>
+                    </p>
+                    <p>
                         <i class="fa fa-phone"></i>
                         {{ trans("site.mobile") }}:
                         <a href="tel:+4401612601985">{{ $phone->value }}</a>

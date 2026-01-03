@@ -37,8 +37,8 @@ const Index = () => {
                     sortable: true,
                 },
                 { name: "name", label: "Name", sortable: true },
+                { name: "email", label: "Email", sortable: true },
                 { name: "phone", label: "Phone", sortable: true },
-                { name: "address", label: "Address", sortable: true },
                 {
                     label: "Options",
                     render: (_data, record, setHidden, revalidate) => (

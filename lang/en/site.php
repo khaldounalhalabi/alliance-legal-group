@@ -95,6 +95,7 @@ return [
         'lebanon' => 'Lebanon, Beirut',
         'saudi_arabia' => 'Kingdom of Saudi Arabia',
     ],
+    'enter_your_name' => 'Enter your full name',
     'enter_your_email' => 'Enter your email',
     'enter_your_address' => 'Enter your address',
     'services_under_this_category' => 'Services Under This Category',

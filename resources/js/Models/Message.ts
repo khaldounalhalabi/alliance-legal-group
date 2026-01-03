@@ -2,8 +2,8 @@ interface Message {
     id: number;
     name: string;
     phone: string;
-    address: string;
     message: string;
+    email: string;
 }
 
 export default Message;

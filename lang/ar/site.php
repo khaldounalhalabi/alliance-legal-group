@@ -94,6 +94,7 @@ return [
         'lebanon' => 'لبنان، بيروت',
         'saudi_arabia' => 'المملكة العربية السعودية',
     ],
+    'enter_your_name' => 'أدخل اسمك',
     'enter_your_email' => 'أدخل بريدك الإلكتروني',
     'enter_your_address' => 'أدخل عنوانك',
     'services_under_this_category' => 'الخدمات ضمن هذا التصنيف',

@@ -19,8 +19,8 @@ class MessageResource extends BaseResource
             'id' => $this->id,
             'name' => $this->name,
             'phone' => $this->phone,
-            'address' => $this->address,
             'message' => $this->message,
+            'email' => $this->email,
         ];
     }
 }

@@ -22,8 +22,8 @@ class StoreMessageRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255', 'min:3'],
             'phone' => ['required', 'string', 'max:255', 'min:3', 'phone:INTERNATIONAL'],
-            'address' => ['required', 'string', 'max:255', 'min:3'],
             'message' => ['required', 'max:5000', 'min:0'],
+            'email' => ['required', 'email', 'string', 'min:3', 'max:255'],
         ];
     }
 }

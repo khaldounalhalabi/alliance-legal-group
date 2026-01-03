@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int    $id
+ * @property int $id
  * @property string $name
  * @property string $phone
  * @property string $address
  * @property string $message
+ * @property string $email
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @mixin Builder<Message>
@@ -26,9 +27,8 @@ class Message extends Model
     protected $fillable = [
         'name',
         'phone',
-        'address',
         'message',
-
+        'email',
     ];
 
     public static function searchableArray(): array
@@ -38,7 +38,7 @@ class Message extends Model
             'phone',
             'address',
             'message',
-
+            'email',
         ];
     }
 
@@ -56,7 +56,7 @@ class Message extends Model
             'phone',
             'address',
             'message',
-
+            'email'
         ];
     }
 

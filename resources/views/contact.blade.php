@@ -107,16 +107,32 @@
                         <input
                             type="text"
                             class="form-control"
-                            placeholder="{{ trans("site.enter_your_email") }}"
+                            placeholder="{{ trans("site.enter_your_name") }}"
                             name="name"
                             id="input_name"
                             required
                             value="{{ old("name") }}"
                         />
                         @error("name")
-                            <div class="invalid-feedback text-danger">
-                                {{ $message }}
-                            </div>
+                        <div class="invalid-feedback text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="{{ trans("site.enter_your_email") }}"
+                            name="email"
+                            value="{{ old("email") }}"
+                            id="input_email"
+                            required
+                        />
+                        @error("email")
+                        <div class="invalid-feedback text-danger">
+                            {{ $message }}
+                        </div>
                         @enderror
                     </div>
                     <div class="form-group">
@@ -130,25 +146,9 @@
                             required
                         />
                         @error("phone")
-                            <div class="invalid-feedback text-danger">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <input
-                            type="text"
-                            class="form-control"
-                            placeholder="{{ trans("site.enter_your_address") }}"
-                            name="address"
-                            value="{{ old("address") }}"
-                            id="input_address"
-                            required
-                        />
-                        @error("address")
-                            <div class="invalid-feedback text-danger">
-                                {{ $message }}
-                            </div>
+                        <div class="invalid-feedback text-danger">
+                            {{ $message }}
+                        </div>
                         @enderror
                     </div>
                     <div class="form-group">
@@ -161,9 +161,9 @@
                             {{ trim(old("message")) }}
                         </textarea>
                         @error("message")
-                            <div class="invalid-feedback text-danger">
-                                {{ $message }}
-                            </div>
+                        <div class="invalid-feedback text-danger">
+                            {{ $message }}
+                        </div>
                         @enderror
                     </div>
                     @if (session()->has("success"))

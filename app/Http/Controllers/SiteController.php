@@ -10,10 +10,10 @@ use App\Models\BlogPost;
 use App\Models\Category;
 use App\Models\ContactPageContent;
 use App\Models\FrequentlyAskedQuestion;
-use App\Models\Message;
 use App\Models\Service;
 use App\Models\TeamMember;
 use App\Models\Testimonial;
+use App\Services\v1\Message\MessageService;
 use Illuminate\Database\Eloquent\Collection;
 
 class SiteController extends Controller
@@ -21,33 +21,33 @@ class SiteController extends Controller
     public function index()
     {
         /** @var Collection<AboutUsContent> $about */
-        $about = cache()->remember(AboutUsContent::CACHE_KEY, now()->addYear(), fn() => AboutUsContent::all());
+        $about = cache()->remember(AboutUsContent::CACHE_KEY, now()->addYear(), fn () => AboutUsContent::all());
         $ourHistory = $about->firstWhere('type', AboutUsKeyEnum::OUR_VISION->value);
         $ourMission = $about->firstWhere('type', AboutUsKeyEnum::OUR_MISSION->value);
         $ourVision = $about->firstWhere('type', AboutUsKeyEnum::OUR_VISION->value);
 
         /** @var Collection<TeamMember> $teamMembers */
-        $teamMembers = cache()->remember(TeamMember::CACHE_KEY, now()->addYear(), fn() => TeamMember::all());
+        $teamMembers = cache()->remember(TeamMember::CACHE_KEY, now()->addYear(), fn () => TeamMember::all());
 
         /** @var Collection<Testimonial> $testimonials */
-        $testimonials = cache()->remember(Testimonial::CACHE_KEY, now()->addYear(), fn() => Testimonial::all());
+        $testimonials = cache()->remember(Testimonial::CACHE_KEY, now()->addYear(), fn () => Testimonial::all());
 
         /** @var Collection<Service> $services */
-        $services = cache()->remember("services_slider", now()->addMinutes(5),
-            fn() => Service::inRandomOrder()->limit(5)->get());
+        $services = cache()->remember('services_slider', now()->addMinutes(5),
+            fn () => Service::inRandomOrder()->limit(5)->get());
 
         /**
          * @var Collection<Category>|Category[] $categories
          */
-        $categories = cache()->remember(Category::CACHE_KEY, now()->addYear(), fn() => Category::all());
+        $categories = cache()->remember(Category::CACHE_KEY, now()->addYear(), fn () => Category::all());
 
         /** @var Collection<FrequentlyAskedQuestion>|FrequentlyAskedQuestion[] $faqs */
-        $faqs = cache()->remember("faqs_slider", now()->addMinutes(5),
-            fn() => FrequentlyAskedQuestion::inRandomOrder()->limit(4)->get());
+        $faqs = cache()->remember('faqs_slider', now()->addMinutes(5),
+            fn () => FrequentlyAskedQuestion::inRandomOrder()->limit(4)->get());
 
         /** @var Collection<BlogPost>|BlogPost[] $latestPosts */
-        $latestPosts = cache()->remember("latest_posts", now()->addMinutes(5),
-            fn() => BlogPost::orderBy('created_at', 'desc')->limit(3)->get());
+        $latestPosts = cache()->remember('latest_posts', now()->addMinutes(5),
+            fn () => BlogPost::orderBy('created_at', 'desc')->limit(3)->get());
 
         return view('index', compact(
             'ourHistory',
@@ -65,13 +65,13 @@ class SiteController extends Controller
     public function about()
     {
         /** @var Collection<TeamMember> $teamMembers */
-        $teamMembers = cache()->remember(TeamMember::CACHE_KEY, now()->addYear(), fn() => TeamMember::all());
+        $teamMembers = cache()->remember(TeamMember::CACHE_KEY, now()->addYear(), fn () => TeamMember::all());
 
         /** @var Collection<Testimonial> $testimonials */
-        $testimonials = cache()->remember(Testimonial::CACHE_KEY, now()->addYear(), fn() => Testimonial::all());
+        $testimonials = cache()->remember(Testimonial::CACHE_KEY, now()->addYear(), fn () => Testimonial::all());
 
         /** @var Collection<AboutUsContent> $about */
-        $about = cache()->remember(AboutUsContent::CACHE_KEY, now()->addYear(), fn() => AboutUsContent::all());
+        $about = cache()->remember(AboutUsContent::CACHE_KEY, now()->addYear(), fn () => AboutUsContent::all());
 
         $aboutUs = $about->firstWhere('type', AboutUsKeyEnum::ABOUT_US->value);
         $whyUs = $about->firstWhere('type', AboutUsKeyEnum::WHY_CHOSE_US->value);
@@ -87,7 +87,8 @@ class SiteController extends Controller
     public function sendMessage(StoreMessageRequest $request)
     {
         $data = $request->validated();
-        Message::create($data);
+        MessageService::make()->store($data);
+
         return redirect()
             ->back()
             ->with('success', trans('site.success'));
@@ -99,7 +100,7 @@ class SiteController extends Controller
         $data = cache()->remember(
             ContactPageContent::CACHE_KEY,
             now()->addYear(),
-            fn() => ContactPageContent::all(),
+            fn () => ContactPageContent::all(),
         );
 
         $address = $data->firstWhere('key', ContactUsContentKeyEnum::ADDRESS->value);
@@ -121,7 +122,7 @@ class SiteController extends Controller
     {
         $category = Category::with('services')->find($categoryId);
 
-        if (!$category) {
+        if (! $category) {
             abort(404);
         }
 
@@ -139,10 +140,10 @@ class SiteController extends Controller
     {
         $service = Service::with([
             'category',
-            'category.services' => fn($query) => $query->where('id', '!=', $serviceId),
+            'category.services' => fn ($query) => $query->where('id', '!=', $serviceId),
         ])->find($serviceId);
 
-        if (!$service) {
+        if (! $service) {
             abort(404);
         }
 
@@ -159,12 +160,12 @@ class SiteController extends Controller
     public function showBlogPost($blogPostId)
     {
         /** @var Collection<BlogPost>|BlogPost[] $latestPosts */
-        $latestPosts = cache()->remember("latest_posts", now()->addMinutes(5),
-            fn() => BlogPost::orderBy('created_at', 'desc')->limit(3)->get());
+        $latestPosts = cache()->remember('latest_posts', now()->addMinutes(5),
+            fn () => BlogPost::orderBy('created_at', 'desc')->limit(3)->get());
 
         $post = BlogPost::find($blogPostId);
 
-        if (!$post) {
+        if (! $post) {
             abort(404);
         }
 
@@ -174,6 +175,7 @@ class SiteController extends Controller
     public function faqs()
     {
         $faqs = FrequentlyAskedQuestion::all();
+
         return view('faqs.index', compact('faqs'));
     }
 
@@ -181,7 +183,7 @@ class SiteController extends Controller
     {
         $teamMember = TeamMember::find($teamMemberId);
 
-        if (!$teamMember) {
+        if (! $teamMember) {
             abort(404);
         }
 

@@ -50,8 +50,8 @@ class MessageController extends WebController
         return rest()
             ->when(
                 $result,
-                fn($rest) => $rest->ok()->deleteSuccess(),
-                fn($rest) => $rest->noData(),
+                fn ($rest) => $rest->ok()->deleteSuccess(),
+                fn ($rest) => $rest->noData(),
             )->send();
     }
 }

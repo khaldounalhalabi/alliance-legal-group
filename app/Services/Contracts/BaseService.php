@@ -45,16 +45,25 @@ abstract class BaseService
         return $this->repository->allWithPagination($relations, $per_page);
     }
 
+    /**
+     * @return MODEL
+     */
     public function store(array $data, array $relationships = []): Model
     {
         return $this->repository->create($data, $relationships);
     }
 
+    /**
+     * @return MODEL|null
+     */
     public function update(array $data, $id, array $relationships = []): ?Model
     {
         return $this->repository->update($data, $id, $relationships);
     }
 
+    /**
+     * @return MODEL|null
+     */
     public function view($id, array $relationships = []): ?Model
     {
         return $this->repository->find($id, $relationships);

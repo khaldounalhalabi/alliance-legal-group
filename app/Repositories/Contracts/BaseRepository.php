@@ -19,8 +19,10 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
  */
 abstract class BaseRepository
 {
-    private static $instance;
+    private static BaseRepository $instance;
+
     protected string $modelClass = Model::class;
+
     protected Model $model;
 
     private array $modelTableColumns;
@@ -62,7 +64,7 @@ abstract class BaseRepository
     {
         if (is_null(self::$instance)) {
             self::$instance = new static;
-        } elseif (!(self::$instance instanceof static)) {
+        } elseif (! (self::$instance instanceof static)) {
             self::$instance = new static;
         }
 
@@ -80,7 +82,7 @@ abstract class BaseRepository
     /**
      * @return Builder|MODEL
      */
-    public function globalQuery(array $relations = []): Builder
+    public function globalQuery(array $relations = []): Builder|Model
     {
         $query = $this->model->with($relations);
 
@@ -98,10 +100,11 @@ abstract class BaseRepository
     }
 
     /**
-     * this function implement already defined filters in the model
+     * this function implements already defined filters in the model
+     *
      * @return Builder|MODEL
      */
-    private function filterFields(Builder $query): Builder
+    private function filterFields(Builder $query): Builder|Model
     {
         foreach ($this->filterKeys as $filterFields) {
             $field = $filterFields['field'] ?? $filterFields['name'];
@@ -116,7 +119,7 @@ abstract class BaseRepository
                 $value = array_values($value);
             }
 
-            if (!$value) {
+            if (! $value) {
                 continue;
             }
 
@@ -156,7 +159,7 @@ abstract class BaseRepository
 
     protected function unsetEmptyParams(string|array|null $param = null): string|array|null
     {
-        if (!$param) {
+        if (! $param) {
             return null;
         }
         if (is_array($param)) {
@@ -176,15 +179,14 @@ abstract class BaseRepository
 
     /**
      * @param  mixed  $value
-     *
      * @return Builder|MODEL
      */
-    private function handleRangeQuery(array $value, Builder $query, string $table, string $column): Builder
+    private function handleRangeQuery(array $value, Builder $query, string $table, string $column): Builder|Model
     {
         if (count($value) == 2) {
-            if (!isset($value[0]) && isset($value[1])) {
+            if (! isset($value[0]) && isset($value[1])) {
                 $query = $query->where("$table.$column", '<=', $value[1]);
-            } elseif (isset($value[0]) && !isset($value[1])) {
+            } elseif (isset($value[0]) && ! isset($value[1])) {
                 $query->where("$table.$column", '>=', $value[0]);
             } elseif (isset($value[0]) && isset($value[1])) {
                 $query = $query
@@ -205,15 +207,15 @@ abstract class BaseRepository
 
             if (count($this->searchableKeys) > 0) {
                 foreach ($this->searchableKeys as $search_attribute) {
-                    $query->orWhere($search_attribute, 'LIKE', "%{$keyword}%");
+                    $query->orWhere($search_attribute, 'LIKE', "%$keyword%");
                 }
             }
 
             if (count($this->relationSearchableKeys) > 0) {
                 foreach ($this->relationSearchableKeys as $relation => $values) {
-                    foreach ($values as $key => $search_attribute) {
+                    foreach ($values as $search_attribute) {
                         $query->orWhereHas($relation, function ($q) use ($keyword, $search_attribute) {
-                            $q->where($search_attribute, 'LIKE', "%{$keyword}%");
+                            $q->where($search_attribute, 'LIKE', "%$keyword%");
                         });
                     }
                 }
@@ -257,6 +259,9 @@ abstract class BaseRepository
         return $this->globalQuery($relationships)->paginate($per_page);
     }
 
+    /**
+     * @return MODEL
+     */
     public function create(array $data, array $relationships = []): Model
     {
         $result = $this->model->create($data);
@@ -276,6 +281,9 @@ abstract class BaseRepository
         return $result?->delete();
     }
 
+    /**
+     * @return MODEL|null
+     */
     public function find($id, array $relationships = []): ?Model
     {
         $result = $this->model->with($relationships)->find($id);
@@ -289,7 +297,6 @@ abstract class BaseRepository
 
     /**
      * @param  string|int|Model|MODEL  $id
-     *
      * @return MODEL|null|Model
      */
     public function update(array $data, string|int|Model $id, array $relationships = []): ?Model
@@ -300,7 +307,7 @@ abstract class BaseRepository
             $item = $this->modelClass::find($id);
         }
 
-        if (!$item) {
+        if (! $item) {
             return null;
         }
 
@@ -314,7 +321,7 @@ abstract class BaseRepository
      */
     public function export(array $ids = []): BinaryFileResponse
     {
-        if (!count($ids)) {
+        if (! count($ids)) {
             $collection = $this->globalQuery()->get();
         } else {
             $collection = $this->globalQuery()->whereIn('id', $ids)->get();

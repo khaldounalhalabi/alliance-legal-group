@@ -1824,12 +1824,17 @@ footer .bottom-footer .ownavigation.navbar .navbar-nav > li > a:hover {
 .testimonial-box {
     max-width: 197px;
     display: block;
-    margin: 0 auto;
     padding-bottom: 28px;
     text-align: center;
     position: relative;
-    margin-bottom: 50px;
+    margin: 0 auto 50px;
     z-index: 1;
+}
+
+@media (min-width: 768px) {
+    .testimonial-box {
+        max-width: 250px;
+    }
 }
 
 .testimonial-box::before {
@@ -1850,10 +1855,6 @@ footer .bottom-footer .ownavigation.navbar .navbar-nav > li > a:hover {
     bottom: 0;
     display: inline-block;
     z-index: -1
-}
-
-.testimonial-box > i img {
-    border-radius: 50%;
 }
 
 .testimonial-box > h4 {

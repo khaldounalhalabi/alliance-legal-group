@@ -32,13 +32,7 @@
                         >
                             <div class="testimonial-content">
                                 <div class="testimonial-box">
-                                    <i>
-                                        <img
-                                            src="{{ $testimonial->customer_image?->url ?? asset("assets/images/profile.jpg") }}"
-                                            alt="Testi"
-                                            style="width: 6rem"
-                                        />
-                                    </i>
+                                    <div style="height: 50px; background: transparent"></div>
                                     <h4>{{ $testimonial->customer_name }}</h4>
                                     <span>
                                         {{ $testimonial->customer_position }}

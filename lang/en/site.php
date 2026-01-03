@@ -37,7 +37,6 @@ return [
     'something_went_wrong' => 'Some thing went wong process failed',
     'server_error' => "Sorry we can't handle your request we have faced a problem",
 
-
     /** content */
     'profound_international_expertise' => 'Profound international expertise',
     'profound_international_expertise_description' => 'Profound international expertise built on years of advising clients across jurisdictions, industries, and regulatory systems.',
@@ -67,7 +66,7 @@ return [
     'contact' => 'Contact',
     'blog' => 'Blog',
     'quick_links' => 'Quick Links',
-    'licence' => <<<TEXT
+    'licence' => <<<'TEXT'
                      Alliance Legal Group Ltd is a company incorporated in
                      England and Wales under Company No. 14034382. Authorised
                      and regulated by the Solicitors Regulation Authority
@@ -112,4 +111,9 @@ return [
     'uk' => 'United Kingdom',
     'syria' => 'Syria',
     'read_more' => 'Read More',
+    'client_portal' => 'Client Portal',
+    'portal_under_construction' => 'Portal Under Construction',
+    'portal_notice' => 'We are currently upgrading our client portal to provide you with a more secure and seamless experience. This feature will be available shortly.',
+    'need_immediate_help' => 'Need immediate access to your file?',
+    'contact_portal_support' => 'Please reach out to your dedicated case handler or contact our main office for assistance.',
 ];

@@ -113,8 +113,11 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route("blog.posts") }}" title="Blog">
-                            {{ trans("site.blog") }}
+                        <a
+                            href="{{ route("client.portal") }}"
+                            title="Client Portal"
+                        >
+                            {{ trans("site.client_portal") }}
                         </a>
                     </li>
                     <li>

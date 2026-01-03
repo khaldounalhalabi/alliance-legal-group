@@ -22,8 +22,11 @@ class SiteController extends Controller
     {
         /** @var Collection<AboutUsContent> $about */
         $about = cache()->remember(AboutUsContent::CACHE_KEY, now()->addYear(), fn () => AboutUsContent::all());
+        /** @var AboutUsContent $ourHistory */
         $ourHistory = $about->firstWhere('type', AboutUsKeyEnum::OUR_VISION->value);
+        /** @var AboutUsContent $ourMission */
         $ourMission = $about->firstWhere('type', AboutUsKeyEnum::OUR_MISSION->value);
+        /** @var AboutUsContent $ourVision */
         $ourVision = $about->firstWhere('type', AboutUsKeyEnum::OUR_VISION->value);
 
         /** @var Collection<TeamMember> $teamMembers */

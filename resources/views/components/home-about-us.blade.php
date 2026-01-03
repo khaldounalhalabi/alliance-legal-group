@@ -1,8 +1,16 @@
 @props([
-    /**@var\null*/"ourHistory",
-    /**@var\null*/"ourMission",
-    /**@var\null*/"ourVision",
+    "ourHistory",
+    "ourMission",
+    "ourVision",
 ])
+
+@php
+    use App\Models\AboutUsContent;
+
+    /** @var AboutUsContent $ourHistory */
+    /** @var AboutUsContent $ourMission */
+    /** @var AboutUsContent $ourVision */
+@endphp
 
 <div
     {{ $attributes->class(["container-fluid no-left-padding no-right-padding about-section d-flex flex-column align-items-center"]) }}

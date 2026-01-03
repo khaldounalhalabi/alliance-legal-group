@@ -13,11 +13,12 @@ use Illuminate\Validation\ValidationException;
 class MediaCast implements CastsAttributes
 {
     public bool $withoutObjectCaching = true;
+
     private readonly bool $private;
 
-    public function __construct(string $privateOrPublic = "public")
+    public function __construct(string $privateOrPublic = 'public')
     {
-        $this->private = $privateOrPublic == "private";
+        $this->private = $privateOrPublic == 'private';
     }
 
     public static function deleteFiles(array $media): void
@@ -45,7 +46,7 @@ class MediaCast implements CastsAttributes
     /**
      * Cast the given value.
      *
-     * @param  array<string, mixed>  $attributes
+     * @param array<string, mixed> $attributes
      *
      * @throws Exception
      */
@@ -57,15 +58,16 @@ class MediaCast implements CastsAttributes
 
         $data = json_decode($value, true);
 
-        if (!is_array($data)) {
+        if (! is_array($data)) {
             throw new Exception("Invalid stored data in the media column [$key] , table : {$model->getTable()}");
         }
 
         if (SerializedMedia::isMediaArray($data)) {
             $file = new SerializedMedia($data, $model->getTable(), $this->private);
-            if (!$file->exists()) {
+            if (! $file->exists()) {
                 return null;
             }
+
             return $file;
         }
 
@@ -73,9 +75,10 @@ class MediaCast implements CastsAttributes
             array_values(
                 array_map(function (array $item) use ($model) {
                     $file = new SerializedMedia($item, $model->getTable(), $this->private);
-                    if (!$file->exists()) {
+                    if (! $file->exists()) {
                         return null;
                     }
+
                     return $file;
                 }, $data,
                 ),
@@ -86,7 +89,7 @@ class MediaCast implements CastsAttributes
     /**
      * Prepare the given value for storage.
      *
-     * @param  array<string, mixed>  $attributes
+     * @param array<string, mixed> $attributes
      *
      * @throws Exception
      */
@@ -94,6 +97,7 @@ class MediaCast implements CastsAttributes
     {
         if (is_null($value)) {
             $model->{$key}?->delete();
+
             return null;
         }
 
@@ -102,7 +106,7 @@ class MediaCast implements CastsAttributes
         }
 
         if ($value instanceof SerializedMedia) {
-            if (!$value->exists()) {
+            if (! $value->exists()) {
                 return null;
             }
 
@@ -111,21 +115,23 @@ class MediaCast implements CastsAttributes
 
         if ($value instanceof UploadedFile) {
             $file = new SerializedMedia($value, $model->getTable(), $this->private);
-            if (!$file->exists()) {
+            if (! $file->exists()) {
                 return null;
             }
+
             return $file->toJson();
         }
 
         if (is_array($value) && SerializedMedia::isMediaArray($value)) {
             $file = new SerializedMedia($value, $model->getTable(), $this->private);
-            if (!$file->exists()) {
+            if (! $file->exists()) {
                 return null;
             }
+
             return $file->toJson();
         }
 
-        if (!is_array($value)) {
+        if (! is_array($value)) {
             throw ValidationException::withMessages([
                 $key => [
                     "Invalid stored data in the media column [$key]",
@@ -137,7 +143,7 @@ class MediaCast implements CastsAttributes
         foreach ($value as $item) {
             if (SerializedMedia::isMediaArray($item) || $item instanceof UploadedFile) {
                 $file = new SerializedMedia($item, $model->getTable(), $this->private);
-                if (!$file->exists()) {
+                if (! $file->exists()) {
                     $stored[] = $file->toArray();
                 }
             } elseif ($item instanceof SerializedMedia) {

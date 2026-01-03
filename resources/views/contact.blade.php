@@ -74,8 +74,8 @@
                     id="contact-map-canvas"
                     data-lat="{{ $lat?->value }}"
                     data-lng="{{ $lng?->value }}"
-                    data-pin="assets/images/marker-2.png"
-                    data-string="5 Union Street, Ardwick, Manchester, M12 4JD"
+                    data-pin="{{ asset("/assets/images/marker-2.png") }}"
+                    data-string="{{ $address->value }}"
                     data-zoom="10"
                 ></div>
             </div>
@@ -83,46 +83,7 @@
             <div class="clearfix"></div>
             <div class="col-md-4 col-xs-6 contact-content">
                 <div class="contact-details">
-                    <h3>{{ trans("site.contact_us") }}</h3>
-                    <div class="contact-detail-box">
-                        <h4>{{ trans("site.address") }}:</h4>
-                        <p>{{ $address?->value }}</p>
-                    </div>
-
-                    <div class="contact-detail-box">
-                        <h4>
-                            {{ trans("site.office", ["office_number" => 1]) }}
-                        </h4>
-                        <p>{{ trans("site.branch_address.dubai") }}</p>
-                    </div>
-
-                    <div class="contact-detail-box">
-                        <h4>
-                            {{ trans("site.office", ["office_number" => 2]) }}
-                        </h4>
-                        <p>{{ trans("site.branch_address.qatar") }}</p>
-                    </div>
-
-                    <div class="contact-detail-box">
-                        <h4>
-                            {{ trans("site.office", ["office_number" => 3]) }}
-                        </h4>
-                        <p>{{ trans("site.branch_address.ireland") }}</p>
-                    </div>
-
-                    <div class="contact-detail-box">
-                        <h4>
-                            {{ trans("site.office", ["office_number" => 4]) }}
-                        </h4>
-                        <p>{{ trans("site.branch_address.lebanon") }}</p>
-                    </div>
-
-                    <div class="contact-detail-box">
-                        <h4>
-                            {{ trans("site.office", ["office_number" => 5]) }}
-                        </h4>
-                        <p>{{ trans("site.branch_address.saudi_arabia") }}</p>
-                    </div>
+                    <h3>{{ trans("site.contact_information") }}</h3>
 
                     <div class="contact-detail-box">
                         <h4>{{ trans("site.email") }}</h4>
@@ -246,6 +207,7 @@
                     <div id="alert-msg" class="alert-msg"></div>
                 </form>
             </div>
+            <x-addresses-grid :addresses="$addresses"/>
         </div>
         <!-- Container -->
     </main>

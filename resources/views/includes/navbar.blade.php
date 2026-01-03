@@ -22,19 +22,26 @@
                 <div class="top-left">
                     <p>
                         <i class="fa fa-map-marker"></i>
-                        {{ $address->value }}
+                        <a
+                            href="{{ "https://www.google.com/maps/@{$lat->value},{$lng->value},15z" }}"
+                            target="_blank"
+                        >
+                            {{ $address->value }}
+                        </a>
                     </p>
                     <p>
                         <i class="fa fa-envelope"></i>
                         {{ trans("site.email") }}:
-                        <a href="mailto:{{ $email->value }}">
+                        <a href="mailto:{{ $email->value }}" target="_blank">
                             {{ $email->value }}
                         </a>
                     </p>
                     <p>
                         <i class="fa fa-phone"></i>
                         {{ trans("site.mobile") }}:
-                        <a href="tel:+4401612601985">{{ $phone->value }}</a>
+                        <a href="tel:+4401612601985" target="_blank">
+                            {{ $phone->value }}
+                        </a>
                     </p>
                 </div>
                 <div class="top-login">

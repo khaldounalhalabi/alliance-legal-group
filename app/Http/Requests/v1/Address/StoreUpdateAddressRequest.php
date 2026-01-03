@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\v1\Category;
+namespace App\Http\Requests\v1\Address;
 
 use App\Rules\ValidTranslatableJson;
 use App\Serializers\SerializedMedia;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreUpdateCategoryRequest extends FormRequest
+class StoreUpdateAddressRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,15 +23,16 @@ class StoreUpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'           => ['json', new ValidTranslatableJson(['string', 'max:75', 'min:3']), 'required'],
-            'cover_sentence' => ['json', new ValidTranslatableJson(['string', 'max:75', 'min:3']), 'required'],
-            'description'    => ['json', new ValidTranslatableJson(['string']), 'required'],
-            'cover'          => [
+            'country'  => ['json', new ValidTranslatableJson, 'required'],
+            'city'     => ['json', new ValidTranslatableJson, 'required'],
+            'address'  => ['json', new ValidTranslatableJson, 'required'],
+            'map_link' => ['required', 'max:5000', 'min:0', 'url'],
+            'image'    => [
                 'required',
-                Rule::when(is_array($this->input('cover')), [
+                Rule::when(is_array($this->input('image')), [
                     SerializedMedia::validator(),
                 ]),
-                Rule::when($this->hasFile('cover'), [
+                Rule::when($this->hasFile('image'), [
                     'image:allow_svg',
                     'max:10000',
                     'mimes:jpeg,png,jpg,gif,svg,webp',

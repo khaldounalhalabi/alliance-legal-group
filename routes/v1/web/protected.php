@@ -64,3 +64,6 @@ Route::get('/v1/frequently-asked-questions/data',
     [v1\FrequentlyAskedQuestionController::class, 'data'])->name('v1.web.protected.frequently.asked.questions.data');
 Route::resource('/v1/frequently-asked-questions',
     v1\FrequentlyAskedQuestionController::class)->names('v1.web.protected.frequently.asked.questions');
+
+Route::get('/v1/addresses/data', [v1\AddressController::class, 'data'])->name('v1.web.protected.addresses.data');
+Route::resource('/v1/addresses', v1\AddressController::class)->names('v1.web.protected.addresses');

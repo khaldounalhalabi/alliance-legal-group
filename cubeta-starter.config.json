@@ -270,6 +270,44 @@
             ],
             "relations": [],
             "version": "v1"
+        },
+        {
+            "model_name": "Address",
+            "table_name": "addresses",
+            "attributes": [
+                {
+                    "name": "country",
+                    "type": "translatable",
+                    "nullable": false,
+                    "unique": false
+                },
+                {
+                    "name": "city",
+                    "type": "translatable",
+                    "nullable": false,
+                    "unique": false
+                },
+                {
+                    "name": "address",
+                    "type": "translatable",
+                    "nullable": false,
+                    "unique": false
+                },
+                {
+                    "name": "map_link",
+                    "type": "text",
+                    "nullable": false,
+                    "unique": false
+                },
+                {
+                    "name": "image",
+                    "type": "file",
+                    "nullable": false,
+                    "unique": false
+                }
+            ],
+            "relations": [],
+            "version": "v1"
         }
     ]
 }

@@ -23,7 +23,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property Category|null                                                   $category
  * @property Carbon                                                          $created_at
  * @property Carbon                                                          $updated_at
+ *
  * @mixin Builder<Service>
+ *
  * @use  HasFactory<ServiceFactory>
  */
 class Service extends Model
@@ -70,7 +72,7 @@ class Service extends Model
     }
 
     /**
-     * @return  BelongsTo<Category, static>
+     * @return BelongsTo<Category, static>
      */
     public function category(): BelongsTo
     {
@@ -80,10 +82,10 @@ class Service extends Model
     protected function casts(): array
     {
         return [
-            'name' => Translatable::class,
+            'name'        => Translatable::class,
             'description' => Translatable::class,
-            'cover' => MediaCast::class,
-            'image' => MediaCast::class,
+            'cover'       => MediaCast::class,
+            'image'       => MediaCast::class,
         ];
     }
 }

@@ -21,13 +21,13 @@ class CategoryFactory extends Factory
         $file = fake()->randomElement(File::allFiles(storage_path('/app/private/required/services')));
 
         return [
-            'name' => Translatable::fake()->toJson(),
+            'name'        => Translatable::fake()->toJson(),
             'description' => Translatable::create([
                 'en' => $this->faker->longHtmlContent(),
                 'ar' => $this->faker->longHtmlContent(),
             ]),
-            'cover' => new UploadedFile($file->getPathname(), $file->getFilename()),
-            'cover_sentence' => Translatable::fake('sentence')->toJson()
+            'cover'          => new UploadedFile($file->getPathname(), $file->getFilename()),
+            'cover_sentence' => Translatable::fake('sentence')->toJson(),
         ];
     }
 

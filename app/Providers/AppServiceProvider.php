@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use App\Enums\ContactUsContentKeyEnum;
 use App\Models\ContactPageContent;
 use App\Services\PageTitleResolver;
+use App\Services\v1\ContactPageContent\ContactPageContentService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
@@ -29,16 +29,10 @@ class AppServiceProvider extends ServiceProvider
     {
         if (Schema::hasTable('cache') && Schema::hasTable('contact_page_contents')) {
             /** @var Collection<ContactPageContent>|ContactPageContent[] $data */
-            $data = cache()->remember(
-                ContactPageContent::CACHE_KEY,
-                now()->addYear(),
-                fn () => ContactPageContent::all(),
-            );
+            [$address, $email, $phone, , $lng, $lat] = ContactPageContentService::make()->getContactInfo();
 
-            $address = $data->firstWhere('key', ContactUsContentKeyEnum::ADDRESS->value);
-            $phone = $data->firstWhere('key', ContactUsContentKeyEnum::PHONE->value);
-            $email = $data->firstWhere('key', ContactUsContentKeyEnum::EMAIL->value);
-
+            View::share('lng', $lng);
+            View::share('lat', $lat);
             View::share('address', $address);
             View::share('phone', $phone);
             View::share('email', $email);

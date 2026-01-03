@@ -17,6 +17,7 @@ import {
     CircleQuestionMark,
     IdCardIcon,
     LucideHandshake,
+    MapPin,
     MessageCircleIcon,
     Sticker,
     TableOfContentsIcon,
@@ -62,6 +63,11 @@ export function Sidebar({
             title: "Contact Us Page Content",
             href: route("v1.web.protected.contact.page.contents.index"),
             icon: () => <TableOfContentsIcon />,
+        },
+        {
+            title: "Adresses",
+            href: route("v1.web.protected.addresses.index"),
+            icon: () => <MapPin />,
         },
         {
             title: "Categories",

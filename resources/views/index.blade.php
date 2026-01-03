@@ -29,5 +29,7 @@
             <!-- Row /- -->
         </div>
         <!-- Faq And Latest Post /- -->
+
+        <x-addresses-grid :addresses="$addresses" />
     </main>
 @endsection

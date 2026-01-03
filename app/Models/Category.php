@@ -22,9 +22,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property array{url:string,size:string,extension:string,mime_type:string} $cover
  * @property Carbon                                                          $created_at
  * @property Carbon                                                          $updated_at
+ *
  * @mixin Builder<Category>
+ *
  * @use  HasFactory<CategoryFactory>
- * @property EloquentCollection<Service>|null                                $services
+ *
+ * @property EloquentCollection<Service>|null $services
  */
 class Category extends Model
 {
@@ -32,6 +35,7 @@ class Category extends Model
     use HasMedia;
 
     public const CACHE_KEY = 'categories';
+
     protected $fillable = [
         'name',
         'description',
@@ -87,7 +91,7 @@ class Category extends Model
     }
 
     /**
-     * @return  HasMany<Service, static>
+     * @return HasMany<Service, static>
      */
     public function services(): HasMany
     {
@@ -97,9 +101,9 @@ class Category extends Model
     protected function casts(): array
     {
         return [
-            'name' => Translatable::class,
-            'description' => Translatable::class,
-            'cover' => MediaCast::class,
+            'name'           => Translatable::class,
+            'description'    => Translatable::class,
+            'cover'          => MediaCast::class,
             'cover_sentence' => Translatable::class,
         ];
     }

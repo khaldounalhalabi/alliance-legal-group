@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Enums\AboutUsKeyEnum;
-use App\Enums\ContactUsContentKeyEnum;
 use App\Http\Requests\v1\Message\StoreMessageRequest;
 use App\Models\AboutUsContent;
+use App\Models\Address;
 use App\Models\BlogPost;
 use App\Models\Category;
-use App\Models\ContactPageContent;
 use App\Models\FrequentlyAskedQuestion;
 use App\Models\Service;
 use App\Models\TeamMember;
 use App\Models\Testimonial;
+use App\Services\v1\ContactPageContent\ContactPageContentService;
 use App\Services\v1\Message\MessageService;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -52,6 +52,9 @@ class SiteController extends Controller
         $latestPosts = cache()->remember('latest_posts', now()->addMinutes(5),
             fn () => BlogPost::orderBy('created_at', 'desc')->limit(3)->get());
 
+        /** @var Collection<Address> $addresses */
+        $addresses = cache()->remember(Address::CACHE_KEY, now()->addYear(), fn () => Address::all());
+
         return view('index', compact(
             'ourHistory',
             'ourMission',
@@ -62,6 +65,7 @@ class SiteController extends Controller
             'services',
             'faqs',
             'latestPosts',
+            'addresses',
         ));
     }
 
@@ -99,19 +103,10 @@ class SiteController extends Controller
 
     public function contactUs()
     {
-        /** @var Collection<ContactPageContent>|ContactPageContent[] $data */
-        $data = cache()->remember(
-            ContactPageContent::CACHE_KEY,
-            now()->addYear(),
-            fn () => ContactPageContent::all(),
-        );
+        [$address, $email, $phone, $whatsapp, $lng, $lat] = ContactPageContentService::make()->getContactInfo();
 
-        $address = $data->firstWhere('key', ContactUsContentKeyEnum::ADDRESS->value);
-        $email = $data->firstWhere('key', ContactUsContentKeyEnum::EMAIL->value);
-        $phone = $data->firstWhere('key', ContactUsContentKeyEnum::PHONE->value);
-        $whatsapp = $data->firstWhere('key', ContactUsContentKeyEnum::WHATSAPP->value);
-        $lng = $data->firstWhere('key', ContactUsContentKeyEnum::LOCATION_LNG->value);
-        $lat = $data->firstWhere('key', ContactUsContentKeyEnum::LOCATION_LAT->value);
+        /** @var Collection<Address> $addresses */
+        $addresses = cache()->remember(Address::CACHE_KEY, now()->addYear(), fn () => Address::all());
 
         return view('contact', compact(
             'address',
@@ -119,7 +114,8 @@ class SiteController extends Controller
             'phone',
             'lng',
             'lat',
-            'whatsapp'
+            'whatsapp',
+            'addresses'
         ));
     }
 

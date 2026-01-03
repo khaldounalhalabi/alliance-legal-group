@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
         User::factory()
             ->create([
                 'first_name' => 'Ali',
-                'last_name' => 'Taleb',
-                'email' => 'ali@alliancelegalgroup.com',
-                'password' => '123456789',
+                'last_name'  => 'Taleb',
+                'email'      => 'ali@alliancelegalgroup.com',
+                'password'   => '123456789',
             ]);
 
         $this->call([
@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             BlogPostSeeder::class,
             FrequentlyAskedQuestionSeeder::class,
+            AddressSeeder::class,
         ]);
     }
 }

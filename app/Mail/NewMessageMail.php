@@ -30,7 +30,7 @@ class NewMessageMail extends Mailable
             replyTo: [
                 new Address($this->clientMessage->email, $this->clientMessage->name),
             ],
-            subject: "New Message From [$this->clientMessage->name]"
+            subject: "New Message From [{$this->clientMessage->name}]"
         );
     }
 

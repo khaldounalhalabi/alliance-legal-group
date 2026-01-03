@@ -67,7 +67,7 @@ class CategoryController extends WebController
     {
         $category = $this->categoryService->view($categoryId, $this->relations);
 
-        if (!$category) {
+        if (! $category) {
             abort(404);
         }
 
@@ -97,8 +97,8 @@ class CategoryController extends WebController
         return rest()
             ->when(
                 $result,
-                fn($rest) => $rest->ok()->deleteSuccess(),
-                fn($rest) => $rest->noData(),
+                fn ($rest) => $rest->ok()->deleteSuccess(),
+                fn ($rest) => $rest->noData(),
             )->send();
     }
 }

@@ -15,9 +15,12 @@ use Symfony\Component\HttpFoundation\Response;
 class ApiResponse implements JsonSerializable
 {
     private int $code;
+
     private string $message;
+
     private mixed $data;
-    private array|null $paginationData;
+
+    private ?array $paginationData;
 
     public function __construct()
     {
@@ -34,54 +37,62 @@ class ApiResponse implements JsonSerializable
 
     public static function create(): static
     {
-        return new static();
+        return new static;
     }
 
     public function unknown(): static
     {
         $this->code = Response::HTTP_INTERNAL_SERVER_ERROR;
+
         return $this;
     }
 
     public function notFound(): static
     {
         $this->code = Response::HTTP_NOT_FOUND;
+
         return $this;
     }
 
     public function badRequest(): static
     {
         $this->code = Response::HTTP_BAD_REQUEST;
+
         return $this;
     }
 
     public function forbidden(): static
     {
         $this->code = Response::HTTP_FORBIDDEN;
+
         return $this;
     }
 
     public function notAuthorized(): static
     {
         $this->code = Response::HTTP_UNAUTHORIZED;
+
         return $this;
     }
 
     public function validationError(): static
     {
         $this->code = Response::HTTP_UNPROCESSABLE_ENTITY;
+
         return $this;
     }
 
     public function tokenExpiration(): static
     {
         $this->code = Response::HTTP_NOT_ACCEPTABLE;
+
         return $this;
     }
 
     public function unverifiedEmail(): static
     {
         $this->code = 407;
+
         return $this;
     }
 
@@ -90,6 +101,7 @@ class ApiResponse implements JsonSerializable
         $this->data = $data;
         $this->message = __('site.there_is_no_data');
         $this->code = Response::HTTP_NOT_FOUND;
+
         return $this;
     }
 
@@ -112,6 +124,7 @@ class ApiResponse implements JsonSerializable
     public function paginationData(array $paginationData): static
     {
         $this->paginationData = $paginationData;
+
         return $this;
     }
 
@@ -119,23 +132,26 @@ class ApiResponse implements JsonSerializable
     {
         if (is_null($data)) {
             $this->data = null;
+
             return $this;
         }
 
         if ($data instanceof LengthAwarePaginator) {
             $this->paginationData = $this->formatPaginateData($data);
             $item = $data->first();
-            if (!$item) {
+            if (! $item) {
                 $this->data = [];
+
                 return $this;
             } elseif ($item instanceof Model) {
                 $modelName = class_basename(get_class($item));
                 $resourceName = config('cubeta-starter.resource_namespace')
-                    ."\\"
+                    .'\\'
                     .config('cubeta-starter.version')
                     ."\\{$modelName}Resource";
                 if (class_exists($resourceName)) {
                     $this->data = $resourceName::collection($data);
+
                     return $this;
                 }
             }
@@ -144,43 +160,47 @@ class ApiResponse implements JsonSerializable
         if ($data instanceof Model) {
             $modelName = class_basename(get_class($data));
             $resourceName = config('cubeta-starter.resource_namespace')
-                ."\\"
+                .'\\'
                 .config('cubeta-starter.version')
                 ."\\{$modelName}Resource";
 
             if (class_exists($resourceName)) {
                 $this->data = $resourceName::make($data);
+
                 return $this;
             }
         }
 
         $this->data = $data;
+
         return $this;
     }
 
     public function formatPaginateData(LengthAwarePaginator $data): array
     {
         return [
-            'current_page' => $data->currentPage(),
-            'from' => $data->firstItem(),
-            'to' => $data->lastItem(),
-            'total' => $data->total(),
-            'per_page' => $data->perPage(),
-            'total_pages' => $data->lastPage(),
+            'current_page'  => $data->currentPage(),
+            'from'          => $data->firstItem(),
+            'to'            => $data->lastItem(),
+            'total'         => $data->total(),
+            'per_page'      => $data->perPage(),
+            'total_pages'   => $data->lastPage(),
             'is_first_page' => $data->onFirstPage(),
-            'is_last_page' => $data->onLastPage(),
+            'is_last_page'  => $data->onLastPage(),
         ];
     }
 
     public function getSuccess(): static
     {
         $this->message = __('site.get_successfully');
+
         return $this;
     }
 
     public function ok(): static
     {
         $this->code = Response::HTTP_OK;
+
         return $this;
     }
 
@@ -196,6 +216,7 @@ class ApiResponse implements JsonSerializable
     public function storeSuccess(): static
     {
         $this->message = __('site.stored_successfully');
+
         return $this;
     }
 
@@ -220,6 +241,7 @@ class ApiResponse implements JsonSerializable
     public function updateSuccess(): static
     {
         $this->message = __('site.update_successfully');
+
         return $this;
     }
 
@@ -235,26 +257,28 @@ class ApiResponse implements JsonSerializable
     public function deleteSuccess(): static
     {
         $this->message = __('site.delete_successfully');
+
         return $this;
     }
 
     public function unknownError(): static
     {
         $this->message(__('site.failed'));
+
         return $this;
     }
 
-    public function message(string|null $message = null): static
+    public function message(?string $message = null): static
     {
         $this->message = $message ?? __('site.success');
+
         return $this;
     }
 
     /**
-     * @param  bool|Closure(ApiResponse):(ApiResponse)  $condition
-     * @param  Closure(ApiResponse):(ApiResponse)       $then
-     * @param  Closure(ApiResponse):(ApiResponse)|null  $else
-     *
+     * @param  bool|Closure(ApiResponse):(ApiResponse) $condition
+     * @param  Closure(ApiResponse):(ApiResponse)      $then
+     * @param  Closure(ApiResponse):(ApiResponse)|null $else
      * @return $this
      */
     public function when($condition, Closure $then, ?Closure $else = null): static
@@ -276,7 +300,6 @@ class ApiResponse implements JsonSerializable
 
     /**
      * @param  Request  $request
-     *
      * @return Response
      */
     public function toResponse($request): Response
@@ -287,9 +310,9 @@ class ApiResponse implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'data' => $this->data,
-            'message' => $this->message,
-            'code' => $this->code,
+            'data'            => $this->data,
+            'message'         => $this->message,
+            'code'            => $this->code,
             'pagination_data' => $this->paginationData,
         ];
     }

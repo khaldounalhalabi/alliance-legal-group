@@ -21,17 +21,22 @@ class MediaCast implements CastsAttributes
         $this->private = $privateOrPublic == 'private';
     }
 
-    public static function deleteFiles(array $media): void
+    /**
+     * @param SerializedMedia[]|SerializedMedia $media
+     */
+    public static function deleteFiles(array|SerializedMedia $media): void
     {
-        if (isset($media['url'])) {
-            self::deleteFileByUrl($media['url']);
-        } else {
+        if (is_array($media)) {
             foreach ($media as $file) {
-                if (is_array($file) && isset($file['url'])) {
-                    self::deleteFileByUrl($file['url']);
+                if (is_array($file) && isset($file->url)) {
+                    self::deleteFileByUrl($file->url);
                 }
             }
+
+        } else {
+            self::deleteFileByUrl($media->url);
         }
+
     }
 
     private static function deleteFileByUrl(string $url): void

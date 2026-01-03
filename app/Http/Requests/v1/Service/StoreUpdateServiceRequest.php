@@ -23,10 +23,10 @@ class StoreUpdateServiceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['json', new ValidTranslatableJson, 'required'],
+            'name'        => ['json', new ValidTranslatableJson, 'required'],
             'description' => ['json', new ValidTranslatableJson, 'required'],
             'category_id' => ['numeric', 'required', Rule::exists('categories', 'id')],
-            'cover' => [
+            'cover'       => [
                 'required',
                 Rule::when(is_array($this->input('cover')), [
                     SerializedMedia::validator(),

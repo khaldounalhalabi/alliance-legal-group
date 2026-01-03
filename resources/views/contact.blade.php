@@ -143,7 +143,7 @@
                 </div>
             </div>
             <div class="col-md-8 col-xs-6 contact-form">
-                <h3>{{ trans("site.leave_a_comment") }}</h3>
+                <h3>{{ trans("site.contact_us") }}</h3>
                 <form
                     action="{{ route("contact.send.message") }}"
                     method="POST"

@@ -1,5 +1,51 @@
 @extends("layout")
 @section("content")
+    <style>
+        /* Ensure the intl-tel-input container behaves like a bootstrap form-control */
+        .iti {
+            width: 100%;
+            display: block;
+        }
+
+        /* Adjust the input to look right with the flag dropdown */
+        .iti__country-list {
+            z-index: 999;
+            color: #333; /* Ensure country names are readable */
+        }
+
+        /* Ensure the container is full width */
+        .iti {
+            width: 100%;
+        }
+
+        /* Logic for RTL - Targeting the html tag attribute */
+        html[dir='rtl'] .iti {
+            direction: rtl;
+        }
+
+        /* Ensure the numbers are typed and displayed LTR (industry standard) */
+        html[dir='rtl'] #input_phone {
+            direction: ltr !important;
+            text-align: right;
+            /* Move padding to the right for the flag container */
+        }
+
+        /* Position the country list correctly in RTL */
+        html[dir='rtl'] .iti__country-list {
+            text-align: right;
+            right: 0;
+            left: auto;
+        }
+
+        /* If you have a specific style for your form-control, ensure it doesn't conflict */
+        .form-control#input_phone {
+            height: 45px; /* Match your website's theme */
+        }
+
+        #input_phone {
+            padding-left: 90px !important; /* Adjust if using separateDialCode: true */
+        }
+    </style>
     <!-- Page Banner -->
     <div class="container-fluid no-left-padding no-right-padding page-banner">
         <!-- Container -->
@@ -114,9 +160,9 @@
                             value="{{ old("name") }}"
                         />
                         @error("name")
-                        <div class="invalid-feedback text-danger">
-                            {{ $message }}
-                        </div>
+                            <div class="invalid-feedback text-danger">
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
                     <div class="form-group">
@@ -130,25 +176,32 @@
                             required
                         />
                         @error("email")
-                        <div class="invalid-feedback text-danger">
-                            {{ $message }}
-                        </div>
+                            <div class="invalid-feedback text-danger">
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
                     <div class="form-group">
                         <input
-                            type="text"
+                            type="tel"
                             class="form-control"
                             placeholder="{{ trans("site.phone_number") }}"
-                            name="phone"
-                            value="{{ old("phone") }}"
                             id="input_phone"
                             required
+                            value="{{ old("phone") }}"
+                            style="width: 100%"
                         />
+                        <input
+                            type="hidden"
+                            name="phone"
+                            id="phone_full"
+                            value="{{ old("phone") }}"
+                        />
+
                         @error("phone")
-                        <div class="invalid-feedback text-danger">
-                            {{ $message }}
-                        </div>
+                            <div class="invalid-feedback text-danger">
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
                     <div class="form-group">
@@ -161,9 +214,9 @@
                             {{ trim(old("message")) }}
                         </textarea>
                         @error("message")
-                        <div class="invalid-feedback text-danger">
-                            {{ $message }}
-                        </div>
+                            <div class="invalid-feedback text-danger">
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
                     @if (session()->has("success"))
@@ -189,4 +242,38 @@
 
 @push("scripts")
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDW40y4kdsjsz714OVTvrw7woVCpD8EbLE"></script>
+@endpush
+
+@push("scripts")
+    <script>
+        $(document).ready(function () {
+            const phoneInputField = document.querySelector('#input_phone');
+            const phoneInputHidden = document.querySelector('#phone_full');
+
+            // Detect RTL from the <html> tag
+            const isRTL =
+                document.documentElement.getAttribute('dir') === 'rtl';
+
+            const iti = window.intlTelInput(phoneInputField, {
+                rtl: isRTL, // Official method from docs
+                preferredCountries: ['gb', 'ae', 'qa', 'ie', 'lb', 'sa'],
+                initialCountry: 'gb',
+                separateDialCode: true,
+                utilsScript:
+                    'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js',
+            });
+
+            const handleChange = () => {
+                phoneInputHidden.value = iti.getNumber();
+            };
+
+            phoneInputField.addEventListener('change', handleChange);
+            phoneInputField.addEventListener('keyup', handleChange);
+
+            $('form').on('submit', function () {
+                // Sync one last time before POST
+                phoneInputHidden.value = iti.getNumber();
+            });
+        });
+    </script>
 @endpush

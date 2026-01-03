@@ -247,7 +247,7 @@
                                                             line-height: 24px;
                                                         "
                                                     >
-                                                        {{ $clientMessage->message }}
+                                                        {{ trim($clientMessage->message) }}
                                                     </td>
                                                 </tr>
                                             </table>

@@ -11,8 +11,6 @@
             :ourVision="$ourVision"
         />
 
-        <x-services-slider :services="$services" />
-
         <x-team-members :team-members="$teamMembers" />
 
         <x-testimonials :testimonials="$testimonials" />

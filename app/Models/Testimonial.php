@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use App\Casts\MediaCast;
 use App\Casts\Translatable;
-use App\Serializers\SerializedMedia;
 use App\Serializers\Translatable as TranslatableSerializer;
 use App\Traits\HasMedia;
 use Carbon\Carbon;
@@ -18,10 +16,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property TranslatableSerializer      $customer_name
  * @property TranslatableSerializer|null $customer_position
  * @property TranslatableSerializer      $testimonial
- * @property SerializedMedia|null        $customer_image
  * @property Carbon                      $created_at
  * @property Carbon                      $updated_at
+ *
  * @mixin Builder<Testimonial>
+ *
  * @use  HasFactory<TestimonialFactory>
  */
 class Testimonial extends Model
@@ -30,11 +29,11 @@ class Testimonial extends Model
     use HasMedia;
 
     public const CACHE_KEY = 'testimonials';
+
     protected $fillable = [
         'customer_name',
         'customer_position',
         'testimonial',
-        'customer_image',
     ];
 
     public static function searchableArray(): array
@@ -76,7 +75,6 @@ class Testimonial extends Model
             'customer_name',
             'customer_position',
             'testimonial',
-            'customer_image',
         ];
     }
 
@@ -86,7 +84,6 @@ class Testimonial extends Model
             'customer_name' => Translatable::class,
             'customer_position' => Translatable::class,
             'testimonial' => Translatable::class,
-            'customer_image' => MediaCast::class,
         ];
     }
 }

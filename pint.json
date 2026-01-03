@@ -2,6 +2,14 @@
     "preset": "laravel",
     "rules": {
         "no_unused_imports": false,
-        "no_superfluous_phpdoc_tags": false
+        "no_superfluous_phpdoc_tags": false,
+        "phpdoc_align": {
+            "align": "vertical"
+        },
+        "binary_operator_spaces": {
+            "operators": {
+                "=>": "align_single_space_minimal"
+            }
+        }
     }
 }

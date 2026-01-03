@@ -1,10 +1,8 @@
-import Input from "@/Components/form/fields/Input";
 import TranslatableInput from "@/Components/form/fields/TranslatableInput";
 import TranslatableTextarea from "@/Components/form/fields/TranslatableTextarea";
 import Form from "@/Components/form/Form";
 import PageCard from "@/Components/ui/PageCard";
 import TranslatableInputsContext from "@/Contexts/TranslatableInputsContext";
-import Media from "@/Models/Media";
 import Testimonial from "@/Models/Testimonial";
 import { useForm } from "@inertiajs/react";
 import { FormEvent } from "react";
@@ -15,13 +13,11 @@ const Edit = ({ testimonial }: { testimonial: Testimonial }) => {
         customer_name: string;
         customer_position?: string;
         testimonial: string;
-        customer_image?: File | undefined | Media;
     }>({
         _method: "PUT",
         customer_name: testimonial?.customer_name,
         customer_position: testimonial?.customer_position,
         testimonial: testimonial?.testimonial,
-        customer_image: testimonial?.customer_image,
     });
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -55,14 +51,6 @@ const Edit = ({ testimonial }: { testimonial: Testimonial }) => {
                             defaultValue={testimonial.customer_position}
                         />
 
-                        <Input
-                            name="customer_image"
-                            label={"Customer Image"}
-                            onChange={(e) =>
-                                setData("customer_image", e.target.files?.[0])
-                            }
-                            type={"file"}
-                        />
                         <div className={"md:col-span-2"}>
                             <TranslatableTextarea
                                 name="testimonial"

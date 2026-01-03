@@ -11,6 +11,7 @@ class TestimonialResource extends BaseResource
 {
     /**
      * Transform the resource into an array.
+     *
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array
@@ -20,7 +21,6 @@ class TestimonialResource extends BaseResource
             'customer_name' => $this->customer_name,
             'customer_position' => $this->customer_position,
             'testimonial' => $this->testimonial,
-            'customer_image' => $this->customer_image,
         ];
     }
 }

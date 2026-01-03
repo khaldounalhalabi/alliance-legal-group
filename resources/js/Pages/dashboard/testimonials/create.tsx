@@ -1,10 +1,8 @@
-import Input from "@/Components/form/fields/Input";
 import TranslatableInput from "@/Components/form/fields/TranslatableInput";
 import TranslatableTextarea from "@/Components/form/fields/TranslatableTextarea";
 import Form from "@/Components/form/Form";
 import PageCard from "@/Components/ui/PageCard";
 import TranslatableInputsContext from "@/Contexts/TranslatableInputsContext";
-import Media from "@/Models/Media";
 import { useForm } from "@inertiajs/react";
 import { FormEvent } from "react";
 
@@ -14,7 +12,6 @@ const Create = () => {
         customer_name: string;
         customer_position?: string;
         testimonial: string;
-        customer_image?: File | undefined | Media;
     }>();
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -43,15 +40,6 @@ const Create = () => {
                             onChange={(e) =>
                                 setData("customer_position", e.target.value)
                             }
-                        />
-
-                        <Input
-                            name="customer_image"
-                            label={"Customer Image"}
-                            onChange={(e) =>
-                                setData("customer_image", e.target.files?.[0])
-                            }
-                            type={"file"}
                         />
 
                         <div className={"md:col-span-2"}>

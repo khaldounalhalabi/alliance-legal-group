@@ -25,7 +25,7 @@
                             {{ trans("site.services") }}
                         </h3>
                         <ul>
-                            @foreach ($categories->random(5) as $cat)
+                            @foreach ($categories->random(min($categories->count(), 5)) as $cat)
                                 <li>
                                     <a
                                         href="{{ route("categories.show", $cat->id) }}"

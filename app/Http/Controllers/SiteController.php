@@ -39,11 +39,6 @@ class SiteController extends Controller
         $services = cache()->remember('services_slider', now()->addMinutes(5),
             fn () => Service::inRandomOrder()->limit(5)->get());
 
-        /**
-         * @var Collection<Category>|Category[] $categories
-         */
-        $categories = cache()->remember(Category::CACHE_KEY, now()->addYear(), fn () => Category::all());
-
         /** @var Collection<FrequentlyAskedQuestion>|FrequentlyAskedQuestion[] $faqs */
         $faqs = cache()->remember('faqs_slider', now()->addMinutes(5),
             fn () => FrequentlyAskedQuestion::inRandomOrder()->limit(4)->get());
@@ -61,7 +56,6 @@ class SiteController extends Controller
             'ourVision',
             'teamMembers',
             'testimonials',
-            'categories',
             'services',
             'faqs',
             'latestPosts',

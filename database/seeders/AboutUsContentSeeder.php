@@ -14,8 +14,8 @@ class AboutUsContentSeeder extends Seeder
      */
     public function run(): void
     {
-        AboutUsContent::updateOrCreate([
-            'type' => AboutUsKeyEnum::OUR_HISTORY->value,
+        AboutUsContent::updateOrCreate(['type' => AboutUsKeyEnum::OUR_HISTORY->value], [
+            'type'    => AboutUsKeyEnum::OUR_HISTORY->value,
             'content' => Translatable::create([
                 'en' => <<<'TEXT'
                         Founded in Manchester, Alliance Legal Group Ltd was established to bridge the gap between traditional legal practice and the modern demands of international business. Built on integrity, precision, and cross-border expertise,
@@ -30,24 +30,24 @@ class AboutUsContentSeeder extends Seeder
             ]),
         ]);
 
-        AboutUsContent::updateOrCreate([
-            'type' => AboutUsKeyEnum::OUR_MISSION->value,
+        AboutUsContent::updateOrCreate(['type' => AboutUsKeyEnum::OUR_MISSION->value], [
+            'type'    => AboutUsKeyEnum::OUR_MISSION->value,
             'content' => Translatable::create([
                 'en' => 'To redefine legal excellence through innovation, global reach, and unwavering ethical standards — delivering legal services that empower clients to grow, adapt, and succeed in an interconnected world.',
                 'ar' => 'إعادة تعريف التميز القانوني من خلال الابتكار والانتشار العالمي والمعايير الأخلاقية الثابتة — تقديم خدمات قانونية تمكّن العملاء من النمو والتكيف والنجاح في عالم مترابط.',
             ]),
         ]);
 
-        AboutUsContent::updateOrCreate([
-            'type' => AboutUsKeyEnum::OUR_VISION->value,
+        AboutUsContent::updateOrCreate(['type' => AboutUsKeyEnum::OUR_VISION->value], [
+            'type'    => AboutUsKeyEnum::OUR_VISION->value,
             'content' => Translatable::create([
                 'en' => 'To provide tailored, practical, and forward-thinking legal solutions that combine deep commercial insight with international perspective. We aim to protect our clients’ interests, promote transparency, and build lasting relationships founded on trust, professionalism, and results.',
                 'ar' => 'تقديم حلول قانونية مخصصة وعملية وتطلعية تجمع بين الرؤية التجارية العميقة والمنظور الدولي. نهدف إلى حماية مصالح عملائنا وتعزيز الشفافية وبناء علاقات دائمة قائمة على الثقة والاحترافية والنتائج.',
             ]),
         ]);
 
-        AboutUsContent::updateOrCreate([
-            'type' => AboutUsKeyEnum::ABOUT_US->value,
+        AboutUsContent::updateOrCreate(['type' => AboutUsKeyEnum::ABOUT_US->value], [
+            'type'    => AboutUsKeyEnum::ABOUT_US->value,
             'content' => Translatable::create([
                 'en' => <<<'TEXT'
                         Alliance Legal Group Ltd is an international corporate
@@ -77,8 +77,8 @@ class AboutUsContentSeeder extends Seeder
             ]),
         ]);
 
-        AboutUsContent::updateOrCreate([
-            'type' => AboutUsKeyEnum::WHY_CHOSE_US->value,
+        AboutUsContent::updateOrCreate(['type' => AboutUsKeyEnum::WHY_CHOSE_US->value], [
+            'type'    => AboutUsKeyEnum::WHY_CHOSE_US->value,
             'content' => Translatable::create([
                 'en' => <<<'TEXT'
                         We understand that modern business doesn’t stop at
@@ -94,6 +94,14 @@ class AboutUsContentSeeder extends Seeder
                 'ar' => <<<'TEXT'
                         ندرك أن الأعمال الحديثة لا تتوقف عند الحدود. يقدم محامونا المشورة بشأن الهياكل الدولية، والصفقات متعددة الاختصاصات، والأطر التنظيمية التي تشكل التجارة العابرة للحدود.
                         TEXT,
+            ]),
+        ]);
+
+        AboutUsContent::updateOrCreate(['type' => AboutUsKeyEnum::ABOUT_US_FOOTER->value], [
+            'type'    => AboutUsKeyEnum::ABOUT_US_FOOTER->value,
+            'content' => Translatable::create([
+                'en' => 'Alliance Legal Group is a premier international law firm dedicated to providing strategic legal solutions. With a presence in the UK and across the Middle East, we combine local expertise with global standards to protect our clients\' interests.',
+                'ar' => 'مجموعة إليانس القانونية هي شركة محاماة دولية رائدة مكرسة لتقديم حلول قانونية استراتيجية. من خلال تواجدنا في المملكة المتحدة وعبر الشرق الأوسط، نجمع بين الخبرة المحلية والمعايير العالمية لحماية مصالح عملائنا.',
             ]),
         ]);
     }

@@ -64,7 +64,10 @@
                                         <a
                                             href="{{ route("services.show", $subService->id) }}"
                                             title="{{ $subService->name }}"
-                                            style="font-size: 12px"
+                                            style="
+                                                font-size: 12px;
+                                                color: #213455;
+                                            "
                                         >
                                             {{ $subService->name }}
                                         </a>

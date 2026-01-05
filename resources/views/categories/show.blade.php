@@ -66,6 +66,7 @@
                             @foreach ($category->services as $service)
                                 <li>
                                     <a
+                                        style="color: #213455"
                                         href="{{ route("services.show", $service->id) }}"
                                     >
                                         {{ $service->name }}
